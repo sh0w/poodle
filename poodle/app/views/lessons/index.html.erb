@@ -1,26 +1,6 @@
 <h1>Listing lessons</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Course</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @lessons.each do |lesson| %>
-  <tr>
-    <td><%= lesson.title %></td>
-    <td><%= lesson.description %></td>
-    <td><%= lesson.course_id %></td>
-    <td><%= link_to 'Show', [ @course, lesson ] %></td>
-    <td><%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]) %></td>
-    <td><%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
 
 <br />
 

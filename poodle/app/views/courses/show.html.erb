@@ -1,15 +1,93 @@
-<p id="notice"><%= notice %></p>
+<article> <!-- Artikel umfasst praktisch den gesammten Inhalt der Seite, im article keine article!! -->
+  <section id="intro">
 
-<p>
-  <b>Title:</b>
-  <%= @course.title %>
-</p>
+    <header>
+      <h1>
+        <%= @course.title %></h1>
+    </header>
 
-<p>
-  <b>Description:</b>
-  <%= @course.description %>
-</p>
+    <div id="rating">
+      <img></img>
+    </div>
+
+    <p>Created by <div id="creator">Jessica M.</div></p>
+
+    <%= @course.description %>
+
+    <%= link_to 'Edit', edit_course_path(@course) %>   |
+    <%= link_to 'New Lesson', "/courses/#{@course.id}/lessons/new" %>
+    <p id="notice"><%= notice %></p>
+
+    <footer id="progress">
+      <h1>Your progress</h1>
+    </footer>
+
+    <aside id="share">
+      <h1>Share this</h1>
+    </aside>
+
+  </section>
 
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+
+  <section id="overview">
+    <hr /><header>
+    <h1>Overview</h1>
+  </header>
+
+    <hr />
+    <ul id="lessons">
+
+      <% @course.lessons.each do |lesson| %>
+          <l class="locked">
+            <h2><%= lesson.title %></h2>
+            <p><%= lesson.description %></p>
+            <%= link_to 'Show', [ @course, lesson ] %>
+            <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]) %>
+            <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' } %>
+          </li>
+      <% end %>
+
+    </ul>
+  </section>
+
+  <section id="comments">
+    <hr />	<header>
+
+    <h1>Comments</h1>
+
+  </header>
+    <hr />
+    <section id="commentbox" class="clearfix">
+      <!-- Keina Ahnung wie Commentboxen funktionieren? bzw was man hier einfügen kann damit wir das Zeug stylen können, sorry -->
+      <div class="comment">
+        <header>
+          <img class="user_thumbnail" src="img/user_thumb.png">
+          <div class="info">
+            <a href="#">Julie S.</a>
+            <div class="when">21 days ago</div>
+          </div>
+        </header>
+        <div class="content">
+          Thank you Jessica, I've had mine lying around for ages, now I can finally put it to good use!
+        </div>
+      </div>
+
+      <div class="comment new">
+        <div class="user">
+          <a href="#">Phillip</a>
+        </div>
+        <div class="form">
+          <form>
+            <textarea>Message...</textarea>
+            <input type="submit" value="Send"></form>
+        </div>
+      </div>
+
+
+    </section>
+
+  </section>
+
+
+</article>

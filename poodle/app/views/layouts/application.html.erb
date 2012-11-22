@@ -8,7 +8,74 @@
 </head>
 <body>
 
-<%= yield %>
+
+<header class="main">
+  <nav>
+    <ul>
+      <li><a href="/home/">Poodle</a></li> <!-- Logo einfügen: Laut daniela als img ( glaub ich) laut Gizmo Mensch als backgroundimage, mir persönlich ist das egal -->
+      <li><a href="courses/new">Create</a></li>
+      <li><a href="courses">Explore</a></li>
+    </ul>
+    <div id="user_nav">
+    <% if user_signed_in? %>
+        hello, <strong><%= current_user.username %></strong>.
+        <%= link_to 'edit profile', edit_user_registration_path %> |
+        <%= link_to "logout", destroy_user_session_path, method: :delete %>
+    <% else %>
+        <%= link_to "sign up", new_user_registration_path %> |
+        <%= link_to "login", new_user_session_path %> |
+        <%= link_to "sign in with facebook", user_omniauth_authorize_path(:facebook) %>
+    <% end %>
+  </div>
+  </nav>
+</header>
+   <%= yield %>
+
+
+
+<footer class="main">
+  <div class="footer-wrapper">
+    <section id="contact"> <!-- ist nicht im nav weil man ja ned damit navigieren kann...-->
+
+      <h1>CONTACT</h1>
+      <ul>
+        <li>Poodle Zentrale</li>
+        <li>Pudelstrasse 12</li>
+        <li>1212 Irgendwo</li>
+        <li><a href="#">info@poodle.com</li>
+      </ul>
+    </section>
+
+    <nav>
+      <ul>
+        <li>
+          <h1>SITEMAP</h1>
+          <ul>
+            <li><a href="#">Homepage</li>
+            <li><a href="#">My Profile</li>
+            <li><a href="#">Create</li>
+            <li><a href="#">Explore</li>
+            <li><a href="#">Settings</li>
+            <li><a href="#">Top Rated</li>
+          </ul>
+        </li>
+
+        <li>
+          <h1>ABOUT</h1>
+          <ul>
+            <li><a href="#">What is Poodle?</li>
+            <li><a href="#">Our team</li>
+            <li><a href="#">Impressum</li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+  <small>
+    <p>Copyright 2012 Poodle, all rights reserved</p>
+  </small>
+</footer>
 
 </body>
 </html>

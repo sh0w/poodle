@@ -1,0 +1,251 @@
+@font-face {
+    font-family: 'ballparkweiner';
+    src: url('fonts/ballw___-webfont.eot');
+    src: url('fonts/ballw___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/ballw___-webfont.woff') format('woff'),
+         url('fonts/ballw___-webfont.ttf') format('truetype'),
+         url('fonts/ballw___-webfont.svg#ballparkweiner') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@charset "UTF-8";
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.clearfix:before,
+.clearfix:after {
+  content: ".";    
+  display: block;    
+  height: 0;    
+  overflow: hidden;	
+}
+.clearfix:after {clear: both;}
+.clearfix {zoom: 1;} /* IE < 8 */
+
+/* Ich bin mir fast sicher das bis hierher nur ein reset-skript ist, jetzt gehts also los */
+
+/*allgemeiner Schmees, font-size 100% is wichtig für die rems, also ned willkürlich ändern, legt schrift auf 16px fest, falls wirs vergessen sollten*/
+html{
+	font-size:100%;
+	line-height:100%;
+	line-height:14px;
+	font-size:14px;
+	font-family:helvetica, arial, sans-serif;
+} 
+body	{		background:#169990;
+}
+/*backgroundcolor hier nur zum arbeiten, tatsächlich backgroundimage repeat zweckst strukur*/
+article{	
+background:#e0e2dd;
+padding-top: 90px; /* sorgt für abstand zw. menüleiste und einführung, bei margin rutscht der hg weg*/
+background-image:url(img/p_bg.jpg);
+	background-repeat:repeat;
+}
+a{
+	text-decoration:none; 
+	outline:none;
+}
+/* Menüleiste!*/
+header li	{
+	float:left;
+	width:20%;
+	text-align:center;
+	color:white;
+	text-transform:uppercase;
+	margin-top: 20px;
+	font-size:1rem; /*16px*/
+}
+
+header.main{
+	height:60px;
+	background:#12857C;
+}
+	
+/*allgemeines layout oder zumindest der versuch eines herzustellen*/	
+
+hr	{height:3px;
+	border:0;
+	background-image:url(img/divider.jpg);
+	background-repeat:repeat-x;
+
+}
+
+#intro, #overview, #comments{
+	margin-top:40px;
+}
+
+#overview	{}
+#overview header h1, #comments header h1	{
+	color:#169990; 
+	height:60px;
+	text-align:center;
+
+}
+
+/* Kurseinführung*/
+#intro{
+	max-width: 940px;
+	width: 90%;
+	margin: 0 auto;
+	background:#f9f5ef;	
+	font-size:1.071rem; /*15px*/
+	color:#7a7a7a;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 1);
+	line-height:1.714rem;}
+#intro header h1{
+	text-align:center;
+	font-size: 1.571rem; /* 22px */
+	text-transform:uppercase;
+	color:white;
+	background:#169990;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
+#overview header h1, #comments header h1	{
+	font-family: 'ballparkweiner';
+	font-size: 2.857rem; /* 40px */
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 1);
+	color:#169990;}
+/*Lesson-Übersicht (Overview)*/
+#lessons li{
+	float:left;
+	width:200px;
+	height:140px;
+	margin-right:20px;
+	margin-top:20px; /*bis hier gehts um größe und position der kästchen*/
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25); /*cross browser ....!!*/
+	color:#30333c;
+
+	font-size: 1rem; /* 14px */
+	line-height:1.429rem;
+	}
+
+.completed	{background:#B9BAB5;}
+.current	{background:#21B482;}
+.locked	{background:#169990;}
+
+.completed h2, .current h2, .locked h2	{font-size:font-size: 1.429rem; /* 20px */;}
+
+#lessons{
+	max-width: 900px;
+	width: 90%;
+	margin:0 auto;
+	margin-top: 90px;
+} 
+
+#lessons h2{
+	font-weight: bold;
+	margin: 20px;
+	}
+#lessons p{
+	margin: 10px 10px 10px 20px;
+}
+
+/* Kommentare... das wo wir nux zum stylen haben*/
+#comments	{
+	clear:both;
+	padding-bottom: 60px;
+	padding-top: 90px;
+}
+
+#commentbox {
+	
+	max-width: 900px;
+	width: 90%;
+	margin:0 auto;
+	margin-top: 40px; /*abstand kommentarbox zur überschrift*/
+}
+
+.comment {
+	width: 235px;
+	height: 125px;
+	float:left;
+	background-color: #cdcec8; /* spaeter backgroundimage */
+	margin-right: 20px;
+	padding: 20px;
+	font-size:0.8571rem;/*12px*/ line-height:1.429rem;
+	color:#787575;
+	text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.76);
+}
+.comment a	{color:#53b292;font-size:0.7857rem; /*11px*/ font-weight:bold;}
+.when	{font-size:0.7143rem;}
+.info	{line-height:0.8571rem;padding-bottom:10px;}
+#contact	{
+	float:left;
+	padding-right:50px;
+}
+
+/* Footer*/
+footer a, #contact	{color:#30333c; font-size:0.9286rem;/*13px*/ line-height:1.071rem;font-weight:normal;text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.24);}
+
+footer h1{
+	text-shadow:none;
+	color:white; 
+	text-transform:uppercase;	
+}
+footer nav li	{
+	float:left;
+	padding-right:50px;
+} 
+
+footer nav li li{
+	float:none;
+}
+
+.footer-wrapper	{
+	overflow:hidden;
+	height:270px;
+}
+
+/*der Versuch das small am Boden festzukleben haben wir aufgegeben, stattdessen hat der HG jetzt die Footerfarbe und das small hängt praktisch am nav*/
+small	p {
+	font-size:10px;
+	font-size:0.625rem;
+	text-align:center;
+	padding-top:50px;
+}
+
+
