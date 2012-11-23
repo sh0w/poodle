@@ -1,5 +1,10 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :find_course, :except => [:index, :delete, :new, :create]
+
+  def find_course
+    @course = Course.find(params[:id])
+  end
 
   # GET /courses
   # GET /courses.json
@@ -15,7 +20,6 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @course = Course.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,16 +40,20 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
-    @course = Course.find(params[:id])
   end
 
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.new(params[:course])
 
     respond_to do |format|
       if @course.save
+        @activity = Activity.new
+        @activity.creator_id = current_user.id
+        @activity.course_id = @course.id
+        @activity.text = "create_course"
+        @activity.save
+
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render json: @course, status: :created, location: @course }
       else
@@ -58,7 +66,6 @@ class CoursesController < ApplicationController
   # PUT /courses/1
   # PUT /courses/1.json
   def update
-    @course = Course.find(params[:id])
 
     respond_to do |format|
       if @course.update_attributes(params[:course])
@@ -74,12 +81,35 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
-    @course = Course.find(params[:id])
     @course.destroy
 
     respond_to do |format|
       format.html { redirect_to courses_url }
       format.json { head :no_content }
+    end
+  end
+
+
+  def take_course
+    @tc = TakesCourse.new
+    @tc.user_id = current_user.id
+    @tc.course_id = @course.id
+    @tc.lesson_progress = 1
+
+    respond_to do |format|
+      if @tc.save
+        @activity = Activity.new
+        @activity.creator_id = current_user.id
+        @activity.course_id = @course.id
+        @activity.text = "start_course"
+        @activity.save
+
+        format.html { redirect_to @course, notice: 'Start this course now.' }
+        format.json { render json: @course, status: :created, location: @course }
+      else
+        format.html { render action: "show" }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

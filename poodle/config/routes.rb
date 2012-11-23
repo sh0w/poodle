@@ -1,14 +1,18 @@
 Poodle::Application.routes.draw do
 
+
   devise_for :users,
              path_names: {sign_in: "login", sign_out: "logout"},
              :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :courses do
     resources :lessons
+    resources :comments
   end
 
   root :to => "courses#index"
+
+  match 'courses/:id/start' => 'courses#take_course'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

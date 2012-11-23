@@ -1,5 +1,4 @@
-<article> <!-- Artikel umfasst praktisch den gesammten Inhalt der Seite, im article keine article!! -->
-  <section id="intro">
+ <section id="intro">
 
     <header>
       <h1>
@@ -39,7 +38,7 @@
     <ul id="lessons">
 
       <% @course.lessons.each do |lesson| %>
-          <l class="locked">
+          <li class="locked">
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
             <%= link_to 'Show', [ @course, lesson ] %>
@@ -72,22 +71,35 @@
           Thank you Jessica, I've had mine lying around for ages, now I can finally put it to good use!
         </div>
       </div>
+      <% @course.comments.each do |comment| %>
 
-      <div class="comment new">
-        <div class="user">
-          <a href="#">Phillip</a>
-        </div>
-        <div class="form">
-          <form>
-            <textarea>Message...</textarea>
-            <input type="submit" value="Send"></form>
-        </div>
-      </div>
+          <div class="comment">
+            <header>
+              <img class="user_thumbnail" src="img/user_thumb.png">
+              <div class="info">
+                <a href="#"><%= User.find(comment.user_id).username %></a>
+
+                <div class="when"><%= comment.created_at %>></div>
+              </div>
+            </header>
+            <div class="content">
+              <%= comment.content %>
+            </div>
+          </div>
+      <% end %>
+      <% if user_signed_in? %>
+          <div class="comment new">
+            <div class="user">
+              <a href="#">
+                <%= current_user.username %>
+              </a>
+            </div>
+            <div class="form">
+            </div>
+          </div>
+      <% end %>
 
 
     </section>
 
   </section>
-
-
-</article>

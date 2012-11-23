@@ -11,7 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122145922) do
+ActiveRecord::Schema.define(:version => 20121123194549) do
+
+  create_table "acitivities", :force => true do |t|
+    t.string   "text"
+    t.integer  "creator_id"
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "activities", :force => true do |t|
+    t.string   "text"
+    t.integer  "creator_id"
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "caregory", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "rating"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "page_id"
+    t.integer  "course_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -20,12 +57,27 @@ ActiveRecord::Schema.define(:version => 20121122145922) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "creates_courses", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "lessons", :force => true do |t|
     t.string   "title"
     t.string   "description"
     t.integer  "course_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "takes_courses", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "lesson_progress"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "users", :force => true do |t|

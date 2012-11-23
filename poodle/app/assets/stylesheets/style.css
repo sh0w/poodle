@@ -98,11 +98,6 @@ header li	{
 	margin-top: 20px;
 	font-size:1rem; /*16px*/
 }
-
-header.main{
-	height:60px;
-	background:#12857C;
-}
 	
 /*allgemeines layout oder zumindest der versuch eines herzustellen*/	
 
@@ -237,7 +232,7 @@ footer nav li li{
 
 .footer-wrapper	{
 	overflow:hidden;
-	height:270px;
+	height:120px;
 }
 
 /*der Versuch das small am Boden festzukleben haben wir aufgegeben, stattdessen hat der HG jetzt die Footerfarbe und das small hängt praktisch am nav*/

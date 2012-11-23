@@ -16,5 +16,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_course_lesson_path(@lesson) %> |
+<%= link_to 'Edit', edit_polymorphic_path([@course, @lesson]) %> |
 <%= link_to 'Back', course_lessons_path %>

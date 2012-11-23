@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Rating:</b>
+  <%= @comment.rating %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @comment.content %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @comment.user_id %>
+</p>
+
+<p>
+  <b>Page:</b>
+  <%= @comment.page_id %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @comment.course_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_polymorphic_path([@course, @comment]) %> |
+<%= link_to 'Back', course_comments_path %>
