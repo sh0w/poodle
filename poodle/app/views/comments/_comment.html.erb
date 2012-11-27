@@ -1,0 +1,13 @@
+
+<div class="span3 comment well">
+  <header>
+    <div class="info">
+      <a href="#"><%= User.find(@comment.user_id).username %></a>
+
+      <div class="when"><%= time_ago_in_words(@comment.created_at) %> ago</div>
+    </div>
+  </header>
+  <div class="content">
+    <%= @comment.content %>
+  </div>
+</div>

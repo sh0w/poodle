@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -51,19 +51,28 @@
               <li><a href="/courses/new">Create</a></li>
               <li><a href="/courses/">Explore</a></li>
             </ul>
-            <ul class="nav pull-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Account
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="/home/">Settings</a></li> <!-- Logo einfügen: Laut daniela als img ( glaub ich) laut Gizmo Mensch als backgroundimage, mir persönlich ist das egal -->
-                  <li><a href="/courses/new">Logout</a></li>
-                  <li><a href="/courses/">test</a></li>
-                </ul>
-              </li>
-            </ul>
+            <div class="nav pull-right">
+              <% if user_signed_in? %>
+                  <li class="dropdown">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      hello, <strong><%= current_user.username %></strong>.
+                      <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/settings/">Settings</a></li> <!-- Logo einfügen: Laut daniela als img ( glaub ich) laut Gizmo Mensch als backgroundimage, mir persönlich ist das egal -->
+                      <li><%= link_to 'edit profile', edit_user_registration_path %></li>
+                      <li><%= link_to "logout", destroy_user_session_path, method: :delete %></li>
+                    </ul>
+                  </li>
+              <% else %>
+                  <ul class="nav">
+                  <li><%= link_to "sign up", new_user_registration_path %></li>
+                  <li><%= link_to "login", new_user_session_path %></li>
+                    <li><%= link_to "sign in with facebook", user_omniauth_authorize_path(:facebook) %>   </li>
+                  </ul>
+              <% end %>
+            </div>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -78,7 +87,47 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2012</p>
+
+        <div class="container-fluid">
+          <div class="row-fluid">
+          <section id="contact" class="span3"> <!-- ist nicht im nav weil man ja ned damit navigieren kann...-->
+
+            <h1>CONTACT</h1>
+            <ul>
+              <li>Poodle Zentrale</li>
+              <li>Pudelstrasse 12</li>
+              <li>1212 Irgendwo</li>
+              <li><a href="#">info@poodle.com</a></li>
+            </ul>
+          </section>
+
+          <nav class="span3">
+            <h1>SITEMAP</h1>
+                <ul>
+                  <li><a href="#">Homepage</a></li>
+                  <li><a href="#">My Profile</a></li>
+                  <li><a href="#">Create</a></li>
+                  <li><a href="#">Explore</a></li>
+                  <li><a href="#">Settings</a></li>
+                  <li><a href="#">Top Rated</a></li>
+                </ul>
+          </nav>
+        <nav class="span3">
+          <h1>ABOUT</h1>
+                <ul>
+                  <li><a href="#">What is Poodle?</a></li>
+                  <li><a href="#">Our team</a></li>
+                  <li><a href="#">Impressum</a></li>
+                </ul>
+          </nav>
+
+        <div class="span6">
+        <small>
+          <p>Copyright 2012 Poodle, all rights reserved</p>
+        </small>
+        </div>
+              </div>
+            </div>
       </footer>
 
     </div> <!-- /container -->

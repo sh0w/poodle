@@ -35,6 +35,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: [@course, @comments] }
+      format.js
     end
   end
 
