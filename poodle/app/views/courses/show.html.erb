@@ -18,11 +18,11 @@
     <p id="notice"><%= notice %></p>
 
     <footer id="progress">
-      <h1>Your progress</h1>
+      <h3>Your progress</h3>
     </footer>
 
     <aside id="share">
-      <h1>Share this</h1>
+      <h3>Share this</h3>
     </aside>
 
   </section>
@@ -35,19 +35,19 @@
   </header>
 
     <hr />
-    <ul id="lessons">
+    <div id="lessons" class="row-fluid">
 
       <% @course.lessons.each do |lesson| %>
-          <li class="locked">
+          <div class="locked well span3">
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
             <%= link_to 'Show', [ @course, lesson ] %>
             <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]) %>
             <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' } %>
-          </li>
+          </div>
       <% end %>
 
-    </ul>
+    </div>
   </section>
 
   <section id="comments">
@@ -57,9 +57,9 @@
 
   </header>
     <hr />
-    <section id="commentbox" class="clearfix">
+    <section id="commentbox" class="clearfix row-fluid">
       <!-- Keina Ahnung wie Commentboxen funktionieren? bzw was man hier einfügen kann damit wir das Zeug stylen können, sorry -->
-      <div class="comment">
+      <div class="comment span3 well">
         <header>
           <img class="user_thumbnail" src="img/user_thumb.png">
           <div class="info">
@@ -73,13 +73,13 @@
       </div>
       <% @course.comments.each do |comment| %>
 
-          <div class="comment">
+          <div class="span3 comment well">
             <header>
               <img class="user_thumbnail" src="img/user_thumb.png">
               <div class="info">
                 <a href="#"><%= User.find(comment.user_id).username %></a>
 
-                <div class="when"><%= comment.created_at %>></div>
+                <div class="when"><%= time_ago_in_words(comment.created_at) %> ago</div>
               </div>
             </header>
             <div class="content">
