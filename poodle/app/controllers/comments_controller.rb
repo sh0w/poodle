@@ -53,6 +53,13 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        @activity = Activity.new
+        @activity.creator_id = current_user.id
+        @activity.course_id = @course.id
+        @activity.comment_id = @comment.id
+        @activity.text = "comment_course"
+        @activity.save
+
         format.html { redirect_to [@course, @comments], notice: 'Comment was successfully created.' }
         format.json { render json: [@course, @comments], status: :created, location: @comment }
       else
