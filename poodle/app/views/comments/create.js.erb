@@ -1,2 +1,3 @@
 $('.comment.new').remove();
-$('#commentbox').append('<%= j render :partial => "comment", :object => @comment %>');
+var comment = '<%= j render :partial => "comment", :object => @comment %>';
+$('#commentbox').append( comment ).masonry( 'appended', comment );
