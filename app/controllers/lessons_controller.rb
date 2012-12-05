@@ -45,8 +45,8 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to [@course, @lesson], notice: 'Lesson was successfully created.' }
-        format.json { render json: [@course, @lesson], status: :created, location: @lesson }
+        format.html { redirect_to @course, notice: 'Lesson was successfully created.' }
+        format.json { render json: @course, status: :created, location: @lesson }
       else
         format.html { render action: "new" }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }

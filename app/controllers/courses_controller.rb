@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_course, :except => [:index, :delete, :new, :create]
+  before_filter :find_course, :only => [:show, :update, :destroy, :edit]
 
   def find_course
     @course = Course.find(params[:id])
@@ -45,6 +45,7 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
+    @course = Course.new(params[:course])
 
     respond_to do |format|
       if @course.save
