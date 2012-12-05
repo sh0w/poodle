@@ -28,7 +28,7 @@ require "bundler/capistrano"
 set :application, "poodle"
 set :scm, :git
 #set :repository,  "ssh://repos.mediacube.at/opt/git/web_2012/poodle.git/"
-set :repository,  "ssh://git@github.com:sh0w/poodle.git"
+set :repository,  "https://github.com/sh0w/poodle.git"
 set :deploy_to, "/var/www/virthosts/poodle.mediacube.at"
 set :user, "deploy_poodle"
 set :branch, "master"
