@@ -26,11 +26,6 @@ class LessonsController < ApplicationController
   # GET /lessons/new.json
   def new
     @lesson = Lesson.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @lesson }
-    end
   end
 
   # GET /lessons/1/edit
@@ -45,11 +40,13 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to @course, notice: 'Lesson was successfully created.' }
+        format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully created.' }
         format.json { render json: @course, status: :created, location: @lesson }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -75,8 +72,9 @@ class LessonsController < ApplicationController
     @lesson.destroy
 
     respond_to do |format|
-      format.html { redirect_to lessons_url }
+      format.html { redirect_to edit_course_path(@course) }
       format.json { head :no_content }
+      format.js
     end
   end
 end

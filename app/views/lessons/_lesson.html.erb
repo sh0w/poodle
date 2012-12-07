@@ -1,0 +1,5 @@
+<div class="lesson" id="lesson_<%= @lesson.id %>">
+   <h2><%= @lesson.title %></h2>
+   <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true %>
+</div>
+

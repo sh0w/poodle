@@ -1,6 +1,24 @@
 <h1>Editing course</h1>
-
 <%= render 'form' %>
+<div id = "courseeditor">
+ <div id="lessoneditor">
+  <div id ="lessons">
+   <% @course.lessons.each do |lesson| %>
+      <div class="lesson" id="lesson_<%= lesson.id %>" >
+         <h2><%= lesson.title %></h2>
+	 <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]) %>
+	 <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true %>
+      </div>
+   <% end %>
+   <div id="new_lessons"></div>
+  </div>   
+  <%= link_to 'Add Lesson', "/courses/#{@course.id}/lessons/new", id: "add_lesson_link", remote: true %>
+  <div id="add_lesson_form"></div>
+  <div id="pages">
+ </div>
+
+ </div>
+</div>
 
 <%= link_to 'Show', @course %> |
 <%= link_to 'Back', courses_path %>
