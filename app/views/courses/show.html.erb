@@ -73,11 +73,13 @@
         </div>
       </div>
       <% @course.comments.each do |comment| %>
-
+          <% u = User.find(comment.user_id) %>
           <div class="comment well">
             <header>
               <div class="info">
-                <a href="#"><%= User.find(comment.user_id).username %></a>
+
+                <%= image_tag u.avatar.url(:thumb) %>
+                <a href="#"><%= u.username %></a>
 
                 <div class="when"><%= time_ago_in_words(comment.created_at) %> ago</div>
               </div>

@@ -9,10 +9,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
 
+
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :username, :firstname, :lastname, :description, :profile_private,
-                  :provider, :uid
+                  :provider, :uid, :avatar
+
+  has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "40x40>" }
 
   validates_presence_of :username, :email
 
@@ -41,5 +45,17 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params)
+  end
+
+  def thumb
+      image_tag @agent.avatar.url(:medium), :class => "user_thumb"
   end
 end
