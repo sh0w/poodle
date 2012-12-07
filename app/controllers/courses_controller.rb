@@ -55,6 +55,11 @@ class CoursesController < ApplicationController
         @activity.text = "create_course"
         @activity.save
 
+        @creates_course = CreatesCourse.new
+        @creates_course.user_id = current_user.id
+        @creates_course.course_id = @course.id
+        @creates_course.save
+
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render json: @course, status: :created, location: @course }
       else
