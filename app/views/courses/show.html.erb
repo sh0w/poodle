@@ -9,7 +9,10 @@
       <img></img>
     </div>
 
-    <p>Created by <div id="creator">Jessica M.</div></p>
+    <p>Created by <div id="creator">
+   <%= User.find(@course.creates_course.user_id).username %>
+   <div class="when"><%= time_ago_in_words(@course.creates_course.created_at) %> ago</div>
+    </div></p>
 
     <%= @course.description %>
 
@@ -17,12 +20,12 @@
     <%= link_to 'New Lesson', "/courses/#{@course.id}/lessons/new" %>
     <p id="notice"><%= notice %></p>
 
-    <footer id="progress">
+    <div id="progress">
       <h3>Your progress</h3>
       <div class="progress progress-striped">
         <div class="bar" style="width: 40%;"></div>
       </div>
-    </footer>
+    </div>
 
     <aside id="share">
       <h3>Share this</h3>

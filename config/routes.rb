@@ -12,6 +12,8 @@ Poodle::Application.routes.draw do
 
   root :to => "courses#index"
 
+  match "/dashboard" => "static_pages#dashboard"
+
   match 'courses/:id/start' => 'courses#take_course'
 
   # The priority is based upon order of creation:
