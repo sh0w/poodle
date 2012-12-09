@@ -5,36 +5,47 @@
         <%= @course.title %></h1>
     </header>
 
-    <div id="rating">
-      <img></img>
-    </div>
+   <div id="intro_content">
 
-    <p>Created by <div id="creator">
-   <%= User.find(@course.creates_course.user_id).username %>
-   <div class="when"><%= time_ago_in_words(@course.creates_course.created_at) %> ago</div>
-    </div></p>
+     <!---Bild und Bewertung--->
+     <figure >
+       <%= image_tag "img/rating.png", :class => "rating_bar" %>
+       <%= image_tag "img/intro_img.jpg", :class => "course_pic" %>
+     </figure>
+     <!---Beschreibung--->
+     <div id="intro_text">
+       <p>Created by <span id="creator">
+        <%= User.find(@course.creates_course.user_id).username %>              </span>
+        <span class="when"><%= time_ago_in_words(@course.creates_course.created_at) %> ago</span>
+     </p>
 
-    <%= @course.description %>
+       <%= @course.description %>
 
-    <%= link_to 'Edit', edit_course_path(@course) %>
-    <p id="notice"><%= notice %></p>
+       <%= link_to 'Edit', edit_course_path(@course) %>
+       <p id="notice"><%= notice %></p> </div>
 
-    <div id="progress">
-      <h3>Your progress</h3>
-      <div class="progress progress-striped">
-        <div class="bar" style="width: 40%;"></div>
-      </div>
-    </div>
+     <!---Fortschritt--->
+     <div id="progress">
+       <h3>Your progress</h3>
+       <div class="progress progress-striped">
+         <div class="bar" style="width: 40%;"></div>
+       </div>
+     </div>
 
-    <aside id="share">
-      <h3>Share this</h3>
-    </aside>
+     <!---social networks--->
+     <aside id="share">
+       <h1>Share this</h1>
+     </aside>
+
+   </div>
 
   </section>
 
 
 
-  <section id="overview">
+
+
+ <section id="overview">
     <hr /><header>
     <h1>Overview</h1>
   </header>
@@ -45,9 +56,7 @@
       <% @course.lessons.each do |lesson| %>
           <div class="locked well span3">
             <h2><%= lesson.title %></h2>
-            <%= link_to 'Show', [ @course, lesson ] %>
-            <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]) %>
-            <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' } %>
+            <p><%= lesson.description %></p>
           </div>
       <% end %>
 
@@ -62,37 +71,28 @@
   </header>
     <hr />
     <section id="commentbox" class="clearfix">
-      <!-- Keina Ahnung wie Commentboxen funktionieren? bzw was man hier einfügen kann damit wir das Zeug stylen können, sorry -->
-      <div class="comment well">
-        <header>
-          <div class="info">
-            <a href="#">Julie S.</a>
-            <div class="when">21 days ago</div>
-          </div>
-        </header>
-        <div class="content">
-          Thank you Jessica, I've had mine lying around for ages, now I can finally put it to good use!
-        </div>
-      </div>
+
       <% @course.comments.each do |comment| %>
           <% u = User.find(comment.user_id) %>
-          <div class="comment well">
-            <header>
-              <div class="info">
+          <div class="comment">
+            <div class="comment_content">
+                <header>
+                  <div class="info">
 
-                <%= image_tag u.avatar.url(:thumb) %>
-                <a href="#"><%= u.username %></a>
+                    <%= image_tag u.avatar.url(:thumb) %>
+                    <a href="#"><%= u.username %></a>
 
-                <div class="when"><%= time_ago_in_words(comment.created_at) %> ago</div>
-              </div>
-            </header>
-            <div class="content">
-              <%= comment.content %>
+                    <div class="when"><%= time_ago_in_words(comment.created_at) %> ago</div>
+                  </div>
+                </header>
+                <div class="content">
+                  <%= comment.content %>
+                </div>
             </div>
           </div>
       <% end %>
       <% if user_signed_in? %>
-          <div class="comment well new">
+          <div class="comment new">
             <div class="form">
               <%= link_to 'New Comment', {:controller => "comments", :action => "new",:course_id => @course.id },
                           id: "new_comment_link", remote: true %>
