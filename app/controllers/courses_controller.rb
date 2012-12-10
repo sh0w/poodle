@@ -119,8 +119,4 @@ class CoursesController < ApplicationController
     end
   end
 
-  def sayHello
-     return "hello!"
-  end
-
 end

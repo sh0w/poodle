@@ -2,7 +2,7 @@ class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
   before_filter :find_lesson, :only => [:show, :update, :destroy, :edit]
-  before_filter :find_course, :except => [:delete]
+  before_filter :find_course, :except => [:delete, :updatePosition]
 
   def find_course
     @course = Course.find(params[:course_id])
@@ -58,11 +58,28 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])
-        format.html { redirect_to @lesson, notice: 'Lesson was successfully updated.' }
+        format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def updatePosition
+   
+    lesson = Lessons.find(params[:lesson_id]);
+    position = params[:position];
+    course = params[:course_id];
+
+    respond_to do |format|
+      if lesson.update_attributes(position)
+        format.html { redirect_to edit_course_path(course), notice: 'Lesson was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: lesson.errors, status: :unprocessable_entity }
       end
     end
   end
