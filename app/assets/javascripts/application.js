@@ -15,5 +15,4 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require masonry
-//= require courseeditor
 //= require_tree .

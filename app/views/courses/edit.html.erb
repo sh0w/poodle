@@ -5,7 +5,7 @@
   <ul id ="lessons">
    <% @course.lessons.each do |lesson| %>
       <li class="lesson" id="lesson_<%= lesson.id %>" >
-         <h2><%= lesson.title %></h2>
+         <h2><%= lesson.position %>: <%= lesson.title %></h2>
 	 <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]) %>
 	 <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true %>
       </li>

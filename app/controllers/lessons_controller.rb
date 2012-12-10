@@ -25,7 +25,7 @@ class LessonsController < ApplicationController
   # GET /lessons/new
   # GET /lessons/new.json
   def new
-    @lesson = Lesson.new
+    @lesson = Lesson.new    
   end
 
   # GET /lessons/1/edit
@@ -37,6 +37,7 @@ class LessonsController < ApplicationController
   def create
     @lesson = Lesson.new(params[:lesson])
     @lesson.course_id = @course.id
+    @lesson.position = @course.lessons.count+1
 
     respond_to do |format|
       if @lesson.save
@@ -77,4 +78,5 @@ class LessonsController < ApplicationController
       format.js
     end
   end
+
 end

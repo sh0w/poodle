@@ -2,5 +2,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @lesson %> |
-<%= link_to 'Back', course_lessons_path %>
+<%= link_to 'Back', "/courses/#{@course.id}/edit" %>
