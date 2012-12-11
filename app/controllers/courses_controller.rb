@@ -1,9 +1,26 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_course, :only => [:show, :update, :destroy, :edit]
+  before_filter :find_course, :only => [:show, :update, :destroy, :edit, :take_course]
+  before_filter :get_lessons, :only => [:show, :edit]
+  before_filter :get_comments, :only => [:show]
+  before_filter :takes_course?, :only => [:show, :take_course]
 
   def find_course
     @course = Course.find(params[:id])
+  end
+
+  def get_lessons
+    @lessons = @course.lessons.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
+    # das schaut jetz voll kompliziert aus - ist dazu da dass die lessons mit position==nil am ende der sortierung sind!!
+  end
+
+  def get_comments
+    @comments = @course.comments
+  end
+
+  def takes_course?
+    @takes_course = TakesCourse.where("user_id = ? AND course_id = ?",current_user.id, @course.id).size
+    @takes_course
   end
 
   # GET /courses
@@ -20,7 +37,6 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @course }
@@ -40,8 +56,6 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
-    @lessons = @course.lessons.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
-    # das schaut jetz voll kompliziert aus - ist dazu da dass die lessons mit position==nil am ende der sortierung sind!!
   end
 
   # POST /courses
@@ -99,26 +113,35 @@ class CoursesController < ApplicationController
 
 
   def take_course
-    @tc = TakesCourse.new
-    @tc.user_id = current_user.id
-    @tc.course_id = @course.id
-    @tc.lesson_progress = 1
 
-    respond_to do |format|
-      if @tc.save
-        @activity = Activity.new
-        @activity.creator_id = current_user.id
-        @activity.course_id = @course.id
-        @activity.text = "start_course"
-        @activity.save
+    if @course.taken_by_user(current_user.id).blank?
+      @tc = TakesCourse.new
+      @tc.user_id = current_user.id
+      @tc.course_id = @course.id
+      @tc.lesson_progress = 1
 
-        format.html { redirect_to @course, notice: 'Start this course now.' }
+      respond_to do |format|
+        if @tc.save
+          @activity = Activity.new
+          @activity.creator_id = current_user.id
+          @activity.course_id = @course.id
+          @activity.text = "start_course"
+          @activity.save
+
+          format.html { redirect_to @course, notice: 'Start this course now.' }
+          format.json { render json: @course, status: :created, location: @course }
+        else
+          format.html { render action: "show" }
+          format.json { render json: @course.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @course, notice: 'You are already taking this course.' }
         format.json { render json: @course, status: :created, location: @course }
-      else
-        format.html { render action: "show" }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
 end

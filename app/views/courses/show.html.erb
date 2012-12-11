@@ -26,10 +26,14 @@
 
      <!---Fortschritt--->
      <div id="progress">
-       <h3>Your progress</h3>
-       <div class="progress progress-striped">
-         <div class="bar" style="width: 40%;"></div>
-       </div>
+       <% if !@course.taken_by_user(current_user.id).blank? %>
+           <h3>Your progress</h3>
+           <div class="progress progress-striped">
+             <div class="bar" style="width: 40%;"></div>
+           </div>
+       <% else %>
+           <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
+       <% end %>
      </div>
 
      <!---social networks--->
@@ -53,7 +57,7 @@
     <hr />
     <div id="lessons" class="row-fluid">
 
-      <% @course.lessons.each do |lesson| %>
+      <% @lessons.each do |lesson| %>
           <div class="locked well span3">
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
@@ -72,7 +76,7 @@
     <hr />
     <section id="commentbox" class="clearfix">
 
-      <% @course.comments.each do |comment| %>
+      <% @comments.each do |comment| %>
           <% u = User.find(comment.user_id) %>
           <div class="comment">
             <div class="comment_content">

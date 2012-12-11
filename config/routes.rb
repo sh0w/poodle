@@ -16,7 +16,7 @@ Poodle::Application.routes.draw do
 
   match "/dashboard" => "static_pages#dashboard"
 
-  match 'courses/:id/start' => 'courses#take_course'
+  match 'courses/:id/start' => 'courses#take_course', :as => "start"
 
   match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
 

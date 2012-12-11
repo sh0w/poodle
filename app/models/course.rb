@@ -13,4 +13,8 @@ class Course < ActiveRecord::Base
   has_many :takes_courses
   has_many :users, :through => :takes_course
 
+  def taken_by_user(user_id)
+   TakesCourse.where(:user_id => user_id, :course_id => id)
+  end
+
 end
