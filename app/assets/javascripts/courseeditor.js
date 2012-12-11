@@ -27,7 +27,7 @@
 	  position = neworder[i].position;
 	  $.ajax({
 	    type: "GET",
-            url: "../courses/updatePosition",
+            url: "/courses/"+course_id+"/lessons/"+lesson_id+"/updatePosition",
             data: {
               "lesson_id": lesson_id,
               "course_id": course_id,

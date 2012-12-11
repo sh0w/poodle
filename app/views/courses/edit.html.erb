@@ -5,7 +5,7 @@
 <div id = "<%= @course.id %>">
  <div id="lessoneditor">
   <ul id ="lessons">
-   <% @course.lessons.each do |lesson| %>
+   <% @lessons.each do |lesson| %>
       <li class="lesson" id="lesson_<%= lesson.id %>" >
          <h2><span class="position"><%= lesson.position %></span>: <%= lesson.title %></h2>
 	 <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]) %>

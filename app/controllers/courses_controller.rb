@@ -40,6 +40,8 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    @lessons = @course.lessons.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
+    # das schaut jetz voll kompliziert aus - ist dazu da dass die lessons mit position==nil am ende der sortierung sind!!
   end
 
   # POST /courses

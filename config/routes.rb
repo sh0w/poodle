@@ -18,6 +18,8 @@ Poodle::Application.routes.draw do
 
   match 'courses/:id/start' => 'courses#take_course'
 
+  match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
