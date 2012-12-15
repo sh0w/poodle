@@ -8,7 +8,7 @@
    <% @lessons.each do |lesson| %>
       <li class="lesson" id="lesson_<%= lesson.id %>" >
          <h2><span class="position"><%= lesson.position %></span>: <%= lesson.title %></h2>
-	 <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]) %>
+	 <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]), id: "edit_page_link", remote: true %>
 	 <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true %>
       </li>
    <% end %>
@@ -16,10 +16,11 @@
   </ul>   
   <%= link_to 'Add Lesson', "/courses/#{@course.id}/lessons/new", id: "add_lesson_link", remote: true %>
   <div id="add_lesson_form"></div>
-  <div id="pages">
- </div>
 
  </div>
+  <div id="pageeditor">
+    ...
+  </div>
 </div>
 </div>
 

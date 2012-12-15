@@ -1,4 +1,16 @@
 class PagesController < ApplicationController
+
+  before_filter :find_lesson, :only => [:show, :update, :destroy, :edit, :updatePosition]
+  before_filter :find_course, :except => [:delete]
+
+  def find_lesson
+    @lesson = Lesson.find(params[:lesson_id])
+  end
+
+  def find_page
+    @page = Page.find(params[:id])
+  end
+  
   # GET /pages
   # GET /pages.json
   def index
@@ -13,7 +25,6 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    @page = Page.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +45,6 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
-    @page = Page.find(params[:id])
   end
 
   # POST /pages
@@ -56,7 +66,6 @@ class PagesController < ApplicationController
   # PUT /pages/1
   # PUT /pages/1.json
   def update
-    @page = Page.find(params[:id])
 
     respond_to do |format|
       if @page.update_attributes(params[:page])
@@ -72,7 +81,6 @@ class PagesController < ApplicationController
   # DELETE /pages/1
   # DELETE /pages/1.json
   def destroy
-    @page = Page.find(params[:id])
     @page.destroy
 
     respond_to do |format|

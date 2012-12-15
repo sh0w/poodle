@@ -1,6 +1,10 @@
 Poodle::Application.routes.draw do
 
 
+  resources :links
+
+  resources :texts
+
   resources :pages
 
   devise_for :users,
