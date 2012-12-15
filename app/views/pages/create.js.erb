@@ -1,0 +1,5 @@
+$('#new_page').remove();
+$('#add_page_link').show();
+$('#pages').append('<%= j render :partial => "page" , :object => @page %>');
+
+

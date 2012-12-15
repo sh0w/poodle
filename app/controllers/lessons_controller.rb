@@ -60,27 +60,22 @@ class LessonsController < ApplicationController
       if @lesson.update_attributes(params[:lesson])
         format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
+        format.json { render json: @lesson.errors, status: :unprocessable_entity } 
+        format.js
       end
     end
   end
 
   def updatePosition
    
-  #  lesson = Lessons.find(params[:lesson_id]);    # lesson erhalten wir durch die URL - sh beforefilter find_lesson
-  #  course = params[:course_id];                 # selbes mit course
-
     position = params[:position]
-
-    # hier passiert das was wir wollen:
-    # @lesson ist die Lesson die wir bearbeiten wollen
-    # update_attributes(params[:lesson]) brauchen wir hier nicht, wir wollen ja nur ein attribut ändern (position):
     @lesson.position = position
 
     respond_to do |format|
-      if @lesson.save          # anstatt update_attributes(params[:lesson]) muessen wir die änderungen nur noch speichern mit save
+      if @lesson.save    
         format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully updated.' }
         format.json { head :no_content }
       else

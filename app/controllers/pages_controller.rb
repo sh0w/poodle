@@ -1,7 +1,12 @@
 class PagesController < ApplicationController
 
-  before_filter :find_lesson, :only => [:show, :update, :destroy, :edit, :updatePosition]
+  before_filter :find_page, :only => [:show, :update, :destroy, :edit, :updatePosition]
+  before_filter :find_lesson, :except => [:delete]
   before_filter :find_course, :except => [:delete]
+
+  def find_course
+    @course = Course.find(params[:course_id])
+  end
 
   def find_lesson
     @lesson = Lesson.find(params[:lesson_id])
@@ -36,11 +41,6 @@ class PagesController < ApplicationController
   # GET /pages/new.json
   def new
     @page = Page.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @page }
-    end
   end
 
   # GET /pages/1/edit
@@ -51,14 +51,18 @@ class PagesController < ApplicationController
   # POST /pages.json
   def create
     @page = Page.new(params[:page])
+    @page.lesson_id = @lesson.id
+    @page.position = @lesson.pages.count+1
 
     respond_to do |format|
       if @page.save
-        format.html { redirect_to @page, notice: 'Page was successfully created.' }
+        format.html { redirect_to edit_course_path(@course), notice: 'Page was successfully created.' }
         format.json { render json: @page, status: :created, location: @page }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -86,6 +90,23 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to pages_url }
       format.json { head :no_content }
+    end
+  end
+
+  def updatePosition
+   
+    position = params[:position]
+
+    @page.position = position
+
+    respond_to do |format|
+      if @page.save          
+        format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: lesson.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

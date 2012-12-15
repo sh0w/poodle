@@ -1,0 +1,14 @@
+<h1>Lesson: <%= @lesson.title %></h1>
+<h2>Description</h2>
+<p><%= @lesson.description %></p>
+<%= link_to 'Add Page', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/new", id: "add_page_link", remote: true %>
+<div id=add_page_form>
+</div>
+<div id="pages">
+  <h2>Your Pages:</h2>
+  <% @lesson.pages.each do |page| %>
+      .
+  <% end %>
+</div>
+
+

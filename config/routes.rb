@@ -12,7 +12,9 @@ Poodle::Application.routes.draw do
              :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :courses do
-    resources :lessons
+    resources :lessons do
+      resources :pages
+    end
     resources :comments
   end
 
