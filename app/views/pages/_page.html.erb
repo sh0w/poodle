@@ -1,1 +1,5 @@
-<div class = "page"> page </div>
+<li class = "page">
+ <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
+	 <%= link_to 'Destroy', [ page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
+
+</li>

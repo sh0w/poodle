@@ -4,11 +4,16 @@
 <%= link_to 'Add Page', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/new", id: "add_page_link", remote: true %>
 <div id=add_page_form>
 </div>
-<div id="pages">
-  <h2>Your Pages:</h2>
+<h2>Your Pages:</h2>
+<div id="pagescontainer">
+<ul id="pages">
   <% @lesson.pages.each do |page| %>
-      .
+      <li class="page" id="page_<%= page.id %>" >
+         <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
+	 <%= link_to 'Destroy', [ page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
+      </li>
   <% end %>
+</ul>
 </div>
 
 
