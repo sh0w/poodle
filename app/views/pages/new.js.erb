@@ -1,3 +1,9 @@
-$('#add_page_link').hide();
-$('#add_page_form').append('<%= j render("form") %>');
+$('#new_page').remove();
+$('#add_page_link').show();
 
+//neue Breite für #pages bestimmen (für horizontales Scrollen)
+var pageswidth = $('#pages').css("width").replace('px', "");
+newpageswidth = (parseInt(pageswidth)+225) + "px";
+$('#pages').css("width", newpageswidth);
+
+$('#pages').append('<%= j render :partial => "page" , :object => @page %>');
