@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
-  before_filter :find_lesson, :only => [:show, :update, :destroy, :edit, :updatePosition]
+  before_filter :find_lesson, :only => [:show, :update, :destroy, :edit, :editDescription, :updatePosition]
   before_filter :find_course, :except => [:destroy]
 
   def find_course
@@ -31,6 +31,11 @@ class LessonsController < ApplicationController
   # GET /lessons/1/edit
   def edit
   end
+  
+  def editDescription
+  end
+  
+  
 
   # POST /lessons
   # POST /lessons.json
@@ -84,6 +89,7 @@ class LessonsController < ApplicationController
       end
     end
   end
+  
 
   # DELETE /lessons/1
   # DELETE /lessons/1.json
