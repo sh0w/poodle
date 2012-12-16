@@ -24,12 +24,11 @@ Poodle::Application.routes.draw do
 
   match 'courses/:id/start' => 'courses#take_course'
 
-  match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
   match 'courses/:course_id/lessons/:id/editDescription' => 'lessons#editDescription'
-  match 'courses/:course_id/lessons/:id/updateDescription' => 'lessons#updateDescription'
-  match 'courses/:course_id/lessons/:id/updateTitle' => 'lessons#updateTitle'
+  match 'courses/:course_id/lessons/:id/editTitle' => 'lessons#editTitle'
   match 'courses/:course_id/lessons/:lesson_id/pages/:id/updatePosition' => 'pages#updatePosition'
-
+  match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

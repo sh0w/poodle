@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
-  before_filter :find_lesson, :only => [:show, :update, :destroy, :edit, :editDescription, :updatePosition]
+  before_filter :find_lesson, :except => [:new, :create]
   before_filter :find_course, :except => [:destroy]
 
   def find_course
@@ -35,6 +35,8 @@ class LessonsController < ApplicationController
   def editDescription
   end
   
+  def editTitle
+  end
   
 
   # POST /lessons
