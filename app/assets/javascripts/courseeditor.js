@@ -6,31 +6,25 @@ $( "#lessons" ).sortable({
 
 $( "#lessons" ).disableSelection();
 
-function update_lesson_position(){
-  
+function update_lesson_position(){  
   list = $("#lessons");  
   neworder = new_positions(list);  
   
   course_id = $("#courseeditor div:first-child").attr("id");
-           
-  for(i=0;i<=neworder.length;i++){
-    lesson_id = neworder[i].id;
-	  position = neworder[i].position;
-	  $.ajax({
-	    type: "GET",
-      url: "/courses/"+course_id+"/lessons/"+lesson_id+"/updatePosition",
-      data: {
-        "lesson_id": lesson_id,
-        "course_id": course_id,
-        "position": position
-      }
-    });
-	}
+  url = "/courses/"+course_id+"/lessons/";
+  
+  do_requests(url);  
 }
 
 function update_page_position(){
   list = $("#pages");
   neworder = new_positions(list); 
+  
+  course_id = $("#courseeditor div:first-child").attr("id");
+  lesson_id = $("#pageeditor div:first-child").attr("id");
+  url = "/courses/"+course_id+"/lessons/"+lesson_id+"/pages/";  
+  
+  do_requests(url);   
 }
 
 function new_positions(list){
@@ -48,5 +42,18 @@ function new_positions(list){
   return neworder;
 }
 
+function do_requests(url){
+  for(i=0;i<=neworder.length;i++){
+    id = neworder[i].id;
+	  position = neworder[i].position;
+	  $.ajax({
+	    type: "GET",
+      url: url+id+"/updatePosition",
+      data: {
+        "position": position
+      }
+    });
+	}
+}
    
 
