@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
 
   before_filter :find_page, :only => [:show, :update, :destroy, :edit, :updatePosition]
-  before_filter :find_lesson, :except => [:delete]
-  before_filter :find_course, :except => [:delete]
+  before_filter :find_lesson, :except => [:destroy]
+  before_filter :find_course, :except => [:destroy]
 
   def find_course
     @course = Course.find(params[:course_id])
@@ -88,8 +88,9 @@ class PagesController < ApplicationController
     @page.destroy
 
     respond_to do |format|
-      format.html { redirect_to pages_url }
+      format.html { redirect_to edit_course_path(@course) }
       format.json { head :no_content }
+      format.js
     end
   end
 

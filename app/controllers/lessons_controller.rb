@@ -2,7 +2,7 @@ class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
   before_filter :find_lesson, :only => [:show, :update, :destroy, :edit, :updatePosition]
-  before_filter :find_course, :except => [:delete]
+  before_filter :find_course, :except => [:destroy]
 
   def find_course
     @course = Course.find(params[:course_id])
