@@ -1,6 +1,10 @@
 Poodle::Application.routes.draw do
 
 
+  resources :links
+
+  resources :texts
+
   resources :pages
 
   devise_for :users,
@@ -8,7 +12,9 @@ Poodle::Application.routes.draw do
              :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :courses do
-    resources :lessons
+    resources :lessons do
+      resources :pages
+    end
     resources :comments
   end
 
@@ -18,8 +24,11 @@ Poodle::Application.routes.draw do
 
   match 'courses/:id/start' => 'courses#take_course', :as => "start"
 
+  match 'courses/:course_id/lessons/:id/editDescription' => 'lessons#editDescription'
+  match 'courses/:course_id/lessons/:id/editTitle' => 'lessons#editTitle'
+  match 'courses/:course_id/lessons/:lesson_id/pages/:id/updatePosition' => 'pages#updatePosition'
   match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

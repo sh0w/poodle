@@ -1,0 +1,30 @@
+<div id = "<%= @lesson.id %>">
+<div id="title">
+  <h1>Lesson: <%= @lesson.title %></h1>
+</div>
+<%= link_to '(edit title)', "/courses/#{@course.id}/lessons/#{@lesson.id}/editTitle", id: "edit_title_link", remote: true %>
+<br /><br />
+<h2>Description:</h2>
+<div id ="description">
+  <p><%= @lesson.description %></p>
+</div>
+<%= link_to '(edit description)', "/courses/#{@course.id}/lessons/#{@lesson.id}/editDescription", id: "edit_description_link", remote: true %>
+<br /><br />
+<%= link_to 'Add Page', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/new", id: "add_page_link", remote: true %>
+<br /><br />
+<div id=add_page_form>
+</div>
+<h2>Your Pages:</h2>
+<br />
+<div id="pagescontainer">
+<ul id="pages">
+  <% @lesson.pages.each do |page| %>
+      <li class="page" id="page_<%= page.id %>" >
+         <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
+	 <%= link_to 'Destroy', [ page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
+      </li>
+  <% end %>
+</ul>
+</div>
+
+

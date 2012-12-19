@@ -1,0 +1,13 @@
+$('#pageeditor').html("");
+$('#pageeditor').append('<%= j render("edit") %>');
+
+var numberofpages = $( ".page" ).length;
+var pageswidth = 225 * numberofpages + 5;
+$('#pages').css("width", pageswidth);
+
+$( "#pages" ).sortable({
+  update: function(){
+    update_page_position();
+  }
+});
+$( "#pages" ).disableSelection();

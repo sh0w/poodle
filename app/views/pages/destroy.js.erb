@@ -1,0 +1,8 @@
+$('#page_<%= @page.id %>').remove();
+
+//neue Breite für #pages bestimmen (für horizontales Scrollen)
+var pageswidth = $('#pages').css("width").replace('px', "");
+newpageswidth = (parseInt(pageswidth)-225) + "px";
+$('#pages').css("width", newpageswidth);
+
+update_page_position();
