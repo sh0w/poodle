@@ -16,5 +16,5 @@ namespace :deploy do
 end
 require "bundler/capistrano"
 
-after "deploy:assets:precompile", "deploy:linkconfig"
+before "deploy:assets:precompile", "deploy:linkconfig"
 
