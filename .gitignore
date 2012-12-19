@@ -36,6 +36,8 @@ doc/
 .DS_Store
 .idea
 
+/config/database.yml
+*/database.yml
 
 
 

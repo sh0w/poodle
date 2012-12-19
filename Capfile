@@ -10,9 +10,11 @@ end
 
 namespace :deploy do
   task :linkconfig do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+        run "mkdir -p #{release_path}/config/"
+        run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 end
 require "bundler/capistrano"
-after "deploy:update_code", "deploy:linkconfig"
+
+after "deploy:assets:precompile", "deploy:linkconfig"
 
