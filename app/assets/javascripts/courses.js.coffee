@@ -2,4 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$("#commentbox").masonry itemSelector: ".comment", columnWidth: 280
+$ ->
+  $(".bar").animate width: "0%", duration: 'slow', ->
+    $(".bar").animate width: "100%", duration: 'slow'
+    0
+  0
