@@ -1,6 +1,8 @@
 Poodle::Application.routes.draw do
 
 
+  resources :resources
+
   resources :links
 
   resources :texts

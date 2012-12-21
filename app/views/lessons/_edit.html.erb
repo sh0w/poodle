@@ -21,7 +21,7 @@
   <% @lesson.pages.each do |page| %>
       <li class="page" id="page_<%= page.id %>" >
          <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
-	 <%= link_to 'Destroy', [ page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
+	 <%= link_to 'Destroy', [ @course, @lesson, page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
       </li>
   <% end %>
 </ul>
