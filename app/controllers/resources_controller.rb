@@ -41,11 +41,6 @@ class ResourcesController < ApplicationController
   # GET /resources/new.json
   def new
     @resource = Resource.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @resource }
-    end
   end
 
   # GET /resources/1/edit
