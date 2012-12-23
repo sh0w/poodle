@@ -1,3 +1,3 @@
 class Text < ActiveRecord::Base
-  attr_accessible :headline, :position, :text
+  attr_accessible :resource_id, :text
 end

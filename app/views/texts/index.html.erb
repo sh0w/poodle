@@ -2,9 +2,8 @@
 
 <table>
   <tr>
-    <th>Headline</th>
     <th>Text</th>
-    <th>Position</th>
+    <th>Resource</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +11,8 @@
 
 <% @texts.each do |text| %>
   <tr>
-    <td><%= text.headline %></td>
     <td><%= text.text %></td>
-    <td><%= text.position %></td>
+    <td><%= text.resource_id %></td>
     <td><%= link_to 'Show', text %></td>
     <td><%= link_to 'Edit', edit_text_path(text) %></td>
     <td><%= link_to 'Destroy', text, method: :delete, data: { confirm: 'Are you sure?' } %></td>

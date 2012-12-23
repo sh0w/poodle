@@ -15,7 +15,9 @@ Poodle::Application.routes.draw do
 
   resources :courses do
     resources :lessons do
-      resources :pages
+      resources :pages do
+        resources :resources
+      end
     end
     resources :comments
   end

@@ -18,7 +18,7 @@ class TextsControllerTest < ActionController::TestCase
 
   test "should create text" do
     assert_difference('Text.count') do
-      post :create, text: { headline: @text.headline, position: @text.position, text: @text.text }
+      post :create, text: { resource_id: @text.resource_id, text: @text.text }
     end
 
     assert_redirected_to text_path(assigns(:text))
@@ -35,7 +35,7 @@ class TextsControllerTest < ActionController::TestCase
   end
 
   test "should update text" do
-    put :update, id: @text, text: { headline: @text.headline, position: @text.position, text: @text.text }
+    put :update, id: @text, text: { resource_id: @text.resource_id, text: @text.text }
     assert_redirected_to text_path(assigns(:text))
   end
 
