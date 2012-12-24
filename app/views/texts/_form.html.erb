@@ -1,4 +1,4 @@
-<%= form_for(@text) do |f| %>
+<%= form_for([@course, @lesson, @page, @text]) do |f| %>
   <% if @text.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@text.errors.count, "error") %> prohibited this text from being saved:</h2>
@@ -11,14 +11,18 @@
     </div>
   <% end %>
 
+  <%= fields_for( @text.resource) do |resource_f| %>
+    <div class="field">
+      <%= resource_f.label :headline %><br />
+      <%= resource_f.text_field :headline %>
+    </div>
+  <% end %>
+  
   <div class="field">
     <%= f.label :text %><br />
     <%= f.text_field :text %>
   </div>
-  <div class="field">
-    <%= f.label :resource_id %><br />
-    <%= f.number_field :resource_id %>
-  </div>
+  <%= @text.resource_id %>
   <div class="actions">
     <%= f.submit %>
   </div>

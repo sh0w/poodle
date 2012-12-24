@@ -2,13 +2,13 @@
 <div id="title">
   <h1>Lesson: <%= @lesson.title %></h1>
 </div>
-<%= link_to '(edit title)', "/courses/#{@course.id}/lessons/#{@lesson.id}/editTitle", id: "edit_title_link", remote: true %>
+<%= link_to '-> (edit title)', "/courses/#{@course.id}/lessons/#{@lesson.id}/editTitle", id: "edit_title_link", remote: true %>
 <br /><br />
 <h2>Description:</h2>
 <div id ="description">
   <p><%= @lesson.description %></p>
 </div>
-<%= link_to '(edit description)', "/courses/#{@course.id}/lessons/#{@lesson.id}/editDescription", id: "edit_description_link", remote: true %>
+<%= link_to '-> (edit description)', "/courses/#{@course.id}/lessons/#{@lesson.id}/editDescription", id: "edit_description_link", remote: true %>
 <br /><br />
 <%= link_to 'Add Page', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/new", id: "add_page_link", remote: true %>
 <br /><br />
@@ -17,17 +17,18 @@
 <h2>Your Pages:</h2>
 <br />
 <div id="pagescontainer">
-<ul id="pages">
-  <% @lesson.pages.each do |page| %>
+  <ul id="pages">
+    <% @lesson.pages.each do |page| %>
       <li class="page" id="page_<%= page.id %>" >
-         <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
-	 <%= link_to 'Destroy', [ @course, @lesson, page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
-	 <br /><br />
-	 <%= link_to 'Add Resource', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/resources/new", id: "add_resource_link", remote: true %>
-
+        <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
+        <%= link_to '(x) Destroy', [ @course, @lesson, page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
+        <br /><br />
+        <%= link_to '(+) Add Resource', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/resources/new", id: "add_resource_link", remote: true %>
+        <br />
+        <%= link_to '(+) Add Text', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/texts/new", id: "add_text_link" %>
       </li>
-  <% end %>
-</ul>
+    <% end %>
+  </ul>
 </div>
 
 

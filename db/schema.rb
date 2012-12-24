@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221155642) do
+ActiveRecord::Schema.define(:version => 20121223163653) do
 
   create_table "activities", :force => true do |t|
     t.string   "text"
@@ -56,15 +56,6 @@ ActiveRecord::Schema.define(:version => 20121221155642) do
     t.integer  "position"
   end
 
-  create_table "links", :force => true do |t|
-    t.string   "headline"
-    t.string   "link"
-    t.integer  "position"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "page_id"
-  end
-
   create_table "pages", :force => true do |t|
     t.integer  "position"
     t.integer  "lesson_id"
@@ -89,12 +80,10 @@ ActiveRecord::Schema.define(:version => 20121221155642) do
   end
 
   create_table "texts", :force => true do |t|
-    t.string   "headline"
     t.string   "text"
-    t.integer  "position"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "page_id"
+    t.integer  "resource_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|

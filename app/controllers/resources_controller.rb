@@ -1,19 +1,11 @@
 class ResourcesController < ApplicationController
   
   before_filter :find_resource, :only => [:show, :update, :destroy, :edit, :updatePosition]
-  before_filter :find_page, :except => [:destroy]
-  before_filter :find_lesson, :except => [:destroy]
-  before_filter :find_course, :except => [:destroy]
+  before_filter :find, :except => [:destroy]
 
-  def find_course
+  def find
     @course = Course.find(params[:course_id])
-  end
-
-  def find_lesson
     @lesson = Lesson.find(params[:lesson_id])
-  end
-
-  def find_page
     @page = Page.find(params[:page_id])
   end
 
