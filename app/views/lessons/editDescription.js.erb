@@ -1,4 +1,4 @@
-elem = $('#description')
+var elem = $('#description')
 elem.html("<%= j render :partial => "editDescriptionForm", :locals => { :lesson => @lesson, :course => @course } %>");
 elem.append("<input type='button' value='cancel' class='cancelbutton'>");
 elem.find(".cancelbutton").button().click(function(){

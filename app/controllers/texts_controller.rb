@@ -1,6 +1,6 @@
 class TextsController < ApplicationController
   
-  before_filter :find_text, :only => [:show, :update, :destroy, :edit, :updatePosition, :create]
+  before_filter :find_text, :only => [:show, :update, :destroy, :edit, :updatePosition]
   before_filter :find, :except => [:destroy]
 
   def find
@@ -38,14 +38,8 @@ class TextsController < ApplicationController
   # GET /texts/new
   # GET /texts/new.json
   def new
-    @resource = Resource.new
-    @resource.page_id = @page.id
-    @resource.position = @page.resources.count+1    
-    @resource.save
-    
+    @resource = Resource.new    
     @text = Text.new
-    @text.resource_id = @resource.id
-    @text.save
   end
 
   # GET /texts/1/edit
@@ -55,14 +49,25 @@ class TextsController < ApplicationController
   # POST /texts
   # POST /texts.json
   def create
+  
+    @resource = Resource.new(params[:resource])
+    @resource.page_id = @page.id
+    @resource.position = @page.resources.count+1    
+    @resource.save
+    
+    @text = Text.new(params[:text])
+    @text.resource_id = @resource.id
+    @text.save
     
     respond_to do |format|
       if @text.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
         format.html { redirect_to edit_course_path(@course), notice: 'Text was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @text.errors, status: :unprocessable_entity }
+        format.js
       end
     end    
   end
@@ -75,9 +80,11 @@ class TextsController < ApplicationController
       if @text.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
         format.html { redirect_to edit_course_path(@course), notice: 'Text was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @text.errors, status: :unprocessable_entity }
+        format.js        
       end
     end
   end
