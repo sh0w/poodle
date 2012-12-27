@@ -1,6 +1,16 @@
 
 <h1>Editing course</h1>
-<%= render 'form' %>
+<div id="coursetitle">
+  <h1>Lesson: <%= @course.title %></h1>
+</div>
+<%= link_to '-> (edit coursetitle)', "/courses/#{@course.id}/editTitle", id: "edit_coursetitle_link", remote: true %>
+<br /><br />
+<h2>Description:</h2>
+<div id ="coursedescription">
+  <p><%= @course.description %></p>
+</div>
+<%= link_to '-> (edit coursedescription)', "/courses/#{@course.id}/editDescription", id: "edit_coursedescription_link", remote: true %>
+<br /><br />
 <div id = "courseeditor">
 <div id = "<%= @course.id %>">
  <div id="lessoneditor">
@@ -12,8 +22,8 @@
 	   <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true %>
         </li>
      <% end %>
-     <div id="new_lessons"></div>
-    </ul>   
+    </ul> 
+     <div id="new_lessons"></div>  
     <%= link_to 'Add Lesson', "/courses/#{@course.id}/lessons/new", id: "add_lesson_link", remote: true %>
     <div id="add_lesson_form"></div>
  </div>

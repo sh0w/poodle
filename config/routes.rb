@@ -22,6 +22,8 @@ Poodle::Application.routes.draw do
 
   match 'courses/:course_id/lessons/:id/editDescription' => 'lessons#editDescription'
   match 'courses/:course_id/lessons/:id/editTitle' => 'lessons#editTitle'
+  match 'courses/:id/editDescription' => 'courses#editDescription'
+  match 'courses/:id/editTitle' => 'courses#editTitle'
   match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:id/updatePosition' => 'resources#updatePosition'
   match 'courses/:course_id/lessons/:lesson_id/pages/:id/updatePosition' => 'pages#updatePosition'
   match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'

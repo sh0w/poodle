@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_course, :only => [:show, :update, :destroy, :edit, :take_course]
+  before_filter :find_course, :only => [:show, :update, :destroy, :edit, :editTitle, :editDescription, :take_course]
   before_filter :get_lessons, :only => [:show, :edit]
   before_filter :get_comments, :only => [:show]
   before_filter :takes_course?, :only => [:show, :take_course]
@@ -11,7 +11,6 @@ class CoursesController < ApplicationController
 
   def get_lessons
     @lessons = @course.lessons.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
-    # das schaut jetz voll kompliziert aus - ist dazu da dass die lessons mit position==nil am ende der sortierung sind!!
   end
 
   def get_comments
@@ -57,6 +56,12 @@ class CoursesController < ApplicationController
   # GET /courses/1/edit
   def edit
   end
+  
+  def editDescription
+  end
+  
+  def editTitle
+  end
 
   # POST /courses
   # POST /courses.json
@@ -91,11 +96,13 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.update_attributes(params[:course])
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
+        format.html { redirect_to edit_course_path(@course), notice: 'Course was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
