@@ -1,2 +1,6 @@
-alert("ey!");
-$('#coursetitle').html("<%= j render :partial => "editTitleForm", :locals => { :course => @course } %>");
+var elem = $('#coursetitle')
+elem.html("<%= j render :partial => "editTitleForm", :locals => { :course => @course } %>");
+elem.append("<input type='button' value='cancel' class='cancelbutton'>");
+elem.find(".cancelbutton").button().click(function(){
+  elem.html("<h1>Course: <%= @course.title %></h1>");
+});

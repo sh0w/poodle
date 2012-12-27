@@ -1,3 +1,12 @@
-$('#add_lesson_link').hide();
-$('#add_lesson_form').append('<%= j render("form") %>');
+var elem = $('#add_lesson_form');
+var link = $('#add_lesson_link');
 
+link.hide();
+
+elem.append('<%= j render("form") %>');
+elem.append("<input type='button' value='cancel' class='cancelbutton'>");
+elem.find(".cancelbutton").button().click(function(){
+  $(this).remove();
+  $('#new_lesson').remove();
+  link.show();
+});
