@@ -23,9 +23,13 @@
         <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
         <%= link_to '(x) Destroy', [ @course, @lesson, page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
         <br /><br />
-        <%= link_to '(+) Add Resource', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/resources/new", id: "add_resource_link", remote: true %>
-        <br />
         <%= link_to '(+) Add Text', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/texts/new", id: "add_text_link" %>
+        <br /><br />
+        <ul>
+          <% page.resources.each do |resource| %>
+              <li><%= resource.position %>: <%= resource.headline %> <br /><%= resource.text.text %> </li>
+          <% end %>
+        </ul>
       </li>
     <% end %>
   </ul>
