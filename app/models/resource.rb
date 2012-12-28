@@ -3,4 +3,6 @@ class Resource < ActiveRecord::Base
   
   belongs_to :page
   has_one :text, :dependent => :destroy
+  
+  default_scope :order => 'position'
 end
