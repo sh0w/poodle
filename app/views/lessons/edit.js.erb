@@ -11,3 +11,11 @@ $( "#pages" ).sortable({
   }
 });
 $( "#pages" ).disableSelection();
+
+$( "#resources" ).sortable({
+  update: function(){
+    page_id = $(this).parent().attr("id").split("_")[1];
+    update_resource_position(page_id);
+  }
+});
+$( "#resources" ).disableSelection();
