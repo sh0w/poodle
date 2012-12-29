@@ -1,5 +1,7 @@
 Poodle::Application.routes.draw do
 
+  resources :links
+
   devise_for :users,
              path_names: {sign_in: "login", sign_out: "logout"},
              :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -9,6 +11,7 @@ Poodle::Application.routes.draw do
       resources :pages do
         resources :resources
         resources :texts
+        resources :links
       end
     end
     resources :comments

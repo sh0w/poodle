@@ -1,4 +1,19 @@
 class LinksController < ApplicationController
+  
+  before_filter :find_link, :only => [:show, :update, :destroy, :edit]
+  before_filter :find, :except => [:destroy]
+
+  def find
+    @course = Course.find(params[:course_id])
+    @lesson = Lesson.find(params[:lesson_id])
+    @page = Page.find(params[:page_id])
+  end
+
+  def find_link
+    @link = Link.find(params[:id])
+    @resource = Resource.find(@link.resource_id)
+  end
+  
   # GET /links
   # GET /links.json
   def index
@@ -24,47 +39,51 @@ class LinksController < ApplicationController
   # GET /links/new
   # GET /links/new.json
   def new
+    @resource = Resource.new 
     @link = Link.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @link }
-    end
   end
 
   # GET /links/1/edit
   def edit
-    @link = Link.find(params[:id])
   end
 
   # POST /links
   # POST /links.json
   def create
+    @resource = Resource.new(params[:resource])
+    @resource.page_id = @page.id
+    @resource.position = @page.resources.count+1    
+    @resource.save
+    
     @link = Link.new(params[:link])
-
+    @link.resource_id = @resource.id
+    @link.save
+    
     respond_to do |format|
-      if @link.save
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
-        format.json { render json: @link, status: :created, location: @link }
+      if @link.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
+        format.html { redirect_to edit_course_path(@course), notice: 'Text was successfully updated.' }
+        format.json { head :no_content }
+        format.js
       else
-        format.html { render action: "new" }
+        format.html { render action: "edit" }
         format.json { render json: @link.errors, status: :unprocessable_entity }
+        format.js
       end
-    end
+    end  
   end
 
   # PUT /links/1
   # PUT /links/1.json
   def update
-    @link = Link.find(params[:id])
-
     respond_to do |format|
-      if @link.update_attributes(params[:link])
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
+      if @link.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
+        format.html { redirect_to edit_course_path(@course), notice: 'Text was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @link.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -72,11 +91,10 @@ class LinksController < ApplicationController
   # DELETE /links/1
   # DELETE /links/1.json
   def destroy
-    @link = Link.find(params[:id])
     @link.destroy
 
     respond_to do |format|
-      format.html { redirect_to links_url }
+      format.html { redirect_to edit_course_path(@course) }
       format.json { head :no_content }
     end
   end

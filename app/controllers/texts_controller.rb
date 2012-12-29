@@ -1,6 +1,6 @@
 class TextsController < ApplicationController
   
-  before_filter :find_text, :only => [:show, :update, :destroy, :edit, :updatePosition]
+  before_filter :find_text, :only => [:show, :update, :destroy, :edit]
   before_filter :find, :except => [:destroy]
 
   def find
