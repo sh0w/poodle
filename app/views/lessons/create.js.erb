@@ -1,5 +1,6 @@
-$('#new_lesson').remove();
-$('#add_lesson_link').show();
-$('#new_lessons').append('<%= j render :partial => "lesson" , :object => @lesson %>');
+$('#lessons').append('<%= j render :partial => "lesson" , :object => @lesson %>');
+
+$("#overlay").remove();
+$("#overlay_center").remove();
 
 

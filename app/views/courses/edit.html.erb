@@ -22,8 +22,7 @@
 	   <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true %>
         </li>
      <% end %>
-    </ul> 
-     <div id="new_lessons"></div>  
+    </ul>  
     <%= link_to 'Add Lesson', "/courses/#{@course.id}/lessons/new", id: "add_lesson_link", remote: true %>
     <div id="add_lesson_form"></div>
  </div>

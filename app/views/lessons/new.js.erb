@@ -1,12 +1,10 @@
-var elem = $('#add_lesson_form');
-var link = $('#add_lesson_link');
+$('body').append('<div id ="overlay"></div><div id ="overlay_center"><div id ="overlay_content"><%= j render("form") %></div></div>');
 
-link.hide();
+var overlay = $("#overlay");
+var content = $("#overlay_content");
 
-elem.append('<%= j render("form") %>');
-elem.append("<input type='button' value='cancel' class='cancelbutton'>");
-elem.find(".cancelbutton").button().click(function(){
-  $(this).remove();
-  $('#new_lesson').remove();
-  link.show();
+content.append("<input type='button' value='cancel' class='cancelbutton'>");
+content.find(".cancelbutton").button().click(function(){
+  overlay.hide();
+  content.hide();
 });
