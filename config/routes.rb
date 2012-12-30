@@ -1,5 +1,7 @@
 Poodle::Application.routes.draw do
 
+  resources :images
+
   resources :links
 
   devise_for :users,
@@ -12,6 +14,7 @@ Poodle::Application.routes.draw do
         resources :resources
         resources :texts
         resources :links
+        resources :images
       end
     end
     resources :comments

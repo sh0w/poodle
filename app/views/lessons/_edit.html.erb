@@ -26,6 +26,8 @@
         <%= link_to '(+) Add Text', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/texts/new", id: "add_text_link", remote: true %>
         <br />
         <%= link_to '(+) Add Link', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/links/new", id: "add_link_link", remote: true %>
+        <br />
+        <%= link_to '(+) Add Image', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/images/new", id: "add_image_link", remote: true %>
         <br /><br />
         <ul id="resources">
           <% page.resources.each do |resource| %>
@@ -47,6 +49,14 @@
                   <%= link_to '(x)', [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
                   &nbsp;
                   <%= link_to '(edit)', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/links/#{resource.link.id}/edit", id: "edit_link_link", remote: true %>
+                <% end %>
+                <% if resource.image %>
+                  <span class="position"><%= resource.position %></span>. Image: <%= resource.headline %> 
+                  &nbsp;
+                  <%= image_tag resource.image.url(:thumb) %>
+                  <%= link_to '(x)', [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
+                  &nbsp;
+                  <%= link_to '(edit)', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/links/#{resource.image.id}/edit", id: "edit_image_link", remote: true %>
                 <% end %>
                             
               </li>
