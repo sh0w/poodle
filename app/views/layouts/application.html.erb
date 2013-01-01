@@ -28,7 +28,7 @@
           <a class="brand" href="/dashboard/">Poodle</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><a href="/dashboard/">Dashboard</a></li> <!-- Logo einfügen: Laut daniela als img ( glaub ich) laut Gizmo Mensch als backgroundimage, mir persönlich ist das egal -->
+              <li><a href="/dashboard/">Dashboard</a></li>
               <li><a href="/courses/new">Create</a></li>
               <li><a href="/courses/">Explore</a></li>
             </ul>
@@ -41,8 +41,8 @@
                       <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a href="/settings/">Settings</a></li> <!-- Logo einfügen: Laut daniela als img ( glaub ich) laut Gizmo Mensch als backgroundimage, mir persönlich ist das egal -->
-                      <li><%= link_to 'edit profile', edit_user_registration_path %></li>
+                      <li><a href="/users/">View Profile</a></li>
+                      <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
                       <li><%= link_to "logout", destroy_user_session_path, method: :delete %></li>
                     </ul>
                   </li>

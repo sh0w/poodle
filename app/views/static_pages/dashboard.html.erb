@@ -1,19 +1,27 @@
 <h1>Dashboard</h1>
+<div class="row">
+    <div class="span4">
+        <h2>Your current courses</h2>
+        <% current_user.courses.each do |c| %>
+            <%= link_to c.title, course_path(c) %> <br>
+        <% end  %>
+    </div>
 
-<h2>Your current courses:</h2>
-<% current_user.courses.each do |c| %>
-    <%= link_to c.title, course_path(c) %> <br>
-<% end  %>
+    <div class="span4">
+        <h2>Courses you created</h2>
+        <% CreatesCourse.find_all_by_user_id(current_user.id).each do |cc| %>
+            <% c = Course.find(cc.course_id) %>
+            <%= link_to c.title, course_path(c) %> <small>updated <%= time_ago_in_words(c.updated_at) %> ago</small><br>
+        <% end  %>
+    </div>
 
-<h2>Courses you created:</h2>
-<% CreatesCourse.find_all_by_user_id(current_user.id).each do |cc| %>
-    <% c = Course.find(cc.course_id) %>
-    <%= link_to c.title, course_path(c) %> <small>updated <%= time_ago_in_words(c.updated_at) %> ago</small><br>
-<% end  %>
+    <div class="span4">
+        <h2>Activities</h2>
+        <% Activity.all.each do |a| %>
+            <%= convert_to_message(a)  %>
+            <small> <%= time_ago_in_words(a.created_at) %> ago</small>
+            <br>
+        <% end %>
+    </div>
 
-<h2>Activities</h2>
-<% Activity.all.each do |a| %>
-    <%= convert_to_message(a)  %>
-    <small> <%= time_ago_in_words(a.created_at) %> ago</small>
-    <br>
-<% end %>
+</div>
