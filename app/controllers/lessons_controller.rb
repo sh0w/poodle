@@ -3,6 +3,7 @@ class LessonsController < ApplicationController
   # GET /lessons.json
   before_filter :find_lesson, :except => [:new, :create]
   before_filter :find_course, :except => [:destroy]
+  before_filter :get_pages, :only => [:edit, :show]
 
   def find_course
     @course = Course.find(params[:course_id])
@@ -10,6 +11,10 @@ class LessonsController < ApplicationController
 
   def find_lesson
     @lesson = Lesson.find(params[:id])
+  end
+  
+  def get_pages
+    @pages = @lesson.pages.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
   end
 
   # GET /lessons/1

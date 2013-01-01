@@ -79,10 +79,10 @@ class ResourcesController < ApplicationController
   def updatePosition
    
     position = params[:position]
-    @lesson.position = position
+    @resource.position = position
 
     respond_to do |format|
-      if @lesson.save    
+      if @resource.save    
         format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully updated.' }
         format.json { head :no_content }
       else
@@ -98,8 +98,9 @@ class ResourcesController < ApplicationController
     @resource.destroy
 
     respond_to do |format|
-      format.html { redirect_to resources_url }
+      format.html { redirect_to edit_course_path(@course) }
       format.json { head :no_content }
+      format.js
     end
   end
 end

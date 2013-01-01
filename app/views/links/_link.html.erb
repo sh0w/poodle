@@ -1,0 +1,5 @@
+<span class="position"><%= @resource.position %></span>. link: <%= @resource.headline %> 
+&nbsp;
+<%= link_to '(x)', [ @course, @lesson, @page, @resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
+&nbsp;
+<%= link_to '(edit)', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{@page.id}/links/#{@resource.link.id}/edit", id: "edit_link_link", remote: true %>

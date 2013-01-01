@@ -7,45 +7,59 @@ $( "#lessons" ).sortable({
 $( "#lessons" ).disableSelection();
 
 function update_lesson_position(){  
-  list = $("#lessons");  
-  neworder = new_positions(list);  
+  var list = $("#lessons");  
+  var neworder = new_positions(list);  
   
-  course_id = $("#courseeditor div:first-child").attr("id");
-  url = "/courses/"+course_id+"/lessons/";
+  var course_id = $("#courseeditor div:first-child").attr("id");
+  var url = "/courses/"+course_id+"/lessons/";
   
   do_requests(url);  
 }
 
 function update_page_position(){
-  list = $("#pages");
-  neworder = new_positions(list); 
-  
-  course_id = $("#courseeditor div:first-child").attr("id");
-  lesson_id = $("#pageeditor div:first-child").attr("id");
-  url = "/courses/"+course_id+"/lessons/"+lesson_id+"/pages/";  
-  
-  do_requests(url);   
+  var list = $("#pages");
+  var neworder = new_positions(list); 
+  var course_id = $("#courseeditor div:first-child").attr("id");
+  var lesson_id = $("#pageeditor div:first-child").attr("id");
+  var url = "/courses/"+course_id+"/lessons/"+lesson_id+"/pages/"; 
+  do_requests(url, neworder); 
+}
+
+function update_resource_position(id){
+  var list = $("#page_"+id+" #resources");
+  var neworder = new_positions(list); 
+  var course_id = $("#courseeditor div:first-child").attr("id");
+  var lesson_id = $("#pageeditor div:first-child").attr("id");
+  var url = "/courses/"+course_id+"/lessons/"+lesson_id+"/pages/"+id+"/resources/"; 
+  do_requests(url, neworder);
 }
 
 function new_positions(list){
-  neworder = new Array();
-  list.find("li").each(function(i){
-    elem = $(this);
+  var neworder = new Array();
+  list.find("> li").each(function(i){
+    
+    var elem = $(this);
+    
+    var id = elem.attr("id").split("_")[1];
     elem.find(".position").html(i+1);
-    id = elem.attr("id").split("_")[1];
-    position = elem.find(".position").html();	
+    var position = elem.find(".position").html();
+    
     neworder.push({
       'id': id,
       'position': position
     });
   });
+  
   return neworder;
 }
 
-function do_requests(url){
+function do_requests(url, neworder){
+
   for(i=0;i<=neworder.length;i++){
-    id = neworder[i].id;
-	  position = neworder[i].position;
+    
+    var id = neworder[i].id;
+	  var position = neworder[i].position;
+	  
 	  $.ajax({
 	    type: "GET",
       url: url+id+"/updatePosition",
@@ -53,7 +67,8 @@ function do_requests(url){
         "position": position
       }
     });
-	}
+	}  
+  alert("end of requests");
 }
    
 

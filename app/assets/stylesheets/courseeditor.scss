@@ -52,6 +52,18 @@
 	                display: block;
 	                float: left;
 	              }
+	              
+	              #resources{
+	                li{
+	                  display: block;
+	                  border-bottom: 1px solid #cccccc;
+	                  padding: 5px 0 5px 0;
+	                }
+	                
+	                li:first-child{
+	                  border-top: 1px solid #cccccc;
+	                }
+	              }
 	          }
 	      }
 	  }
