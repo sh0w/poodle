@@ -1,0 +1,6 @@
+var elem = $('#image')
+elem.html("<%= j render :partial => "editImageForm", :locals => { :lesson => @lesson, :course => @course } %>");
+elem.append("<input type='button' value='cancel' class='cancelbutton'>");
+elem.find(".cancelbutton").button().click(function(){
+  elem.html("<img src='<%= @lesson.image.url(:thumb) %>' alt='<%= @lesson.image_file_name %>' />");
+});

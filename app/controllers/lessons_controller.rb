@@ -43,6 +43,9 @@ class LessonsController < ApplicationController
   def editTitle
   end
   
+  def editImage
+  end
+  
 
   # POST /lessons
   # POST /lessons.json

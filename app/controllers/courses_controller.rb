@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_course, :only => [:show, :update, :destroy, :edit, :editTitle, :editDescription, :take_course]
+  before_filter :find_course, :only => [:show, :update, :destroy, :edit, :editTitle, :editDescription, :editImage, :take_course]
   before_filter :get_lessons, :only => [:show, :edit]
   before_filter :get_comments, :only => [:show]
   before_filter :takes_course?, :only => [:show, :take_course]
@@ -61,6 +61,9 @@ class CoursesController < ApplicationController
   end
   
   def editTitle
+  end
+  
+  def editImage
   end
 
   # POST /courses
