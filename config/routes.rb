@@ -1,5 +1,7 @@
 Poodle::Application.routes.draw do
 
+  resources :uploads
+
   resources :images
 
   resources :links
@@ -15,6 +17,7 @@ Poodle::Application.routes.draw do
         resources :texts
         resources :links
         resources :images
+        resources :uploads
       end
     end
     resources :comments

@@ -1,0 +1,7 @@
+<span class="position"><%= @resource.position %></span>. upload: <%= @resource.headline %> 
+<br />
+<%= @resource.upload.upload.url %> 
+<br />
+<%= link_to '(x)', [ @course, @lesson, @page, @resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_upload", remote: true %>
+&nbsp;
+<%= link_to '(edit)', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{@page.id}/uploads/#{@resource.upload.id}/edit", id: "edit_upload_upload", remote: true %>

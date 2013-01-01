@@ -1,0 +1,29 @@
+<%= form_for ([@course, @lesson, @page, @upload]), remote: true do |f| %>
+  <% if @upload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h2>
+
+      <ul>
+      <% @upload.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= fields_for( @resource ) do |resource_f| %>
+    <div class="field">
+      <%= resource_f.label :headline %><br />
+      <%= resource_f.text_field :headline %>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :upload %><br />
+    <%= f.file_field :upload %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
