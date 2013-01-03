@@ -32,6 +32,21 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+* {
+    margin: 0;
+}
+
+html, body {
+    height:100%;
+}
+
+.content-wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -270px;
+}
+
 h1 {
     font-size: 1.5em;
 }
@@ -251,6 +266,8 @@ box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
 -webkit-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
 	font-size: 1rem; /* 14px */
 	line-height:1.429rem;
+    height: 142px;
+    overflow: hidden;
 	}
 
 .completed	{
@@ -265,7 +282,7 @@ box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
 background-image:url(<%= asset_path 'img/sea.png' %>);
 background-repeat:no-repeat;}
 
-.completed h2, .current h2, .locked h2	{font-size: 1.429rem; /* 20px */;}
+.completed h2, .current h2, .locked h2	{font-size: 18px;}
 
 #lessons{
 	max-width: 900px;
@@ -273,14 +290,14 @@ background-repeat:no-repeat;}
 	margin:0 auto;
 	margin-top: 90px;
     text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25); /*cross browser ....!!*/
-} 
+}
 
 #lessons h2{
 	font-weight: bold;
-	margin: 20px;
+	margin: 0px;
 	}
 #lessons p{
-	margin: 10px 10px 10px 20px;
+	margin: 10px 10px 10px 0px;
 }
 
 
@@ -307,11 +324,12 @@ background-repeat:no-repeat;}
 	margin-right:12px;
 	}
 .comment {
-	width: 269px;
-	height: 161px;
+	width: 250px;
+    margin: 5px;
 	float:left;
     background-image:url(<%= asset_path 'img/comment.png' %>);
-	background-repeat:no-repeat;
+	background-repeat:repeat;
+    background-position: left center;
 	
 }
 .comment_content	{
@@ -342,47 +360,36 @@ background-repeat:no-repeat;}
 
 
 	/*				FOOTER				*/
-	
-	
-footer a, #contact	{
-	color:#30333c; 
-	font-size:0.9286rem;/*13px*/ 
-	line-height:1.071rem;
-	font-weight:normal;
-	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.24);}
-	
-.footer-wrapper	{
-	overflow:hidden;
-	margin-top: 50px;
-	margin-left:auto;
-	margin-right:auto;
-	width:680px;
-	border:1px solid red;
-}
-#contact{
-	
-	max-width: 250px;
-	padding-left: 15%;	
-}
 
-footer ul ul:first-child, #contact ul{
-	padding-right: 50px;
-	} 
+
+footer.bottom, .push {
+    height: 270px;
+
+}
 footer h1{
 	text-shadow:none;
 	color:white; 
-	text-transform:uppercase;	
+	text-transform:uppercase;
+    font-size: 1em;
+    padding-bottom: 20px;
 }
-footer nav li	{
-	float:left;
-	padding-right:50px;
-} 
-
-footer nav li li{
-	float:none;
+footer.bottom .links {
+    padding-top: 60px;
+    text-shadow: 1px 1px 1px #3da29b;
+    font-size: 0.9em;
+    line-height: 1.2em;
 }
 
+footer.bottom a {
+    color: #30333c;
 
+
+}
+
+footer.bottom .container-fluid {
+    height: 270px;
+
+}
 
 /*der Versuch das small am Boden festzukleben haben wir aufgegeben, stattdessen hat der HG jetzt die Footerfarbe und das small hängt praktisch am nav*/
 small	p {
@@ -392,4 +399,13 @@ small	p {
 	padding-top:50px;
 }
 
+.copyright {
+    font-size: 9px;
+    height: 10px;
+    text-align: center;
+}
+
+footer .poodle {
+    height: 250px;
+}
 
