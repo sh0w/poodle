@@ -33,6 +33,9 @@ Poodle::Application.routes.draw do
   match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:id/updatePosition' => 'resources#updatePosition'
   match 'courses/:course_id/lessons/:lesson_id/pages/:id/updatePosition' => 'pages#updatePosition'
   match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
+
+  match 'users/:username' => "users#show"
+  match 'profile' => "users#current"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
