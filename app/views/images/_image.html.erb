@@ -1,5 +1,7 @@
 <span class="position"><%= @resource.position %></span>. image: <%= @resource.headline %> 
-&nbsp;
+<br />
+<%= @resource.image.image.url(:thumb) %> 
+<br />
 <%= link_to '(x)', [ @course, @lesson, @page, @resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_image", remote: true %>
 &nbsp;
 <%= link_to '(edit)', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{@page.id}/images/#{@resource.image.id}/edit", id: "edit_image_image", remote: true %>

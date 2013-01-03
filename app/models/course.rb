@@ -1,5 +1,5 @@
 class Course < ActiveRecord::Base
-  attr_accessible :description, :title
+  attr_accessible :description, :title, :image
 
   has_many :lessons, :dependent => :destroy
   has_many :comments, :dependent => :destroy
@@ -16,5 +16,10 @@ class Course < ActiveRecord::Base
   def taken_by_user(user_id)
    TakesCourse.where(:user_id => user_id, :course_id => id)
   end
+  
+  has_attached_file :image, :styles => { :thumb => "100x100>", :medium => "240x240" }
+  
+  validates_attachment_size :image, :less_than => 5.megabytes
+  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
 end

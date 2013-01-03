@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230103000) do
+ActiveRecord::Schema.define(:version => 20130101153743) do
 
   create_table "acitivities", :force => true do |t|
     t.string   "text"
@@ -53,8 +53,12 @@ ActiveRecord::Schema.define(:version => 20121230103000) do
   create_table "courses", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "creates_courses", :force => true do |t|
@@ -78,9 +82,13 @@ ActiveRecord::Schema.define(:version => 20121230103000) do
     t.string   "title"
     t.string   "description"
     t.integer  "course_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "position"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "links", :force => true do |t|
@@ -118,6 +126,16 @@ ActiveRecord::Schema.define(:version => 20121230103000) do
     t.integer  "resource_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "uploads", :force => true do |t|
+    t.integer  "resource_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
   end
 
   create_table "users", :force => true do |t|

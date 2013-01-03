@@ -9,7 +9,13 @@
 <div id ="coursedescription">
   <p><%= @course.description %></p>
 </div>
-<%= link_to '-> (edit coursedescription)', "/courses/#{@course.id}/editDescription", id: "edit_coursedescription_link", remote: true %>
+<%= link_to '-> (edit course description)', "/courses/#{@course.id}/editDescription", id: "edit_coursedescription_link", remote: true %>
+<br /><br />
+<h2>Image:</h2>
+<div id ="courseimage">
+  <%= image_tag @course.image.url(:thumb) %> 
+</div>
+<%= link_to '-> (edit course image)', "/courses/#{@course.id}/editImage", id: "edit_courseimage_link", remote: true %>
 <br /><br />
 <div id = "courseeditor">
 <div id = "<%= @course.id %>">
@@ -18,6 +24,7 @@
      <% @lessons.each do |lesson| %>
         <li class="lesson" id="lesson_<%= lesson.id %>" >
            <h2><span class="position"><%= lesson.position %></span>: <%= lesson.title %></h2>
+           <%= image_tag lesson.image.url(:thumb) %> <br />
 	   <%= link_to 'Edit', edit_polymorphic_path([ @course, lesson ]), id: "edit_page_link", remote: true %>
 	   <%= link_to 'Destroy', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true %>
         </li>

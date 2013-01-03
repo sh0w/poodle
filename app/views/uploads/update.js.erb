@@ -1,0 +1,3 @@
+$("#overlay").remove();
+$("#overlay_center").remove();
+$("#resource_<%= @resource.id %>").html('<%= j render :partial => "upload" , :object => @resource %>');

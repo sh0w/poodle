@@ -9,6 +9,11 @@
   <p><%= @lesson.description %></p>
 </div>
 <%= link_to '-> (edit description)', "/courses/#{@course.id}/lessons/#{@lesson.id}/editDescription", id: "edit_description_link", remote: true %>
+<br /><br /><h2>Image:</h2>
+<div id ="image">
+  <%= image_tag @lesson.image.url(:thumb) %>
+</div>
+<%= link_to '-> (edit image)', "/courses/#{@course.id}/lessons/#{@lesson.id}/editImage", id: "edit_image_link", remote: true %>
 <br /><br />
 <%= link_to 'Add Page', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/new", id: "add_page_link", remote: true %>
 <br /><br />
@@ -28,6 +33,8 @@
         <%= link_to '(+) Add Link', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/links/new", id: "add_link_link", remote: true %>
         <br />
         <%= link_to '(+) Add Image', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/images/new", id: "add_image_link", remote: true %>
+        <br />
+        <%= link_to '(+) Add File', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/uploads/new", id: "add_upload_link", remote: true %>
         <br /><br />
         <ul id="resources">
           <% page.resources.each do |resource| %>
@@ -52,11 +59,20 @@
                 <% end %>
                 <% if resource.image %>
                   <span class="position"><%= resource.position %></span>. Image: <%= resource.headline %> 
-                  &nbsp;
-                  <%= image_tag resource.image.url(:thumb) %>
+                  <br />
+                  <%= image_tag resource.image.image.url(:thumb) %> 
+                  <br />
                   <%= link_to '(x)', [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
                   &nbsp;
                   <%= link_to '(edit)', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/links/#{resource.image.id}/edit", id: "edit_image_link", remote: true %>
+                <% end %>
+                <% if resource.upload %>
+                  <span class="position"><%= resource.position %></span>. File: 
+                  <a href ="<%= resource.upload.upload.url %>">-> <%= resource.upload.upload_file_name %></a> 
+                  <br />
+                  <%= link_to '(x)', [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
+                  &nbsp;
+                  <%= link_to '(edit)', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/links/#{resource.upload.id}/edit", id: "edit_upload_link", remote: true %>
                 <% end %>
                             
               </li>

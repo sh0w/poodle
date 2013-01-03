@@ -3,12 +3,9 @@ class Image < ActiveRecord::Base
   
   belongs_to :resource
   
-  has_attached_file :image, :styles => { :thumb => "100x100>", :medium => "300x300" }
+  has_attached_file :image, :styles => { :thumb => "100x100>", :medium => "240x240" }
   
   validates_attachment_size :image, :less_than => 5.megabytes
-  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
-  
-  def thumb
-      image_tag @agent.image.url(:medium), :class => "resource_image_thumb"
-  end
+  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+ 
 end
