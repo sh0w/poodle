@@ -17,7 +17,7 @@ class Course < ActiveRecord::Base
    TakesCourse.where(:user_id => user_id, :course_id => id)
   end
   
-  has_attached_file :image, :styles => { :thumb => "100x100>", :medium => "240x240" }
+  has_attached_file :image, :styles => { :thumb => "100x100>", :medium => "240>x240" }
   
   validates_attachment_size :image, :less_than => 5.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif']

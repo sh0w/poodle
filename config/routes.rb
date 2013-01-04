@@ -39,7 +39,7 @@ Poodle::Application.routes.draw do
   match 'courses/:course_id/lessons/:lesson_id/pages/:id/updatePosition' => 'pages#updatePosition'
   match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
 
-  match 'users/:username' => "users#show"
+  match 'users/:username' => "users#show", :as => "user"
   match 'profile' => "users#current"
   
   # The priority is based upon order of creation:

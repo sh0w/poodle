@@ -1,2 +1,36 @@
-hallo
-<%= @user.username %>
+<section id="intro">
+
+  <header>
+    <h1><%= @user.username %></h1>
+  </header>
+
+  <div id="intro_content">
+
+    <!---Bild und Bewertung--->
+    <figure >
+      <%= image_tag @user.avatar.url(:medium), :class => "course_pic" %>
+    </figure>
+    <!---Beschreibung--->
+    <div id="intro_text">
+
+
+    </div>
+
+    <!---Fortschritt--->
+    <div id="progress">
+      <% if @user == current_user %>
+          <%= link_to "Edit Profile", edit_user_registration_path, :class=>"btn btn-block btn-large" %>
+      <% else %>
+        <%= link_to "Follow", "/dashboard", :class=>"btn btn-primary start-course btn-block btn-large" %>
+      <% end %>
+    </div>
+  </div>
+
+</section>
+
+
+<hr /><h1 class="main">Courses</h1><hr />
+
+<div id="courses" class="row-fluid">
+
+</div>

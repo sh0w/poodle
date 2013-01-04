@@ -3,6 +3,7 @@ module ApplicationHelper
 
     @c = Course.find(a.course_id)
 
+
     case a.text
       when "create_course"
         @message = [

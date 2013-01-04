@@ -14,8 +14,11 @@
      </figure>
      <!---Beschreibung--->
      <div id="intro_text">
-       <p>Created by <span id="creator">
-        <%= User.find(@course.creates_course.user_id).username %>              </span>
+       <p>Created by
+
+         <%= link_to image_tag(@creator.avatar.url(:mini)), user_path(@creator.username), :class => "creator"%>
+         <%= link_to @creator.username, user_path(@creator.username), :class => "creator"%>
+
         <span class="when"><%= time_ago_in_words(@course.creates_course.created_at) %> ago</span>
      </p>
 
@@ -36,29 +39,22 @@
        <% end %>
      </div>
 
-     <!---social networks--->
+     <!---social networks
      <aside id="share">
        <h1>Share this</h1>
      </aside>
-
+                --->
    </div>
 
   </section>
 
 
+    <hr /><h1 class="main">Overview</h1><hr />
 
-
-
- <section id="overview">
-    <hr /><header>
-    <h1>Overview</h1>
-  </header>
-
-    <hr />
     <div id="lessons" class="row-fluid">
 
       <% @lessons.each_with_index do |lesson, index| %>
-          <div class="locked well span3">
+          <div class="locked lesson span3">
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
           </div>
@@ -71,12 +67,9 @@
     </div>
   </section>
 
-  <section id="comments">
-    <hr />	<header>
 
-    <h1>Comments</h1>
-
-  </header>
+    <hr />
+    <h1 class="main">Comments</h1>
     <hr />
     <section id="commentbox" class="clearfix">
 
@@ -87,10 +80,11 @@
                 <header>
                   <div class="info">
 
-                    <%= image_tag u.avatar.url(:thumb) %>
-                    <a href="#"><%= u.username %></a>
-
-                    <div class="when"><%= time_ago_in_words(comment.created_at) %> ago</div>
+                    <%= link_to image_tag(u.avatar.url(:thumb)), user_path(u.username) %>
+                    <div class="cmt_info">
+                        <p><%= link_to u.username, user_path(u.username) %> </p>
+                        <p><span class="when"><%= time_ago_in_words(comment.created_at) %> ago</span></p>
+                    </div>
                   </div>
                 </header>
                 <div class="content">
@@ -108,8 +102,5 @@
             </div>
           </div>
       <% end %>
-
-
-    </section>
 
   </section>

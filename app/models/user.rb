@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
                   :username, :firstname, :lastname, :description, :profile_private,
                   :provider, :uid, :avatar
 
-  has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "40x40>" }
+  has_attached_file :avatar, :styles => { :medium => "240>x240", :thumb => "28x28", :mini => "15x15" }
 
   validates_presence_of :username, :email
 
