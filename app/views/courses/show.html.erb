@@ -2,7 +2,8 @@
 
     <header>
       <h1>
-        <%= @course.title %></h1>
+        <%= @course.title %>
+      </h1>
     </header>
 
    <div id="intro_content">
@@ -34,10 +35,10 @@
            <div class="progress progress-striped">
              <div class="bar" style="width: 40%;"></div>
            </div>
-           <% progress = @course.takes_courses.find_by_user_id(current_user.id).lesson_progress %>
-           <% first_lesson = @course.lessons.find_by_position(progress) %>
-           <% first_page = first_lesson.pages.first %>
-           <%= link_to "continue course", "/courses/#{@course.id}/lessons/#{first_lesson.id}/pages/#{first_page.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+           <% takes_course = @course.takes_courses.find_by_user_id(current_user.id) %>
+           <% next_lesson = @course.lessons.find_by_id(takes_course.lesson_progress) %>
+           <% next_page = next_lesson.pages.find_by_id(takes_course.page_progress) %>
+           <%= link_to "continue course", "/courses/#{@course.id}/lessons/#{next_lesson.id}/pages/#{next_page.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
        <% else %>
         <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
 
@@ -62,6 +63,8 @@
           <div class="locked lesson span3">
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
+            <% first_lesson_page = lesson.pages.first %>
+            <%= link_to "do lesson", "/courses/#{@course.id}/lessons/#{lesson.id}/pages/#{first_lesson_page.id}" %>
           </div>
           <% if (index+1) % 4 == 0 && index > 3 %>
               </div>

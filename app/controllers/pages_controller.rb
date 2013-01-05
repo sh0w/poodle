@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-
+  before_filter :authenticate_user!
   before_filter :find_page, :only => [:show, :update, :destroy, :edit, :updatePosition]
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_course, :except => [:destroy]
@@ -35,7 +35,21 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-
+    @tc = @course.takes_courses.find_by_user_id(current_user.id)
+    @actual_lesson = @course.lessons.find_by_id(@tc.lesson_progress)
+    @actual_page = @lesson.pages.find_by_id(@tc.page_progress)
+    
+    if not @actual_lesson
+      @actual_lesson = @course.lessons.find_by_position(1)
+      @actual_page = @lesson.pages.find_by_position(1)
+    end
+    
+    if @lesson.position >= @actual_lesson.position and @page.position >= @actual_page.position    
+      @tc.lesson_progress = @lesson.id
+      @tc.page_progress = @page.id
+      @tc.save
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @page }

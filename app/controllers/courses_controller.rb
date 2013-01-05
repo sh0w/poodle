@@ -130,6 +130,7 @@ class CoursesController < ApplicationController
       @tc.user_id = current_user.id
       @tc.course_id = @course.id
       @tc.lesson_progress = 0
+      @tc.page_progress = 0
 
       @first_lesson = @course.lessons.first
       @first_page = @first_lesson.pages.first

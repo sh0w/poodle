@@ -1,1 +1,48 @@
-test
+<header>
+ <h1>
+   <%= @page.lesson.title %>
+ </h1>
+</header>
+
+<% @page.resources.each do |resource| %>
+  <div class = "resource" id="resource_<%= resource.id %>">
+    <% if resource.text %>
+      <h2><%= resource.headline %></h2>
+      <p><%= resource.text.text %></p>
+    <% end %>
+    <% if resource.link %>
+      <h2><%= resource.headline %></h2> 
+      <a href ="<%= resource.link.link %>">-> <%= resource.link.link %></a>
+    <% end %>
+    <% if resource.image %>
+      <h2><%= resource.headline %></h2>
+      <br />
+      <%= image_tag resource.image.image.url(:medium) %> 
+    <% end %>
+    <% if resource.upload %>
+      <h2><%= resource.headline %></h2>
+      <a href ="<%= resource.upload.upload.url %>">-> <%= resource.upload.upload_file_name %></a> 
+    <% end %>
+  </div>
+<% end %>
+<% page_position = @page.position %>
+<% lesson_position = @page.lesson.position %>
+<% if @page.lesson.pages.find_by_position(page_position - 1) %>
+  <% previous_page_id = @page.lesson.pages.find_by_position(page_position - 1).id %>
+  <%= link_to "previous page", "/courses/#{@course.id}/lessons/#{@page.lesson.id}/pages/#{previous_page_id}" %>
+<% end %>
+<% if @page.lesson.pages.find_by_position(page_position + 1) %>
+  <% next_page_id = @page.lesson.pages.find_by_position(page_position + 1).id %>
+  <%= link_to "next page", "/courses/#{@course.id}/lessons/#{@page.lesson.id}/pages/#{next_page_id}" %>
+<% else %>
+  Lesson finished!
+  <% if @page.lesson.course.lessons.find_by_position(lesson_position + 1) %>
+    <% next_lesson_id = @page.lesson.course.lessons.find_by_position(lesson_position + 1).id %>
+    <% next_page_id = @page.lesson.course.lessons.find_by_position(lesson_position + 1).pages.first.id %>
+    <%= link_to "start next lesson", "/courses/#{@course.id}/lessons/#{next_lesson_id}/pages/#{next_page_id}" %>
+  <% else %>
+    Course finished!
+  <% end %>
+<% end %>
+<br />
+<%= link_to "back to course overview", "/courses/#{@course.id}" %>
