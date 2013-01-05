@@ -1,26 +1,36 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section id="intro" class="edit_user">
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f| %>
-  <%= devise_error_messages! %>
+  <header>
+    <h1>Edit profile</h1>
+  </header>
 
-    <%= image_tag @user.avatar.url(:medium) %>
-        <%= f.file_field :avatar %>
+  <div id="intro_content">
 
+    <div id="intro_text">
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f| %>
+          <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+          <%= image_tag @user.avatar.url(:thumb) %>
+          <%= f.file_field :avatar %>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+          <div><%= f.label :email %><br />
+            <%= f.email_field :email %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+          <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, :autocomplete => "off" %></div>
 
-  <div><%= f.submit "Update" %></div>
-<% end %>
+          <div><%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation %></div>
 
-<h3>Cancel my account</h3>
+          <div><%= f.submit "Update" %></div>
+      <% end %>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+      <h3>Cancel my account</h3>
 
-<%= link_to "Back", :back %>
+      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+    </div>
+
+  </div>
+
+</section>

@@ -4,33 +4,65 @@
     <h1><%= @user.username %></h1>
   </header>
 
-  <div id="intro_content">
+  <div class="row-fluid" id="intro_content">
 
     <!---Bild und Bewertung--->
-    <figure >
-      <%= image_tag @user.avatar.url(:medium), :class => "course_pic" %>
-    </figure>
-    <!---Beschreibung--->
-    <div id="intro_text">
+    <div class="span5">
+        <figure>
+          <%= image_tag @user.avatar.url(:medium), :class => "course_pic" %>
+        </figure>
 
-
+        <div id="progress">
+        <% if @user == current_user %>
+            <%= link_to "Edit Profile", edit_user_registration_path, :class=>"btn btn-block btn-large" %>
+        <% else %>
+            <%= link_to "Follow", "/dashboard", :class=>"btn btn-primary start-course btn-block btn-large" %>
+        <% end %>
+        </div>
     </div>
-
-    <!---Fortschritt--->
-    <div id="progress">
-      <% if @user == current_user %>
-          <%= link_to "Edit Profile", edit_user_registration_path, :class=>"btn btn-block btn-large" %>
-      <% else %>
-        <%= link_to "Follow", "/dashboard", :class=>"btn btn-primary start-course btn-block btn-large" %>
+    <!---Beschreibung--->
+    <div id="intro_text" class="span7">
+      <h2>Recent activity</h2>
+      <% @recent_activity.each do |a| %>
+          <%= convert_to_message(a)  %>
+          <small> <%= time_ago_in_words(a.created_at) %> ago</small>
+          <br>
       <% end %>
     </div>
   </div>
 
 </section>
 
+<% if ! @created_courses.nil? %>
+    <hr /><h1 class="main">Created Courses</h1><hr />
+ <%  @created_courses.each do |c| %>
+    <section class="course">
+      <figure >
+        <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
+        <%= link_to image_tag(c.image.url :medium, :class=>"course_pic"), course_path(c) %>
+      </figure>
+      <h2><%= link_to c.title, course_path(c) %></h2>
+      <aside><%= time_ago_in_words(c.created_at) %> ago</aside>
+      <div class="introtext"><%= c.description[/(\s*\S+){#{30}}/] %>...</div>
+    </section>
+
+    <% end %>
+<% end %>
+
+
 
 <hr /><h1 class="main">Courses</h1><hr />
 
 <div id="courses" class="row-fluid">
 
-</div>
+
+  <div class="row">
+    <div class="span4">
+      <h2>Your current courses</h2>
+      <% current_user.courses.each do |c| %>
+          <%= link_to c.title, course_path(c) %> <br>
+      <% end  %>
+    </div>
+
+
+  </div>
