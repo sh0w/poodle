@@ -1,10 +1,10 @@
-$( "#lessons" ).sortable({
+$( ".courseeditor #lessons" ).sortable({
   update: function(){
     update_lesson_position();
   }
 });
 
-$( "#lessons" ).disableSelection();
+$( ".courseeditor #lessons" ).disableSelection();
 
 function update_lesson_position(){  
   var list = $("#lessons");  

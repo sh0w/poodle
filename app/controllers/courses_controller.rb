@@ -129,7 +129,7 @@ class CoursesController < ApplicationController
       @tc = TakesCourse.new
       @tc.user_id = current_user.id
       @tc.course_id = @course.id
-      @tc.lesson_progress = 1
+      @tc.lesson_progress = 0
 
       respond_to do |format|
         if @tc.save

@@ -25,7 +25,7 @@ Poodle::Application.routes.draw do
 
   root :to => "courses#index"
 
-  match "/dashboard" => "static_pages#dashboard"
+  match "/explore" => "static_pages#explore", :as => "explore"
 
   match 'courses/:id/start' => 'courses#take_course', :as => "start"
 

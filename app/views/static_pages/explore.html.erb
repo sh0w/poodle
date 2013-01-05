@@ -1,0 +1,90 @@
+
+<section id="popular">
+  <header>
+
+    <h1>Popular Courses</h1>
+
+  </header>
+
+  <div id="favorites">
+    <% @popular_courses.each do |c| %>
+        <section class="course">
+          <figure >
+            <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
+            <%= image_tag c.image.url :medium, :class=>"course_pic" %>
+          </figure>
+          <h2><%= link_to c.title, course_path(c) %></h2>
+          <aside><%= time_ago_in_words(c.created_at) %> ago</aside>
+          <div class="introtext"><%= c.description[/(\s*\S+){#{30}}/] %>...</div>
+        </section>
+
+    <% end %>
+
+
+
+    <section class="course" id="stricken">
+      <!--Bild und Bewertung-->
+      <figure >
+        <img src="img/rating.png" class="rating_bar" width="186" height="39" alt="rating" />
+        <%= image_tag  "img/search-course5.png", :class=>"course_pic" %>
+      </figure>
+      <h2>Strickjacke DIY</h2>
+      <aside> 132 days ago </aside>
+      <div class="introtext">Hier lernt ihr neue Sticktechniken und wie ihr diese kombinieren könnt und so diese tolle Jacke rauskommt!</div>
+    </section>
+    <section class="course" id="indesign">
+      <!--Bild und Bewertung-->
+      <figure >
+        <img src="img/rating.png" class="rating_bar" width="186" height="39" alt="rating" />
+        <%= image_tag  "img/search-course4.png", :class=>"course_pic" %>
+      </figure>
+      <h2>InDesign kennenlernen</h2>
+      <aside> 326 days ago </aside>
+      <div class="introtext">Ich zeige euch wie man mit Indesign ein einfaches Magazin erstellen kann. Für Anfänger geeignet.</div>
+    </section>
+    <section class="course" id="t-shirt">
+      <!--Bild und Bewertung-->
+      <figure >
+        <img src="img/rating.png" class="rating_bar" width="186" height="39" alt="rating" />
+        <%= image_tag  "img/search-course6.png", :class=>"course_pic" %>
+      </figure>
+      <h2>T-Shirts selbst bedrucken</h2>
+      <aside> 67 days ago </aside>
+      <div class="introtext">Von der Skizze zu Illustrator zum Siebdruck, für Anfänger!</div>
+    </section>
+    <section class="course" id="kuler">
+      <!--Bild und Bewertung-->
+      <figure >
+        <img src="img/rating.png" class="rating_bar" width="186" height="39" alt="rating" />
+        <%= image_tag  "img/search-course1.png", :class=>"course_pic" %>
+      </figure>
+      <h2>Arbeiten mit Kuler</h2>
+      <aside> 432 days ago </aside>
+      <div class="introtext">Mit Kuhler lässt sich der Workflow eines Designers optimieren, hier lernt ihr wie ihr dieses Feature verwendet bzw. zu euern Programm hinzufügen könnt.</div>
+    </section>
+    <section class="course" id="digital">
+      <!--Bild und Bewertung-->
+      <figure >
+        <img src="img/rating.png" class="rating_bar" width="186" height="39" alt="rating" />
+        <%= image_tag  "img/search-course2.png", :class=>"course_pic" %>
+      </figure>
+      <h2>Digital Painting für Pros</h2>
+      <aside> 2. October 2010 </aside>
+      <div class="introtext">Für Fortgeschrittene! Ich zeige euch wie ich arbeite und dabei Photoshop, Textures und mein Grafik Tablet einsetze, Schritt für schritt von der Skizze bis zum fertien Bild.</div>
+    </section>
+    <section class="course" id="manip">
+      <!--Bild und Bewertung-->
+      <figure >
+        <img src="img/rating.png" class="rating_bar" width="186" height="39" alt="rating" />
+        <%= image_tag  "img/search-course3.png", :class=>"course_pic" %>
+      </figure>
+      <h2>Photomanipulation mit PS</h2>
+      <aside> 437 days ago </aside>
+      <div class="introtext">Eine einfache Photomanipulation mit verschiedenen Fotos, die mit Photoshop aneinander angepasst und kombiniert werden.</div>
+    </section>
+
+
+  </div>
+
+
+</section>

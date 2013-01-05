@@ -3,15 +3,15 @@ class Course < ActiveRecord::Base
 
   has_many :lessons, :dependent => :destroy
   has_many :comments, :dependent => :destroy
-  has_many :activities
+  has_many :activities, :dependent => :destroy
 
-  has_and_belongs_to_many :categories
+  #has_and_belongs_to_many :categories
 
   has_one :creates_course
-  has_one :user, :through => :creates_course
+  has_one :user, :through => :creates_course, :dependent => :destroy
 
   has_many :takes_courses
-  has_many :users, :through => :takes_course
+  has_many :users, :through => :takes_course, :dependent => :destroy
 
   def taken_by_user(user_id)
    TakesCourse.where(:user_id => user_id, :course_id => id)
