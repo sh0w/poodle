@@ -26,7 +26,7 @@ function update_page_position(){
 }
 
 function update_resource_position(id){
-  var list = $("#page_"+id+" #resources");
+  var list = $("#page_"+id+" .resources");
   var neworder = new_positions(list); 
   var course_id = $("#courseeditor div:first-child").attr("id");
   var lesson_id = $("#pageeditor div:first-child").attr("id");

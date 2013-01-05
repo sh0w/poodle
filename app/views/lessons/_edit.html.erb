@@ -36,7 +36,7 @@
         <br />
         <%= link_to '(+) Add File', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{page.id}/uploads/new", id: "add_upload_link", remote: true %>
         <br /><br />
-        <ul id="resources">
+        <ul class="resources">
           <% page.resources.each do |resource| %>
               <li class = "resource" id="resource_<%= resource.id %>">
                 

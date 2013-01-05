@@ -10,7 +10,7 @@
      <!---Bild und Bewertung--->
      <figure >
        <%= image_tag "img/rating.png", :class => "rating_bar" %>
-       <%= image_tag "img/intro_img.jpg", :class => "course_pic" %>
+       <%= image_tag  @course.image.url(:medium), :class => "course_pic" %>
      </figure>
      <!---Beschreibung--->
      <div id="intro_text">
@@ -34,10 +34,15 @@
            <div class="progress progress-striped">
              <div class="bar" style="width: 40%;"></div>
            </div>
+           <% progress = @course.takes_courses.find_by_user_id(current_user.id).lesson_progress %>
+           <% first_lesson = @course.lessons.find_by_position(progress) %>
+           <% first_page = first_lesson.pages.first %>
+           <%= link_to "continue course", "/courses/#{@course.id}/lessons/#{first_lesson.id}/pages/#{first_page.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
        <% else %>
-           <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
+        <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
+
        <% end %>
-     </div>
+        </div>
 
      <!---social networks
      <aside id="share">

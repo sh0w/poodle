@@ -131,6 +131,9 @@ class CoursesController < ApplicationController
       @tc.course_id = @course.id
       @tc.lesson_progress = 0
 
+      @first_lesson = @course.lessons.first
+      @first_page = @first_lesson.pages.first
+
       respond_to do |format|
         if @tc.save
           @activity = Activity.new
@@ -139,7 +142,7 @@ class CoursesController < ApplicationController
           @activity.text = "start_course"
           @activity.save
 
-          format.html { redirect_to @course, notice: 'Start this course now.' }
+          format.html { redirect_to "/courses/#{@course.id}/lessons/#{@first_lesson.id}/pages/#{@first_page.id}", notice: 'Start this course now.' }
           format.json { render json: @course, status: :created, location: @course }
         else
           format.html { render action: "show" }

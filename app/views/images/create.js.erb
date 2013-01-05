@@ -2,4 +2,4 @@ alert("test");
 
 $("#overlay").remove();
 $("#overlay_center").remove();
-$("#page_<%= @page.id %> #resources").append('<li class = "resource" id="resource_<%= @resource.id %>"><%= j render :partial => "image" , :object => @resource %></li>');
+$("#page_<%= @page.id %> .resources").append('<li class = "resource" id="resource_<%= @resource.id %>"><%= j render :partial => "image" , :object => @resource %></li>');

@@ -4,8 +4,12 @@
   <br /><br />
   <%= link_to '(+) Add Text', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{@page.id}/texts/new", id: "add_text_link", remote: true %>
   <br />
-          <%= link_to '(+) Add Link', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{@page.id}/links/new", id: "add_link_link", remote: true %>
-          <br /><br />
-  <ul id="resources">
+  <%= link_to '(+) Add Link', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{@page.id}/links/new", id: "add_link_link", remote: true %>
+  <br />
+  <%= link_to '(+) Add Image', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{@page.id}/images/new", id: "add_image_link", remote: true %>
+  <br />
+  <%= link_to '(+) Add File', "/courses/#{@course.id}/lessons/#{@lesson.id}/pages/#{@page.id}/uploads/new", id: "add_upload_link", remote: true %>
+  <br /><br />
+  <ul class="resources">
   </ul>
 </li>
