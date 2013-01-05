@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
-  has_many :activities
-  has_many :comments
-  belongs_to :creates_course
+  has_many :activities, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+  belongs_to :creates_course, :dependent => :destroy
 
   has_many :courses, :through => :takes_courses
-  has_many :takes_courses
+  has_many :takes_courses, :dependent => :destroy
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

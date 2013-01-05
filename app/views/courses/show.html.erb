@@ -19,7 +19,7 @@
          <%= link_to image_tag(@creator.avatar.url(:mini)), user_path(@creator.username), :class => "creator"%>
          <%= link_to @creator.username, user_path(@creator.username), :class => "creator"%>
 
-        <span class="when"><%= time_ago_in_words(@course.creates_course.created_at) %> ago</span>
+        <span class="when"><%= time_ago_in_words(@course.created_at) %> ago</span>
      </p>
 
        <%= @course.description %>
