@@ -158,7 +158,7 @@ class CoursesController < ApplicationController
           @activity.text = "start_course"
           @activity.save
 
-          format.html { redirect_to "/courses/#{@course.id}/lessons/#{@first_lesson.id}/pages/#{@first_page.id}", notice: 'Start this course now.' }
+          format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@first_lesson.id}/pages/#{@first_page.id}", notice: 'Start this course now.' }
           format.json { render json: @course, status: :created, location: @course }
         else
           format.html { render action: "show" }

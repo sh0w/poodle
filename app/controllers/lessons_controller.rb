@@ -6,7 +6,7 @@ class LessonsController < ApplicationController
   before_filter :get_pages, :only => [:edit, :show]
 
   def find_course
-    @course = Course.find(params[:course_id])
+    @course = Course.find_by_slug(params[:course_id])
   end
 
   def find_lesson

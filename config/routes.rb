@@ -1,15 +1,4 @@
 Poodle::Application.routes.draw do
-
-  resources :pagecomments
-
-  resources :add_page_id_to_activities
-
-  resources :uploads
-
-  resources :images
-
-  resources :links
-
   devise_for :users,
              path_names: {sign_in: "login", sign_out: "logout"},
              :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -43,7 +32,7 @@ Poodle::Application.routes.draw do
   match 'courses/:id/editDescription' => 'courses#editDescription'
   match 'courses/:id/editTitle' => 'courses#editTitle'
   match 'courses/:id/editImage' => 'courses#editImage'
-  match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:id/updatePosition' => 'resources#updatePosition'
+  match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:id/updatePosition' => 'resources#updatePosition', :as => "updateResourcePosition"
   match 'courses/:course_id/lessons/:lesson_id/pages/:id/updatePosition' => 'pages#updatePosition'
   match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
 

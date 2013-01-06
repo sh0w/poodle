@@ -21,20 +21,46 @@
         </div>
     </div>
     <!---Beschreibung--->
-    <div id="intro_text" class="span7">
+    <div class="span7">
+
       <h2>Recent activity</h2>
+      <div class="recent_activity">
+      <ul>
       <% @recent_activity.each do |a| %>
-          <%= convert_to_message(a)  %>
-          <small> <%= time_ago_in_words(a.created_at) %> ago</small>
-          <br>
+          <li><%= convert_to_message(a)  %>
+          <span class="when"> <%= time_ago_in_words(a.created_at) %> ago</span>
+          </li>
       <% end %>
+      </ul>
+      </div>
     </div>
   </div>
 
 </section>
 
 <% if ! @created_courses.nil? %>
-    <hr /><h1 class="main">Created Courses</h1><hr />
+
+    <section id="popular">
+      <header>
+        <h1>Course Overview</h1>
+
+      </header>
+    <div id="favorites">
+      <% @created_courses.each do |c| %>
+          <section class="course">
+            <figure >
+              <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
+              <%= link_to image_tag(c.image.url :medium, :class=>"course_pic"), course_path(c) %>
+            </figure>
+            <h2><%= link_to c.title, course_path(c) %></h2>
+            <div class="introtext"><%= c.description[/(\s*\S+){#{30}}/] %>...</div>
+          </section>
+
+      <% end %>
+
+    </div>
+      </section>
+
  <%  @created_courses.each do |c| %>
     <section class="course">
       <figure >

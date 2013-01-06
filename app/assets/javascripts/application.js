@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require masonry
+//= require jquery.vticker
 //= require_tree .

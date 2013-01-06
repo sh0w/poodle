@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_filter :find_course, :except => [:delete]
 
   def find_course
-    @course = Course.find(params[:course_id])
+    @course = Course.find_by_slug(params[:course_id])
   end
 
   # GET /comments

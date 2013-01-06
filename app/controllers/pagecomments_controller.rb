@@ -1,8 +1,10 @@
 class PagecommentsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_page, :except => [:delete]
+  before_filter :find, :except => [:destroy]
 
-  def find_page
+  def find
+    @course = Course.find_by_slug(params[:course_id])
+    @lesson = Lesson.find(params[:lesson_id])
     @page = Page.find(params[:page_id])
   end
 
