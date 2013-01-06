@@ -19,7 +19,7 @@
 <%= link_to '-> (edit course image)', "/courses/#{@course.slug}/editImage", id: "edit_courseimage_link", remote: true %>
 <br /><br />
 <div id = "courseeditor">
-<div id = "<%= @course.slug %>">
+<div data-slug="<%= @course.slug %>">
  <div id="lessoneditor">
     <ul id ="lessons">
      <% @lessons.each do |lesson| %>
