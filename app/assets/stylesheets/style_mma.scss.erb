@@ -183,7 +183,9 @@ hr	{height:3px;
 	margin-left:auto;
 	margin-right:auto;
     background-image:url(<%= asset_path 'img/intro_content_bg.png' %>);
-	background-repeat:no-repeat;}
+	background-repeat:no-repeat;
+}
+
 
 #intro_content figure	{
 	width:240px;
@@ -211,7 +213,7 @@ hr	{height:3px;
 	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.24);
 }
 
-#intro_text p:first-child	{
+.course_overview #intro_text p:first-child	{
 	font-size:0.8571rem;/*12px*/
 	margin-top:-7px;}
 	
@@ -474,6 +476,7 @@ footer .poodle {
         float:left;
         margin-left:10px;
         margin-top:10px;
+        webkit-transition: opacity 0.3s linear; -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; transition: all 0.3s linear;
     }
     .course h2{
         font-size:1rem; /*16px*/
@@ -497,8 +500,31 @@ footer .poodle {
 
     .course aside{
         font-size:0.7857rem; /*11px*/
-        border-bottom: 1px solid #7a7a7a;
-        width:110px;
+        border-bottom: 1px solid #999999;
+        width:120px;
     }
 
+
+}
+
+#popular:hover {
+    .course{
+        opacity: 0.7;
+        webkit-transition: opacity 0.3s linear; -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; transition: all 0.3s linear;
+    }
+
+    .course:hover{
+        opacity: 1;
+        webkit-transition: opacity 0.3s linear; -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; transition: all 0.3s linear;
+    }
+
+}
+
+.edit_user {
+    #intro_content {
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        background-position: bottom;
+
+    }
 }

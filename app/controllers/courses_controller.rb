@@ -85,8 +85,8 @@ class CoursesController < ApplicationController
         @creates_course.course_id = @course.id
         @creates_course.save
 
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
-        format.json { render json: @course, status: :created, location: @course }
+        format.html { redirect_to proc { edit_course_url(@course) }, notice: 'Course was successfully created.' }
+        format.json { render json: proc { edit_course_url(@post) }, status: :created, location: @course }
       else
         format.html { render action: "new" }
         format.json { render json: @course.errors, status: :unprocessable_entity }

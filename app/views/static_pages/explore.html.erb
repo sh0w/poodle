@@ -11,7 +11,7 @@
         <section class="course">
           <figure >
             <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
-            <%= image_tag c.image.url :medium, :class=>"course_pic" %>
+            <%= link_to image_tag(c.image.url :medium, :class=>"course_pic"), course_path(c) %>
           </figure>
           <h2><%= link_to c.title, course_path(c) %></h2>
           <aside><%= time_ago_in_words(c.created_at) %> ago</aside>

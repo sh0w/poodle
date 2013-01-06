@@ -12,12 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :placeholder => "Title" %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.text_area :description, :rows=>5, :description => "Description" %>
   </div>
   
   <div class="field">
@@ -26,6 +24,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Course", :class => "btn" %>
   </div>
 <% end %>
