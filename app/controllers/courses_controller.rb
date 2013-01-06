@@ -131,7 +131,7 @@ class CoursesController < ApplicationController
 
         @lesson = Lesson.new
         @lesson.position = 1
-        @lesson.lesson_id = @course.id
+        @lesson.course_id = @course.id
         @lesson.save
 
         format.html { redirect_to proc { edit_course_url(@course) }, notice: 'Course was successfully created.' }
