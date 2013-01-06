@@ -4,7 +4,7 @@ class ResourcesController < ApplicationController
   before_filter :find, :except => [:destroy]
 
   def find
-    @course = Course.find(params[:course_id])
+    @course = Course.find_by_slug(params[:course_id])
     @lesson = Lesson.find(params[:lesson_id])
     @page = Page.find(params[:page_id])
   end
