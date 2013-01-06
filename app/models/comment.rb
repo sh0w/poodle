@@ -5,4 +5,6 @@ class Comment < ActiveRecord::Base
   belongs_to :user, :dependent => :destroy
   has_many :activities
 
+  validates :rating, :inclusion => 0..5
+
 end

@@ -1,20 +1,13 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_page, :only => [:show, :update, :destroy, :edit, :updatePosition]
-  before_filter :find_lesson, :except => [:destroy]
-  before_filter :find_course, :except => [:destroy]
+  before_filter :find
   before_filter :get_resources, :only => [:edit, :show]
   before_filter :get_pagecomments, :only => [:show]
 
-  def find_course
+
+  def find
     @course = Course.find_by_slug(params[:course_id])
-  end
-
-  def find_lesson
     @lesson = Lesson.find(params[:lesson_id])
-  end
-
-  def find_page
     @page = Page.find(params[:id])
   end
   
@@ -48,31 +41,11 @@ class PagesController < ApplicationController
       @actual_lesson = @course.lessons.find_by_position(1)
       @actual_page = @lesson.pages.find_by_position(1)
     end
-    
-    if @lesson.position >= @actual_lesson.position and @page.position >= @actual_page.position    
+
+    if @lesson.position >= @actual_lesson.position and @page.position >= @actual_page.position
       @tc.lesson_progress = @lesson.id
       @tc.page_progress = @page.id
 
-      number_of_pages = 0
-      @course.lessons.each do |lesson|
-        number_of_pages += lesson.pages.count
-      end
-
-      actual_lesson_position = @actual_lesson.position
-
-      number_of_absolved_pages = 0
-
-      @course.lessons.each do |lesson|
-        if lesson.position < actual_lesson_position
-          number_of_absolved_pages += lesson.pages.count
-        end
-
-        if lesson.position == actual_lesson_position
-          number_of_absolved_pages += Page.find(@tc.page_progress).position
-        end
-      end
-
-      @tc.lesson_progress_percent = Float(number_of_absolved_pages) / Float(number_of_pages) * 100
       @tc.save
     end
     
