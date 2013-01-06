@@ -1,7 +1,9 @@
 module ApplicationHelper
   def convert_to_message (a)
 
-    @c = Course.find(a.course_id)
+    if(!a.course_id.blank?)
+      @c = Course.find(a.course_id)
+    end
 
 
     case a.text
@@ -22,6 +24,11 @@ module ApplicationHelper
             User.find(a.creator_id).username,
             "commented on",
             @c.title
+        ]*" "
+      when "signup"
+        @message = [
+            User.find(a.user_id).username,
+            "has signed up."
         ]*" "
 
     end

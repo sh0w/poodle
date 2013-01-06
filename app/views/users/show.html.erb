@@ -1,10 +1,11 @@
-<section id="intro">
+<div class="user_profile">
+  <section class="intro">
 
   <header>
     <h1><%= @user.username %></h1>
   </header>
 
-  <div class="row-fluid" id="intro_content">
+  <div class="row-fluid intro_content">
 
     <!---Bild und Bewertung--->
     <div class="span5">
@@ -12,7 +13,7 @@
           <%= image_tag @user.avatar.url(:medium), :class => "course_pic" %>
         </figure>
 
-        <div id="progress">
+        <div class="progressbox">
         <% if @user == current_user %>
             <%= link_to "Edit Profile", edit_user_registration_path, :class=>"btn btn-block btn-large" %>
         <% else %>
@@ -38,18 +39,32 @@
 
 </section>
 
-<% if ! @tc.nil? %>
+<% finished = []
+   unfinished = []
 
-    <section id="popular">
+   if ! @tc.nil?
+     @tc.each do |tc|
+       if tc.lesson_progress_percent < 100
+         unfinished.push(tc)
+       else
+         finished.push(tc)
+       end
+     end
+   end
+   %>
+
+
+
+    <section class="popular clearfix">
       <header>
         <h1>Course Overview</h1>
-
       </header>
-    <div id="favorites">
-      <% @tc.each do |tc| %>
-          <%
-             c = Course.find(tc.course_id)
-          %>
+    <div class="favorites">
+
+      <%  if ! unfinished.empty?
+            unfinished.each do |tc|
+            c = Course.find(tc.course_id)  %>
+
           <section class="course">
             <figure >
               <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
@@ -57,18 +72,55 @@
             </figure>
             <h2><%= link_to c.title, course_path(c) %></h2>
 
+            <div class="introtext">
+
             <%= render 'shared/progressbar', { :progress => tc.lesson_progress_percent } %>
 
             <%= link_to "continue course", "/courses/#{c.slug}/lessons/#{tc.lesson_progress}/pages/#{tc.page_progress}", :class=>"btn btn-primary start-course btn-block btn-large" %>
 
-
-
-
-
+            </div>
           </section>
+
+      <% end
+         else %>
+
+          <div class="explore">
+            <h1>Hey! Looks like you're not taking any courses yet.</h1>
+          <%= link_to "Explore Poodle", explore_path, :class=> "btn btn-large" %>
+          </div>
 
       <% end %>
 
     </div>
       </section>
+
+</div>
+
+<%
+   if ! finished.empty? %>
+
+    <section class="popular clearfix">
+
+      <header>
+        <h1>Completed Courses</h1>
+      </header>
+      <div class="favorites">
+        <% finished.each do |tc| %>
+            <%
+               c = Course.find(tc.course_id)
+            %>
+                <section class="course">
+                  <figure >
+                    <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
+                    <%= link_to image_tag(c.image.url :medium, :class=>"course_pic"), course_path(c) %>
+                  </figure>
+                  <h2><%= link_to c.title, course_path(c) %></h2>
+
+                </section>
+        <% end %>
+
+      </div>
+    </section>
 <% end %>
+
+</div>

@@ -1,12 +1,12 @@
-<section id="intro" class="edit_user">
+<section class="intro" class="edit_user">
 
   <header>
     <h1>Edit profile</h1>
   </header>
 
-  <div id="intro_content">
+  <div class="intro_content">
 
-    <div id="intro_text">
+    <div class="intro_text">
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f| %>
           <%= devise_error_messages! %>
 

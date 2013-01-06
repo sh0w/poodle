@@ -30,7 +30,11 @@ class CoursesController < ApplicationController
   end
 
   def takes_course?
-    @takes_course = TakesCourse.where("user_id = ? AND course_id = ?",current_user.id, @course.id).size
+    if user_signed_in?
+      @takes_course = TakesCourse.where("user_id = ? AND course_id = ?",current_user.id, @course.id).size
+    else
+      @takes_course = false
+    end
     @takes_course
   end
 
@@ -48,7 +52,13 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @takes_course = @course.takes_courses.find_by_user_id(current_user.id)
+
+    if user_signed_in?
+      @takes_course = @course.takes_course.find_by_user_id(current_user.id)
+    else
+      @takes_course = false
+    end
+
     @creator = User.find(@course.creates_course.user_id)
 
     if(! @takes_course.blank?)
@@ -117,6 +127,12 @@ class CoursesController < ApplicationController
         @creates_course.user_id = current_user.id
         @creates_course.course_id = @course.id
         @creates_course.save
+
+
+        @lesson = Lesson.new
+        @lesson.position = 1
+        @lesson.lesson_id = @course.id
+        @lesson.save
 
         format.html { redirect_to proc { edit_course_url(@course) }, notice: 'Course was successfully created.' }
         format.json { render json: proc { edit_course_url(@post) }, status: :created, location: @course }
