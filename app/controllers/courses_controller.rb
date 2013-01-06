@@ -5,8 +5,9 @@ class CoursesController < ApplicationController
   before_filter :get_comments, :only => [:show]
   before_filter :takes_course?, :only => [:show, :take_course]
 
+
   def find_course
-    @course = Course.find(params[:id])
+    @course = Course.find_by_slug(params[:id])
   end
 
   def get_lessons
@@ -37,6 +38,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @creator = User.find(@course.creates_course.user_id)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @course }

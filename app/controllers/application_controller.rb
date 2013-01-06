@@ -5,4 +5,38 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new('Not Found')
   end
 
+  def to_slug
+    #strip the string
+    ret = self.strip
+
+    #blow away apostrophes
+    ret.gsub! /['`]/,""
+
+    # @ --> at, and & --> and
+    ret.gsub! /\s*@\s*/, " at "
+    ret.gsub! /\s*&\s*/, " and "
+
+    # german special characters äöüß
+    #ret.gsub(/[äöü]/) do |match|
+    #  case match
+    #    when "ä" 'ae'
+    #    when "ö" 'oe'
+    #    when "ü" 'ue'
+    #    when "ß" 'ss'
+    #  end
+    #end
+
+    #replace all non alphanumeric, dashes or periods with underscore
+    ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '-'
+
+    #convert double dashes to single
+    ret.gsub! /_+/,"-"
+
+    #strip off leading/trailing underscore
+    ret.gsub! /\A[_\.]+|[_\.]+\z/,""
+    ret.gsub! /\A[-\.]+|[-\.]+\z/,""
+
+    ret
+  end
+
 end

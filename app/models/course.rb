@@ -22,4 +22,14 @@ class Course < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 5.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
+  before_create :create_slug
+
+  def to_param
+    slug
+  end
+
+  def create_slug
+    self.slug = self.title.parameterize
+  end
+
 end
