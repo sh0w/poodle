@@ -1,13 +1,18 @@
+<% user = User.find(@comment.user_id) %>
 
-<div class=" comment well">
-  <header>
-    <div class="info">
-      <a href="#"><%= User.find(@comment.user_id).username %></a>
-
-      <div class="when"><%= time_ago_in_words(@comment.created_at) %> ago</div>
+<div class="comment">
+  <div class="comment_content">
+    <header>
+      <div class="info">
+        <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.username) %>
+        <div class="cmt_info">
+          <p><%= link_to user.username, user_path(user.username) %> </p>
+          <p><span class="when"><%= time_ago_in_words(@comment.created_at) %> ago</span></p>
+        </div>
+      </div>
+    </header>
+    <div class="content">
+      <%= @comment.content %>
     </div>
-  </header>
-  <div class="content">
-    <%= @comment.content %>
   </div>
 </div>

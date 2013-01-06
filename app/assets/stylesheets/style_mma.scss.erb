@@ -155,7 +155,7 @@ hr	{height:3px;
 	line-height:1.714rem;}
 
 
-#intro header	{
+#intro > header	{
 	z-index:5;
 	height:118px;
 	width:933px;
@@ -328,11 +328,12 @@ background-repeat:no-repeat;}
 	}
 .comment {
 	width: 250px;
-    margin: 5px;
+	min-height: 93px;
+  margin: 5px;
 	float:left;
-    background-image:url(<%= asset_path 'img/comment.png' %>);
+  background-image:url(<%= asset_path 'img/comment.png' %>);
 	background-repeat:repeat;
-    background-position: left center;
+  background-position: left center;
 	
 }
 .comment_content	{

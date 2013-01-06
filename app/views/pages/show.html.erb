@@ -48,34 +48,36 @@
     <br />
     <%= link_to "back to course overview", "/courses/#{@course.slug}" %>
   </div>
-<section id="pagecommentbox" class="clearfix">
-
-      <% @pagecomments.each do |pagecomment| %>
-          <% u = User.find(pagecomment.user_id) %>
-          <div class="comment">
-            <div class="comment_content">
-                <header>
-                  <div class="info">
-
-                    <%= link_to image_tag(u.avatar.url(:thumb)), user_path(u.username) %>
-                    <div class="cmt_info">
-                        <p><%= link_to u.username, user_path(u.username) %> </p>
-                        <p><span class="when"><%= time_ago_in_words(pagecomment.created_at) %> ago</span></p>
-                    </div>
-                  </div>
-                </header>
-                <div class="content">
-                  <%= pagecomment.content %>
-                </div>
+  
+<hr />
+ <h1 class="main">Comments</h1>
+<hr />
+<section id="commentbox" class="clearfix">
+  <div id = "comments">
+    <% @pagecomments.each do |pagecomment| %>
+      <% u = User.find(pagecomment.user_id) %>
+      <div class="comment">
+        <div class="comment_content">
+          <header>
+            <div class="info">
+              <%= link_to image_tag(u.avatar.url(:thumb)), user_path(u.username) %>
+              <div class="cmt_info">
+                <p><%= link_to u.username, user_path(u.username) %> </p>
+                <p><span class="when"><%= time_ago_in_words(pagecomment.created_at) %> ago</span></p>
+              </div>
             </div>
+          </header>
+          <div class="content">
+            <%= pagecomment.content %>
           </div>
-      <% end %>
-      <% if user_signed_in? %>
-          <div class="comment new">
-            <div class="form">
-              <%= link_to 'New pagecomment', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@page.id}/pagecomments/new", id: "new_comment_link", remote: true %>
-            </div>
-          </div>
-      <% end %>
-
-  </section>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if user_signed_in? %>
+    <div class="comment new">
+      <div class="form"></div>
+      <%= link_to 'New pagecomment', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@page.id}/pagecomments/new", id: "new_comment_link", remote: true %>
+    </div>
+  <% end %>
+</section>
