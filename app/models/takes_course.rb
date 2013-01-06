@@ -31,7 +31,6 @@ class TakesCourse < ActiveRecord::Base
     end
 
     self.lesson_progress_percent = Float(number_of_absolved_pages) / Float(number_of_pages) * 100
-    self.save
   end
 
 

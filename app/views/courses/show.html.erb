@@ -31,9 +31,9 @@
      <div id="progress">
        <% if !@course.taken_by_user(current_user.id).blank? %>
 
-           <%= render 'shared/progressbar', { :progress => @lesson_progress_percent } %>
+           <%= render 'shared/progressbar', { :progress => @takes_course.lesson_progress_percent } %>
 
-           <%= link_to "continue course", "/courses/#{@course.id}/lessons/#{@lesson_progress.id}/pages/#{@page_progress.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+           <%= link_to "continue course", "/courses/#{@course.slug}/lessons/#{@takes_course.lesson_progress}/pages/#{@takes_course.page_progress}", :class=>"btn btn-primary start-course btn-block btn-large" %>
 
        <% else %>
         <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
@@ -60,7 +60,7 @@
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
             <% first_lesson_page = lesson.pages.first %>
-            <% if !@course.taken_by_user(current_user.id).blank? and @actual_lesson_position >= lesson.position %>
+            <% if !@course.taken_by_user(current_user.id).blank? and @takes_course.lesson_progress >= lesson.position %>
               <%= link_to "do lesson", "/courses/#{@course.slug}/lessons/#{lesson.id}/pages/#{first_lesson_page.id}" %>
             <% end %>
           </div>
