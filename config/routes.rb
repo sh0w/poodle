@@ -28,7 +28,7 @@ Poodle::Application.routes.draw do
     resources :comments
   end
 
-  root :to => "courses#index"
+  root :to => "static_pages#explore"
 
 
   match "/explore" => "static_pages#explore", :as => "explore"

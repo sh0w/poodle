@@ -4,22 +4,22 @@
 <div id="coursetitle">
   <h1>Lesson: <%= @course.title %></h1>
 </div>
-<%= link_to '-> (edit coursetitle)', "/courses/#{@course.id}/editTitle", id: "edit_coursetitle_link", remote: true %>
+<%= link_to '-> (edit coursetitle)', "/courses/#{@course.slug}/editTitle", id: "edit_coursetitle_link", remote: true %>
 <br /><br />
 <h2>Description:</h2>
 <div id ="coursedescription">
   <p><%= @course.description %></p>
 </div>
-<%= link_to '-> (edit course description)', "/courses/#{@course.id}/editDescription", id: "edit_coursedescription_link", remote: true %>
+<%= link_to '-> (edit course description)', "/courses/#{@course.slug}/editDescription", id: "edit_coursedescription_link", remote: true %>
 <br /><br />
 <h2>Image:</h2>
 <div id ="courseimage">
   <%= image_tag @course.image.url(:thumb) %> 
 </div>
-<%= link_to '-> (edit course image)', "/courses/#{@course.id}/editImage", id: "edit_courseimage_link", remote: true %>
+<%= link_to '-> (edit course image)', "/courses/#{@course.slug}/editImage", id: "edit_courseimage_link", remote: true %>
 <br /><br />
 <div id = "courseeditor">
-<div id = "<%= @course.id %>">
+<div id = "<%= @course.slug %>">
  <div id="lessoneditor">
     <ul id ="lessons">
      <% @lessons.each do |lesson| %>
@@ -31,7 +31,7 @@
         </li>
      <% end %>
     </ul>  
-    <%= link_to 'Add Lesson', "/courses/#{@course.id}/lessons/new", id: "add_lesson_link", remote: true %>
+    <%= link_to 'Add Lesson', "/courses/#{@course.slug}/lessons/new", id: "add_lesson_link", remote: true %>
     <div id="add_lesson_form"></div>
  </div>
  <div id="pageeditor">

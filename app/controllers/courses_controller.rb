@@ -4,9 +4,21 @@ class CoursesController < ApplicationController
   before_filter :get_lessons, :only => [:show, :edit]
   before_filter :get_comments, :only => [:show]
   before_filter :takes_course?, :only => [:show, :take_course]
+  before_filter :only_creator, :only => :destroy
+
 
   def find_course
-    @course = Course.find(params[:id])
+    @course = Course.find_by_slug(params[:id])
+  end
+
+  def only_creator
+    if @course.creates_course.user_id != current_user.id
+      respond_to do |format|
+          format.html { redirect_to course_path(@course), error: 'Sorry, only course managers can delete courses.' }
+          format.json { head :no_content }
+      end
+    end
+
   end
 
   def get_lessons
@@ -37,6 +49,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @creator = User.find(@course.creates_course.user_id)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @course }
@@ -47,6 +60,7 @@ class CoursesController < ApplicationController
   # GET /courses/new.json
   def new
     @course = Course.new
+    @categories = Category.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -71,6 +85,7 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(params[:course])
+    #@course.category_ids
 
     respond_to do |format|
       if @course.save

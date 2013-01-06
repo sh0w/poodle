@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106140913) do
+ActiveRecord::Schema.define(:version => 20130106133854) do
 
   create_table "activities", :force => true do |t|
     t.string   "text"
@@ -24,10 +24,23 @@ ActiveRecord::Schema.define(:version => 20130106140913) do
     t.integer  "page_id"
   end
 
-  create_table "add_page_id_to_activities", :force => true do |t|
-    t.integer  "page_id"
+  create_table "caregory", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "categories_courses", :force => true do |t|
+    t.integer "course_id"
+    t.integer "category_id"
   end
 
   create_table "comments", :force => true do |t|
@@ -43,12 +56,21 @@ ActiveRecord::Schema.define(:version => 20130106140913) do
   create_table "courses", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "slug"
+    t.boolean  "published",          :default => false
+  end
+
+  create_table "courses_categories", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "creates_courses", :force => true do |t|

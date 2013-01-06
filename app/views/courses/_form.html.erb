@@ -15,15 +15,27 @@
     <%= f.text_field :title, :placeholder => "Title" %>
   </div>
   <div class="field">
-    <%= f.text_area :description, :rows=>5, :description => "Description" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.file_field :image %>
+    <%= f.text_area :description, :rows=>2, :description => "Description" %>
   </div>
 
+    <b>Select at least one category:</b>
+    <% current_category_ids = @course.categories %>
+    <div class="field select_cat"><div>
+    <% Category.all.each_with_index do |category, i| %>
+          <div class="span4">
+            <label>
+              <%= check_box_tag "course[category_ids][]", category.id, current_category_ids.include?(category.id) %>
+              <%= category.name %>
+            </label>
+          </div>
+          <% if i%3==2 %>
+              </div><div>
+              <% end %>
+
+    <% end %>
+    </div>   </div>
+
   <div class="actions">
-    <%= f.submit "Create Course", :class => "btn" %>
+    <%= f.submit "Create Course", :class => "btn btn-large" %>
   </div>
 <% end %>
