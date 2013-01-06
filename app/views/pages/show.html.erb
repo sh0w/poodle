@@ -1,10 +1,10 @@
- <section id="intro" class="course_overview">
+ <section class="intro" class="course_overview">
   <header>
    <h1>
      <%= @page.lesson.title %>
    </h1>
   </header>
-  <div id="intro_content">
+  <div class="intro_content">
     <% @page.resources.each do |resource| %>
       <div class = "resource" id="resource_<%= resource.id %>">
         <% if resource.text %>

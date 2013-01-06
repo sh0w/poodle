@@ -1,12 +1,12 @@
 
-<section id="popular">
+<section class="popular clearfix">
   <header>
 
     <h1>Popular Courses</h1>
 
   </header>
 
-  <div id="favorites">
+  <div class="favorites">
     <% @popular_courses.each do |c| %>
         <section class="course">
           <figure >
@@ -17,7 +17,7 @@
           </figure>
           <h2><%= link_to c.title, course_path(c) %></h2>
           <aside><%= time_ago_in_words(c.created_at) %> ago</aside>
-          <div class="introtext"><%= c.description[/(\s*\S+){#{30}}/] %>...</div>
+          <div class="introtext"><%= c.description%></div>
         </section>
 
     <% end %>

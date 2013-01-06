@@ -131,7 +131,7 @@ hr	{height:3px;
 
 }
 
-#intro, #overview, #comments{
+.intro, #overview, #comments{
 	margin-top:40px;
 }
 
@@ -144,7 +144,7 @@ hr	{height:3px;
 }
 
 	/*				KURSBESCHREIBUNG				*/
-#intro{
+.intro{
 	max-width: 940px;
 	width: 90%;
 	margin: 0 auto;
@@ -155,7 +155,7 @@ hr	{height:3px;
 	line-height:1.714rem;}
 
 
-#intro > header	{
+.intro > header	{
 	z-index:5;
 	height:118px;
 	width:933px;
@@ -167,7 +167,7 @@ hr	{height:3px;
 
 }
 	
-#intro header h1{
+.intro header h1{
 	text-align:center;
 	font-size: 1.571rem; /* 22px */
 	text-transform:uppercase;
@@ -175,32 +175,34 @@ hr	{height:3px;
 	padding-top:80px;
 	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
 }
-#intro_content	{
+.intro_content	{
 	z-index:4;
-	height:372px;
-	width:813px;
-	padding:20px;
+	width:814px;
 	padding-top:50px;
+    padding-bottom: 40px;
 	margin-left:auto;
 	margin-right:auto;
-    background-image:url(<%= asset_path 'img/intro_content_bg.png' %>);
-	background-repeat:no-repeat;
+
+    background-image: url(<%= asset_path "img/search-bg_bottom.png" %>), url(<%= asset_path "img/search-bg.png" %>);
+    background-position: center bottom, center top;
+    background-repeat: no-repeat, repeat;
 }
 
 
-#intro_content figure	{
+.intro_content figure	{
 	width:240px;
 	margin-left:50px;
 	float:left;
 }
 	
-#intro_content figure img.rating_bar	{ 
+.intro_content figure img.rating_bar	{ 
   float:left;
 	z-index:100; 
 	margin-left:-7px; 
 	margin-top:-60px;
 	position:relative;
 }
+
 
 #rating {
   width: 200px;
@@ -268,12 +270,12 @@ hr	{height:3px;
 	  }
 }
 
-#intro_content figure img.course_pic	{
+.intro_content figure img.course_pic	{
 	z-index:2; 
 	border:2px solid #cecece;
 }
 
-#intro_text	{
+.intro_text	{
 	width:440px;
 	height:200px;
 	margin-left:30px;
@@ -284,16 +286,16 @@ hr	{height:3px;
 	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.24);
 }
 
-.course_overview #intro_text p:first-child	{
+.course_overview .intro_text p:first-child	{
 	font-size:0.8571rem;/*12px*/
 	margin-top:-7px;}
 	
-#intro_text p+p	{
+.intro_text p+p	{
 	padding-top:14px;}
 	
-#progress	{float:left;margin-left:51px;width: 238px;}
+.progressbox	{float:left;margin-left:51px;width: 238px;}
 
-#progress	h1{
+.progressbox	h1{
 	text-transform:none;
 	font-size:0.7857rem; /*11px*/
 	color:#30333c;
@@ -325,48 +327,59 @@ h1.main, h1.main	{
 	
 	/*				OVERVIEW				*/
 
-	
-#lessons .lesson{
-	float:left;
-	color:#30333c;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-	font-size: 1rem; /* 14px */
-	line-height:1.429rem;
-    height: 142px;
-    overflow: hidden;
-    padding: 15px;
-
-	}
-
-.completed	{
-    background-image:url(<%= asset_path 'img/grey.png' %>);
-	background-repeat:no-repeat;
-	}
-.current	{
-    background-image:url(<%= asset_path 'img/green.png' %>);
-	background-repeat:no-repeat;}
-
-.locked {
-background-image:url(<%= asset_path 'img/sea.png' %>);
-background-repeat:no-repeat;}
-
-.completed h2, .current h2, .locked h2	{font-size: 18px;}
 
 #lessons{
 	max-width: 900px;
 	width: 90%;
 	margin:60px auto;
     text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25); /*cross browser ....!!*/
-}
 
-#lessons h2{
-	font-weight: bold;
-	margin: 0px;
-	}
-#lessons p{
-	margin: 10px 10px 10px 0px;
+    .lesson{
+        float:left;
+        color:#30333c;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        font-size: 1rem; /* 14px */
+        line-height:1.429rem;
+        height: 142px;
+        overflow: hidden;
+        padding: 15px;
+        opacity: 0.9;
+        webkit-transition: opacity 0.3s linear; -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; transition: all 0.3s linear;
+    }
+
+    a:hover.lesson {
+        text-decoration: none;
+        opacity: 1;
+        webkit-transition: opacity 0.3s linear; -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; transition: all 0.3s linear;
+    }
+
+    .completed	{
+        background-image:url(<%= asset_path 'img/grey.png' %>);
+        background-repeat:no-repeat;
+    }
+    .current	{
+        background-image:url(<%= asset_path 'img/green.png' %>);
+        background-repeat:no-repeat;}
+
+    .locked {
+        background-image:url(<%= asset_path 'img/sea.png' %>);
+        background-repeat:no-repeat;}
+
+    .completed h2, .current h2, .locked h2	{font-size: 18px;}
+
+    h2{
+        font-weight: bold;
+        margin: 0px;
+    }
+
+    p{
+        margin: 10px 10px 10px 0px;
+    }
+    .row-fluid {
+        margin-bottom: 15px
+    }
 }
 
 
@@ -447,7 +460,7 @@ background-repeat:no-repeat;}
 
 
 footer.bottom, .push {
-    height: 270px;
+    min-height: 270px;
 
 }
 footer h1{
@@ -495,21 +508,19 @@ footer .poodle {
 
 
 
-
-
-
-#popular{
+.popular{
     width: 814px;
-    min-height: 1241px;
+    min-height: 270px;
     margin-left:auto;
     margin-right:auto;
+    margin-bottom: 30px;
     font-size:1.071rem; /*15px*/
     color:#7a7a7a;
     text-shadow: 0px 1px 0px rgba(255, 255, 255, 1);
     line-height:1.714rem;
-    background-image: url(img/search-bg_bottom.png), url(img/search-bg.png);
-    background-position: center bottom, left top;
-    background-repeat: no-repeat;
+    background-image: url(<%= asset_path "img/search-bg_bottom.png" %>), url(<%= asset_path "img/search-bg.png" %>);
+    background-position: center bottom, center top;
+    background-repeat: no-repeat, repeat;
     padding-bottom: 80px;
 
     header	{
@@ -518,7 +529,7 @@ footer .poodle {
         height:182px;
         background-repeat:no-repeat;
         background-position:center;
-        background-image:url(img/ribbon-search.png);
+        background-image:url(<%= asset_path "img/ribbon-search.png" %>);
         margin-left:-63px;
     }
 
@@ -533,11 +544,12 @@ footer .poodle {
     }
 
 
-    #favorites{
+    .favorites{
         width: 700px;
         margin-left:auto;
         margin-right:auto;
     }
+
     .course{
         background-color:white;
         width:220px;
@@ -575,7 +587,7 @@ footer .poodle {
 
 }
 
-#popular:hover {
+.popular:hover {
     .course{
         opacity: 0.7;
         webkit-transition: opacity 0.3s linear; -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; transition: all 0.3s linear;
@@ -589,7 +601,7 @@ footer .poodle {
 }
 
 .edit_user {
-    #intro_content {
+    .intro_content {
         padding-bottom: 20px;
         margin-bottom: 30px;
         background-position: bottom;
@@ -599,11 +611,13 @@ footer .poodle {
 
 .new_course {
     margin: 0px auto;
+    margin-bottom: 20px;
     input[type=text],input[type=submit], textarea {
         width: 100%;
     }
-    #intro_text {
+    .intro_text {
         margin-left: 160px;
+        height: auto;
     }
 
     .select_cat {
@@ -618,6 +632,21 @@ footer .poodle {
     }
 }
 
+.user_profile {
+
+    .popular {
+        margin-top: 30px;
+    }
+}
+
+.explore {
+    text-align: center;
+    font-weight: 300;
+
+    .btn {
+        margin: 20px;
+    }
+}
 
 #new_comment{
  .star{
@@ -632,5 +661,13 @@ footer .poodle {
     background: url(<%= asset_path 'img/stars.png' %>) left bottom no-repeat;
     float: left;
   }
+}
+
+.edit_user {
+
+    .intro_text {
+        margin-left: 140px;
+        height: auto;
+    }
 }
 

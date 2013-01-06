@@ -62,4 +62,13 @@ class User < ActiveRecord::Base
   def thumb
       image_tag @agent.avatar.url(:medium), :class => "user_thumb"
   end
+
+  after_create :signup_activity
+
+  def signup_activity
+    @a = Activity.new
+    @a.user_id = self.id
+    @a.text = "signup"
+    @a.save
+  end
 end

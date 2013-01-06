@@ -1,19 +1,19 @@
- <section id="intro" class="course_overview">
+ <section class="intro course_overview">
 
    <header><h1><%= @course.title %> </h1></header>
 
-   <div id="intro_content">
+   <div class="intro_content clearfix">
 
      <!---Bild und Bewertung--->
      <figure >
        <%= image_tag  @course.image.url(:medium), :class => "course_pic" %>
        <div id="rating">
-        <div id="rated_stars" class="rating_<%= @rating %>" >&nbsp;</div>
+        <div id="rated_stars" class="rating_<%= @course.rating %>" >&nbsp;</div>
        </div>
      </figure>
 
      <!---Beschreibung--->
-     <div id="intro_text">
+     <div class="intro_text">
        <p>Created by
             <%= link_to image_tag(@creator.avatar.url(:mini)), user_path(@creator.username), :class => "creator"%>
             <%= link_to @creator.username, user_path(@creator.username), :class => "creator"%>
@@ -30,12 +30,12 @@
        <p id="notice"><%= notice %></p> </div>
 
      <!---Fortschritt--->
-     <div id="progress">
-       <% if !@course.taken_by_user(current_user.id).blank? %>
+     <div class="progressbox">
+       <% if user_signed_in? and !@course.taken_by_user(current_user.id).blank? %>
 
            <%= render 'shared/progressbar', { :progress => @takes_course.lesson_progress_percent } %>
 
-           <%= link_to "continue course", "/courses/#{@course.slug}/lessons/#{@takes_course.lesson_progress}/pages/#{@takes_course.page_progress}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+           <%= link_to "continue learning", "/courses/#{@course.slug}/lessons/#{@takes_course.lesson_progress}/pages/#{@takes_course.page_progress}", :class=>"btn btn-primary start-course btn-block btn-large" %>
 
        <% else %>
         <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
@@ -55,18 +55,15 @@
 
     <hr /><h1 class="main">Overview</h1><hr />
 
-    <div id="lessons" class="row-fluid">
-
+    <div id="lessons">
+                     <div class="row-fluid">
       <% @lessons.each_with_index do |lesson, index| %>
-          <div class="locked lesson span3">
+          <a class="locked lesson span3" href="<%= "/courses/#{@course.slug}/lessons/#{lesson.id}" %>">
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
             <% first_lesson_page = lesson.pages.first %>
-            <% if !@course.taken_by_user(current_user.id).blank? and @takes_course.lesson_progress >= lesson.position %>
-              <%= link_to "do lesson", "/courses/#{@course.slug}/lessons/#{lesson.id}/pages/#{first_lesson_page.id}" %>
-            <% end %>
-          </div>
-          <% if (index+1) % 4 == 0 && index > 3 %>
+          </a>
+          <% if index % 4 == 3 %>
               </div>
               <div class="row-fluid">
           <% end %>

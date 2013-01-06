@@ -3,7 +3,6 @@ class CoursesController < ApplicationController
   before_filter :find_course, :only => [:show, :update, :destroy, :edit, :editTitle, :editDescription, :editImage, :take_course]
   before_filter :get_lessons, :only => [:show, :edit]
   before_filter :get_comments, :only => [:show]
-  before_filter :get_rating, :only => [:show]
   before_filter :takes_course?, :only => [:show, :take_course]
   before_filter :only_creator, :only => :destroy
 
@@ -30,14 +29,12 @@ class CoursesController < ApplicationController
     @comments = @course.comments
   end
 
-  def get_rating
-    @rating = @comments.average("rating")  
-    @rating = Integer(@rating * 2 + 0.9999) * 0.5
-    @rating = String(@rating).delete( "." )
-  end
-
   def takes_course?
-    @takes_course = TakesCourse.where("user_id = ? AND course_id = ?",current_user.id, @course.id).size
+    if user_signed_in?
+      @takes_course = TakesCourse.where("user_id = ? AND course_id = ?",current_user.id, @course.id).size
+    else
+      @takes_course = false
+    end
     @takes_course
   end
 
@@ -55,7 +52,13 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @takes_course = @course.takes_course.find_by_user_id(current_user.id)
+
+    if user_signed_in?
+      @takes_course = @course.takes_course.find_by_user_id(current_user.id)
+    else
+      @takes_course = false
+    end
+
     @creator = User.find(@course.creates_course.user_id)
 
     if(! @takes_course.blank?)
@@ -124,6 +127,12 @@ class CoursesController < ApplicationController
         @creates_course.user_id = current_user.id
         @creates_course.course_id = @course.id
         @creates_course.save
+
+
+        @lesson = Lesson.new
+        @lesson.position = 1
+        @lesson.lesson_id = @course.id
+        @lesson.save
 
         format.html { redirect_to proc { edit_course_url(@course) }, notice: 'Course was successfully created.' }
         format.json { render json: proc { edit_course_url(@post) }, status: :created, location: @course }
