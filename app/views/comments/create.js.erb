@@ -1,3 +1,5 @@
-$('.comment.new').remove();
+$("#new_comment_link").show();
+$('#new_comment').remove();
 var comment = '<%= j render :partial => "comment", :object => @comment %>';
-$('#commentbox').append( comment ).masonry( 'appended', comment );
+$('#comments').append( comment ).masonry( 'appended', comment );
+

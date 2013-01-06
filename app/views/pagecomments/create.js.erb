@@ -1,3 +1,4 @@
-$('.pagecomment.new').remove();
+$("#new_comment_link").show();
+$('#new_pagecomment').remove();
 var pagecomment = '<%= j render :partial => "pagecomment", :object => @pagecomment %>';
 $('#commentbox').append( pagecomment ).masonry( 'appended', pagecomment );

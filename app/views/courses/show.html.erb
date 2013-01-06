@@ -30,7 +30,55 @@
 
            <%= render 'shared/progressbar', { :progress => @lesson_progress_percent } %>
            
+<<<<<<< HEAD
            <%= link_to "continue course", "/courses/#{@course.id}/lessons/#{@lesson_progress.id}/pages/#{@page_progress.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+=======
+           <!---lesson und page für "continue course" finden--->
+           <% takes_course = @course.takes_courses.find_by_user_id(current_user.id) %>
+           
+           <% if @course.lessons.find_by_id(takes_course.lesson_progress) %>
+             <% lesson_progress = @course.lessons.find_by_id(takes_course.lesson_progress) %>
+             <% if lesson_progress.pages.find_by_id(takes_course.page_progress) %>
+              <% page_progress = lesson_progress.pages.find_by_id(takes_course.page_progress) %>
+             <% else %>
+              <% page_progress = lesson_progress.pages.find_by_position(1) %>
+             <% end %>
+           <% else %>
+             <% lesson_progress = @course.lessons.find_by_position(1) %>
+             <% page_progress = lesson_progress.pages.find_by_position(1) %>
+           <% end %>
+           <!--- TODO: save lesson_progress/page_progress if not found --->
+           
+           <!---Progress berechnen--->
+           <% number_of_lessons = @course.lessons.count %>
+           <% number_of_pages = 0 %>
+           <% @course.lessons.each do |lesson| %>
+            <% number_of_pages += lesson.pages.count %>
+           <% end %>
+           
+           <% actual_lesson_position = lesson_progress.position %>
+           
+           <% number_of_absolved_pages = 0 %>
+           
+           <% @course.lessons.each do |lesson| %>
+            <% if lesson.position < actual_lesson_position %>
+              <% number_of_absolved_pages += lesson.pages.count %>
+            <% end %>
+            <% if lesson.position == actual_lesson_position %>
+              <% number_of_absolved_pages += page_progress.position %>   
+            <% end %>
+           <% end %>
+          
+           <h3>Your progress: </h3>
+           <span id="course_progress"><%= Float(number_of_absolved_pages)/Float(number_of_pages)*100 %>%</span>
+                      
+           <div class="progress progress-striped">
+             <div class="bar" ></div>
+           </div>
+           
+           
+           <%= link_to "continue course", "/courses/#{@course.slug}/lessons/#{lesson_progress.id}/pages/#{page_progress.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+>>>>>>> 254326ba324c1bf863b634c24f2b2e0a2b16f8de
        <% else %>
         <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
 
@@ -57,7 +105,7 @@
             <p><%= lesson.description %></p>
             <% first_lesson_page = lesson.pages.first %>
             <% if !@course.taken_by_user(current_user.id).blank? and @actual_lesson_position >= lesson.position %>
-              <%= link_to "do lesson", "/courses/#{@course.id}/lessons/#{lesson.id}/pages/#{first_lesson_page.id}" %>
+              <%= link_to "do lesson", "/courses/#{@course.slug}/lessons/#{lesson.id}/pages/#{first_lesson_page.id}" %>
             <% end %>
           </div>
           <% if (index+1) % 4 == 0 && index > 3 %>
@@ -74,35 +122,34 @@
     <h1 class="main">Comments</h1>
     <hr />
     <section id="commentbox" class="clearfix">
+      <div id = "comments">
+        <% @comments.each do |comment| %>
+            <% u = User.find(comment.user_id) %>
+            <div class="comment">
+              <div class="comment_content">
+                  <header>
+                    <div class="info">
 
-      <% @comments.each do |comment| %>
-          <% u = User.find(comment.user_id) %>
-          <div class="comment">
-            <div class="comment_content">
-                <header>
-                  <div class="info">
-
-                    <%= link_to image_tag(u.avatar.url(:thumb)), user_path(u.username) %>
-                    <div class="cmt_info">
-                        <p><%= link_to u.username, user_path(u.username) %> </p>
-                        <p><span class="when"><%= time_ago_in_words(comment.created_at) %> ago</span></p>
+                      <%= link_to image_tag(u.avatar.url(:thumb)), user_path(u.username) %>
+                      <div class="cmt_info">
+                          <p><%= link_to u.username, user_path(u.username) %> </p>
+                          <p><span class="when"><%= time_ago_in_words(comment.created_at) %> ago</span></p>
+                      </div>
                     </div>
+                  </header>
+                  <div class="content">
+                    <%= comment.content %>
                   </div>
-                </header>
-                <div class="content">
-                  <%= comment.content %>
-                </div>
+              </div>
             </div>
-          </div>
-      <% end %>
+        <% end %>
+      </div>
       <% if user_signed_in? %>
           <div class="comment new">
-            <div class="form">
-              <%= link_to 'New Comment', {:controller => "comments", :action => "new",:course_id => @course.id },
-                          id: "new_comment_link", remote: true %>
-              <!-- TODO: render different form (:controller => comments) -->
-            </div>
+            <div class="form"></div>
+            <%= link_to 'New Comment', {:controller => "comments", :action => "new",:course_id => @course.slug }, id: "new_comment_link", remote: true %>
           </div>
       <% end %>
 
   </section>
+  
