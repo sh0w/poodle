@@ -21,13 +21,18 @@
         </div>
     </div>
     <!---Beschreibung--->
-    <div id="intro_text" class="span7">
+    <div class="span7">
+
       <h2>Recent activity</h2>
+      <div class="recent_activity">
+      <ul>
       <% @recent_activity.each do |a| %>
-          <%= convert_to_message(a)  %>
-          <small> <%= time_ago_in_words(a.created_at) %> ago</small>
-          <br>
+          <li><%= convert_to_message(a)  %>
+          <span class="when"> <%= time_ago_in_words(a.created_at) %> ago</span>
+          </li>
       <% end %>
+      </ul>
+      </div>
     </div>
   </div>
 
