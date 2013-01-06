@@ -1,5 +1,9 @@
 Poodle::Application.routes.draw do
 
+  resources :pagecomments
+
+  resources :add_page_id_to_activities
+
   resources :uploads
 
   resources :images
@@ -18,12 +22,14 @@ Poodle::Application.routes.draw do
         resources :links
         resources :images
         resources :uploads
+        resources :pagecomments
       end
     end
     resources :comments
   end
 
   root :to => "courses#index"
+
 
   match "/explore" => "static_pages#explore", :as => "explore"
   match "/about" => "static_pages#about", :as => "about"

@@ -10,8 +10,8 @@
 
      <!---Bild und Bewertung--->
      <figure >
-       <%= image_tag "img/rating.png", :class => "rating_bar" %>
        <%= image_tag  @course.image.url(:medium), :class => "course_pic" %>
+       <%= image_tag "img/rating.png", :class => "rating_bar" %>
      </figure>
      <!---Beschreibung--->
      <div id="intro_text">
@@ -21,10 +21,10 @@
          <%= link_to @creator.username, user_path(@creator.username), :class => "creator"%>
 
         <span class="when"><%= time_ago_in_words(@course.created_at) %> ago</span>
-     </p>
-
-       <%= @course.description %>
-
+       </p>
+       <p>
+        <%= @course.description %>
+       </p>
        <%= link_to 'Edit', edit_course_path(@course) %>
        <p id="notice"><%= notice %></p> </div>
 
@@ -102,7 +102,7 @@
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
             <% first_lesson_page = lesson.pages.first %>
-            <% if actual_lesson_position >= lesson.position %>
+            <% if !@course.taken_by_user(current_user.id).blank? and actual_lesson_position >= lesson.position %>
               <%= link_to "do lesson", "/courses/#{@course.id}/lessons/#{lesson.id}/pages/#{first_lesson_page.id}" %>
             <% end %>
           </div>

@@ -1,0 +1,29 @@
+<h1>Listing pagecomments</h1>
+
+<table>
+  <tr>
+    <th>Rating</th>
+    <th>Content</th>
+    <th>User</th>
+    <th>Page</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pagecomments.each do |pagecomment| %>
+  <tr>
+    <td><%= pagecomment.rating %></td>
+    <td><%= pagecomment.content %></td>
+    <td><%= pagecomment.user_id %></td>
+    <td><%= pagecomment.page_id %></td>
+    <td><%= link_to 'Show', pagecomment %></td>
+    <td><%= link_to 'Edit', edit_pagecomment_path(pagecomment) %></td>
+    <td><%= link_to 'Destroy', pagecomment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pagecomment', new_pagecomment_path %>

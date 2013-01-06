@@ -1,0 +1,25 @@
+<%= form_for ([@course, @lesson, @page, @pagecomment]), :remote => true do |f| %>
+  <% if @pagecomment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pagecomment.errors.count, "error") %> prohibited this pagecomment from being saved:</h2>
+
+      <ul>
+      <% @pagecomment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rating %><br />
+    <%= f.number_field :rating, class: "input-medium" %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :rows=>3, class: "input-medium" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
