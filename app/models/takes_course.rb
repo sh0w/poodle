@@ -4,9 +4,10 @@ class TakesCourse < ActiveRecord::Base
   belongs_to :user
   belongs_to :course
 
-  before_save update_progress
+  before_save :update_progress
 
-  def update_progess
+  def update_progress
+
     self.lesson_progress_percent = 50
   end
 
