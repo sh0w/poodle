@@ -6,4 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
+categories = Category.create([{name: 'Science'},{name: 'Languages'},{name: 'Art & Design'},{name: 'Computer & Internet'},{name: 'Crafts & Hobbies'},{name: 'Home & Garden'},{name: 'Just for Fun'},{name: 'Personal Enrichment'}])
