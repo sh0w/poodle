@@ -10,8 +10,10 @@
     <% @popular_courses.each do |c| %>
         <section class="course">
           <figure >
-            <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
             <%= link_to image_tag(c.image.url :medium, :class=>"course_pic"), course_path(c) %>
+            <div id="rating">
+              <div id="rated_stars" class="rating_<%= c.rating %>" >&nbsp;</div>
+            </div>
           </figure>
           <h2><%= link_to c.title, course_path(c) %></h2>
           <aside><%= time_ago_in_words(c.created_at) %> ago</aside>

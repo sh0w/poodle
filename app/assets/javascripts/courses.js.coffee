@@ -7,4 +7,10 @@ $ ->
     $(".bar").animate width: $("#course_progress").html(), duration: 'slow'
     0
   0
+ 
+$ -> 
+  $("#stars .star").click ->
+    alert "click"
+  0
+0
 

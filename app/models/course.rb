@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   attr_accessible :description, :title, :image, :category_ids
+  attr_reader :rating
 
   has_many :lessons, :dependent => :destroy
   has_many :comments, :dependent => :destroy
@@ -7,8 +8,8 @@ class Course < ActiveRecord::Base
 
   has_and_belongs_to_many :categories
 
-  has_one :creates_course
-  has_one :user, :through => :creates_course, :dependent => :destroy
+  has_one :creates_course, :dependent => :destroy
+  has_one :user, :through => :creates_course
 
   has_many :takes_course, :dependent => :destroy
   has_many :users, :through => :takes_course
@@ -34,6 +35,13 @@ class Course < ActiveRecord::Base
 
   def create_slug
     self.slug = self.title.parameterize
+  end
+  
+  def rating
+    r = self.comments.average("rating") || 0
+    r = Integer(r*2+0.9999)*0.5
+    r = String(r).delete( "." )
+    r
   end
 
 end
