@@ -52,6 +52,27 @@ class PagesController < ApplicationController
     if @lesson.position >= @actual_lesson.position and @page.position >= @actual_page.position    
       @tc.lesson_progress = @lesson.id
       @tc.page_progress = @page.id
+
+      number_of_pages = 0
+      @course.lessons.each do |lesson|
+        number_of_pages += lesson.pages.count
+      end
+
+      actual_lesson_position = @actual_lesson.position
+
+      number_of_absolved_pages = 0
+
+      @course.lessons.each do |lesson|
+        if lesson.position < actual_lesson_position
+          number_of_absolved_pages += lesson.pages.count
+        end
+
+        if lesson.position == actual_lesson_position
+          number_of_absolved_pages += Page.find(@tc.page_progress).position
+        end
+      end
+
+      @tc.lesson_progress_percent = Float(number_of_absolved_pages) / Float(number_of_pages) * 100
       @tc.save
     end
     
