@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find
+  before_filter :find_page, :except => [:new]
   before_filter :get_resources, :only => [:edit, :show]
   before_filter :get_pagecomments, :only => [:show]
 
@@ -8,6 +9,10 @@ class PagesController < ApplicationController
   def find
     @course = Course.find_by_slug(params[:course_id])
     @lesson = Lesson.find(params[:lesson_id])
+  end
+
+  def find_page
+
     @page = Page.find(params[:id])
   end
   

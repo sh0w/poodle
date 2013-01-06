@@ -30,7 +30,7 @@
 
            <%= render 'shared/progressbar', { :progress => @lesson_progress_percent } %>
 
-           <%= link_to "continue course", "/courses/#{@course.id}/lessons/#{@lesson_progress.id}/pages/#{@page_progress.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+           <%= link_to "continue course", "/courses/#{@course.slug}/lessons/#{@lesson_progress.id}/pages/#{@page_progress.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
 
        <% else %>
         <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
