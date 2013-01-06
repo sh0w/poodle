@@ -145,7 +145,9 @@
       <% if user_signed_in? %>
           <div class="comment new">
             <div class="form"></div>
-            <%= link_to 'New Comment', {:controller => "comments", :action => "new",:course_id => @course.slug }, id: "new_comment_link", remote: true %>
+            <div class="comment_content">
+              <%= link_to 'New Comment', {:controller => "comments", :action => "new",:course_id => @course.slug }, id: "new_comment_link", remote: true %>
+            </div>
           </div>
       <% end %>
 
