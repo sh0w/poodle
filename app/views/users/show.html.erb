@@ -39,7 +39,28 @@
 </section>
 
 <% if ! @created_courses.nil? %>
-    <hr /><h1 class="main">Created Courses</h1><hr />
+
+    <section id="popular">
+      <header>
+        <h1>Course Overview</h1>
+
+      </header>
+    <div id="favorites">
+      <% @created_courses.each do |c| %>
+          <section class="course">
+            <figure >
+              <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
+              <%= link_to image_tag(c.image.url :medium, :class=>"course_pic"), course_path(c) %>
+            </figure>
+            <h2><%= link_to c.title, course_path(c) %></h2>
+            <div class="introtext"><%= c.description[/(\s*\S+){#{30}}/] %>...</div>
+          </section>
+
+      <% end %>
+
+    </div>
+      </section>
+
  <%  @created_courses.each do |c| %>
     <section class="course">
       <figure >

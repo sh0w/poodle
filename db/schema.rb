@@ -13,16 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130106133854) do
 
-  create_table "acitivities", :force => true do |t|
-    t.string   "text"
-    t.integer  "creator_id"
-    t.integer  "user_id"
-    t.integer  "course_id"
-    t.integer  "comment_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "activities", :force => true do |t|
     t.string   "text"
     t.integer  "creator_id"
@@ -31,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130106133854) do
     t.integer  "comment_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "page_id"
   end
 
   create_table "caregory", :force => true do |t|
@@ -117,6 +108,15 @@ ActiveRecord::Schema.define(:version => 20130106133854) do
     t.string   "link"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "pagecomments", :force => true do |t|
+    t.integer  "rating"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "page_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "pages", :force => true do |t|

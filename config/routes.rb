@@ -1,5 +1,9 @@
 Poodle::Application.routes.draw do
 
+  resources :pagecomments
+
+  resources :add_page_id_to_activities
+
   resources :uploads
 
   resources :images
@@ -18,12 +22,14 @@ Poodle::Application.routes.draw do
         resources :links
         resources :images
         resources :uploads
+        resources :pagecomments
       end
     end
     resources :comments
   end
 
   root :to => "static_pages#explore"
+
 
   match "/explore" => "static_pages#explore", :as => "explore"
   match "/about" => "static_pages#about", :as => "about"
@@ -37,7 +43,7 @@ Poodle::Application.routes.draw do
   match 'courses/:id/editDescription' => 'courses#editDescription'
   match 'courses/:id/editTitle' => 'courses#editTitle'
   match 'courses/:id/editImage' => 'courses#editImage'
-  match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:id/updatePosition' => 'resources#updatePosition'
+  match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:id/updatePosition' => 'resources#updatePosition', :as => "updateResourcePosition"
   match 'courses/:course_id/lessons/:lesson_id/pages/:id/updatePosition' => 'pages#updatePosition'
   match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
 

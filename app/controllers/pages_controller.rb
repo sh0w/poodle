@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_course, :except => [:destroy]
   before_filter :get_resources, :only => [:edit, :show]
+  before_filter :get_pagecomments, :only => [:show]
 
   def find_course
     @course = Course.find(params[:course_id])
@@ -19,6 +20,10 @@ class PagesController < ApplicationController
   
   def get_resources
     @resources = @page.resources.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
+  end
+  
+  def get_pagecomments
+    @pagecomments = @page.pagecomments
   end
   
   # GET /pages
