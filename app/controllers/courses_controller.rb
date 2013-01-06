@@ -3,6 +3,7 @@ class CoursesController < ApplicationController
   before_filter :find_course, :only => [:show, :update, :destroy, :edit, :editTitle, :editDescription, :editImage, :take_course]
   before_filter :get_lessons, :only => [:show, :edit]
   before_filter :get_comments, :only => [:show]
+  before_filter :get_rating, :only => [:show]
   before_filter :takes_course?, :only => [:show, :take_course]
   before_filter :only_creator, :only => :destroy
 
@@ -29,6 +30,12 @@ class CoursesController < ApplicationController
     @comments = @course.comments
   end
 
+  def get_rating
+    @rating = @comments.average("rating");  
+    @rating = Integer(@rating * 2 + 0.9999) * 0.5; 
+    @rating = String(@rating).delete( "." ); 
+  end
+
   def takes_course?
     @takes_course = TakesCourse.where("user_id = ? AND course_id = ?",current_user.id, @course.id).size
     @takes_course
@@ -48,7 +55,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @takes_course = @course.takes_courses.find_by_user_id(current_user.id)
+    @takes_course = @course.takes_course.find_by_user_id(current_user.id)
     @creator = User.find(@course.creates_course.user_id)
 
     if(! @takes_course.blank?)

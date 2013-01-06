@@ -1,1 +1,20 @@
 $("#new_comment_link").hide().after('<%= j render("form") %>');
+
+
+  $("#stars").find(".star").click(function(){
+    var self = $(this);
+    
+    $("#stars").find(".fullstar").each(function(){
+      $(this).attr("class", "star");
+    });
+    
+    rating = self.attr("id").split("_")[1];
+    
+    for(i=1; i<=rating; i++){
+      $("#star_"+i).attr("class", "fullstar");
+    }
+    
+    $("#rating_value").attr("value", rating);
+    
+  });
+

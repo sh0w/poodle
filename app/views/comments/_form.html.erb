@@ -10,9 +10,18 @@
             </ul>
           </div>
         <% end %>
+      
+      <h3>Rate Course:</h3>
+      <div id="stars">
+        <div class="star" id="star_1">&nbsp;</div>
+        <div class="star" id="star_2">&nbsp;</div>
+        <div class="star" id="star_3">&nbsp;</div>
+        <div class="star" id="star_4">&nbsp;</div>
+        <div class="star" id="star_5">&nbsp;</div>        
+      </div>
+      
       <div class="field">
-        <%= f.label :rating %><br />
-        <%= f.number_field :rating, class: "input-medium" %>
+        <%= f.hidden_field :rating, id: "rating_value", value: "0" %>
       </div>
       <div class="field">
         <%= f.label :content %><br />
