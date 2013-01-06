@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   belongs_to :creates_course, :dependent => :destroy
 
-  has_many :courses, :through => :takes_courses
+  has_many :courses, :through => :takes_courses, :dependent => :destroy
   has_many :takes_courses, :dependent => :destroy
 
   # Include default devise modules. Others available are:

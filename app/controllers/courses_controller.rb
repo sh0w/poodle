@@ -49,47 +49,26 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
 
-    takes_course = @course.takes_courses.find_by_user_id(current_user.id)
+    @takes_course = @course.takes_courses.find_by_user_id(current_user.id)
+    @creator = User.find(@course.creates_course.user_id)
 
-    if(! takes_course.blank?)
 
-      if @course.lessons.find_by_id(takes_course.lesson_progress)
-        @lesson_progress = @course.lessons.find_by_id(takes_course.lesson_progress)
-          if @lesson_progress.pages.find_by_id(takes_course.page_progress)
-            @page_progress = @lesson_progress.pages.find_by_id(takes_course.page_progress)
-          else
-            @page_progress = @lesson_progress.pages.find_by_position(1)
-          end
+    if(! @takes_course.blank?)
+
+      if @course.lessons.find_by_id(@takes_course.lesson_progress)
+        @lesson_progress = @course.lessons.find_by_id(@takes_course.lesson_progress)
+        if @lesson_progress.pages.find_by_id(@takes_course.page_progress)
+          @page_progress = @lesson_progress.pages.find_by_id(@takes_course.page_progress)
+        else
+          @page_progress = @lesson_progress.pages.find_by_position(1)
+        end
 
       else
         @lesson_progress = @course.lessons.find_by_position(1)
         @page_progress = @lesson_progress.pages.find_by_position(1)
       end
 
-      number_of_pages = 0
-      @course.lessons.each do |lesson|
-        number_of_pages += lesson.pages.count
-      end
-
-      @actual_lesson_position = @lesson_progress.position
-
-      number_of_absolved_pages = 0
-
-      @course.lessons.each do |lesson|
-        if lesson.position < @actual_lesson_position
-          number_of_absolved_pages += lesson.pages.count
-        end
-
-        if lesson.position == @actual_lesson_position
-          number_of_absolved_pages += @page_progress.position
-        end
-      end
-
-      #@course.lesson_progress_percent = Float(number_of_absolved_pages) / Float(number_of_pages) * 100
-
     end
-    
-    @creator = User.find(@course.creates_course.user_id)
 
     respond_to do |format|
       format.html # show.html.erb

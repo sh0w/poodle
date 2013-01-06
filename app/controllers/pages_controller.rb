@@ -42,8 +42,10 @@ class PagesController < ApplicationController
     @actual_lesson = @course.lessons.find_by_id(@tc.lesson_progress)
     @actual_page = @lesson.pages.find_by_id(@tc.page_progress)
     
-    if not @actual_lesson
+    if @actual_lesson.blank?
       @actual_lesson = @course.lessons.find_by_position(1)
+    end
+    if @actual_page.blank?
       @actual_page = @lesson.pages.find_by_position(1)
     end
 
