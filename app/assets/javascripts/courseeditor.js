@@ -10,27 +10,27 @@ function update_lesson_position(){
   var list = $("#lessons");  
   var neworder = new_positions(list);  
   
-  var course_id = $("#courseeditor div:first-child").attr("id");
-  var url = "/courses/"+course_id+"/lessons/";
+  var course_slug = $("#courseeditor div:first-child").data("slug");
+  var url = "/courses/"+course_slug+"/lessons/";
   
-  do_requests(url);  
+  do_requests(url,neworder);
 }
 
 function update_page_position(){
   var list = $("#pages");
   var neworder = new_positions(list); 
-  var course_id = $("#courseeditor div:first-child").attr("id");
+  var course_slug = $("#courseeditor div:first-child").data("slug");
   var lesson_id = $("#pageeditor div:first-child").attr("id");
-  var url = "/courses/"+course_id+"/lessons/"+lesson_id+"/pages/"; 
+  var url = "/courses/"+course_slug+"/lessons/"+lesson_id+"/pages/"; 
   do_requests(url, neworder); 
 }
 
 function update_resource_position(id){
   var list = $("#page_"+id+" .resources");
   var neworder = new_positions(list); 
-  var course_id = $("#courseeditor div:first-child").attr("id");
+  var course_slug = $("#courseeditor div:first-child").data("slug");
   var lesson_id = $("#pageeditor div:first-child").attr("id");
-  var url = "/courses/"+course_id+"/lessons/"+lesson_id+"/pages/"+id+"/resources/"; 
+  var url = "/courses/"+course_slug+"/lessons/"+lesson_id+"/pages/"+id+"/resources/"; 
   do_requests(url, neworder);
 }
 
