@@ -31,7 +31,6 @@
      <!---Fortschritt--->
      <div id="progress">
        <% if !@course.taken_by_user(current_user.id).blank? %>
-           <h3>Your progress</h3>
            
            <!---lesson und page für "continue course" finden--->
            <% takes_course = @course.takes_courses.find_by_user_id(current_user.id) %>
@@ -59,18 +58,21 @@
            <% actual_lesson_position = lesson_progress.position %>
            
            <% number_of_absolved_pages = 0 %>
+           
            <% @course.lessons.each do |lesson| %>
             <% if lesson.position < actual_lesson_position %>
               <% number_of_absolved_pages += lesson.pages.count %>
-            <% else %>
-              <% number_of_absolved_pages += page_progress.position %>
+            <% end %>
+            <% if lesson.position == actual_lesson_position %>
+              <% number_of_absolved_pages += page_progress.position %>   
             <% end %>
            <% end %>
-           
-           Course Progress: <%= course_progress = number_of_pages/number_of_absolved_pages*100 %>
-           
+          
+           <h3>Your progress: </h3>
+           <span id="course_progress"><%= Float(number_of_absolved_pages)/Float(number_of_pages)*100 %>%</span>
+                      
            <div class="progress progress-striped">
-             <div class="bar" style="width: <%= course_progress %>%;"></div>
+             <div class="bar" ></div>
            </div>
            
            
@@ -100,7 +102,9 @@
             <h2><%= lesson.title %></h2>
             <p><%= lesson.description %></p>
             <% first_lesson_page = lesson.pages.first %>
-            <%= link_to "do lesson", "/courses/#{@course.id}/lessons/#{lesson.id}/pages/#{first_lesson_page.id}" %>
+            <% if actual_lesson_position >= lesson.position %>
+              <%= link_to "do lesson", "/courses/#{@course.id}/lessons/#{lesson.id}/pages/#{first_lesson_page.id}" %>
+            <% end %>
           </div>
           <% if (index+1) % 4 == 0 && index > 3 %>
               </div>
