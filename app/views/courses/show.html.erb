@@ -32,13 +32,49 @@
      <div id="progress">
        <% if !@course.taken_by_user(current_user.id).blank? %>
            <h3>Your progress</h3>
-           <div class="progress progress-striped">
-             <div class="bar" style="width: 40%;"></div>
-           </div>
+           
+           <!---lesson und page für "continue course" finden--->
            <% takes_course = @course.takes_courses.find_by_user_id(current_user.id) %>
-           <% next_lesson = @course.lessons.find_by_id(takes_course.lesson_progress) %>
-           <% next_page = next_lesson.pages.find_by_id(takes_course.page_progress) %>
-           <%= link_to "continue course", "/courses/#{@course.id}/lessons/#{next_lesson.id}/pages/#{next_page.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+           
+           <% if @course.lessons.find_by_id(takes_course.lesson_progress) %>
+             <% lesson_progress = @course.lessons.find_by_id(takes_course.lesson_progress) %>
+             <% if lesson_progress.pages.find_by_id(takes_course.page_progress) %>
+              <% page_progress = lesson_progress.pages.find_by_id(takes_course.page_progress) %>
+             <% else %>
+              <% page_progress = lesson_progress.pages.find_by_position(1) %>
+             <% end %>
+           <% else %>
+             <% lesson_progress = @course.lessons.find_by_position(1) %>
+             <% page_progress = lesson_progress.pages.find_by_position(1) %>
+           <% end %>
+           <!--- TODO: save lesson_progress/page_progress if not found --->
+           
+           <!---Progress berechnen--->
+           <% number_of_lessons = @course.lessons.count %>
+           <% number_of_pages = 0 %>
+           <% @course.lessons.each do |lesson| %>
+            <% number_of_pages += lesson.pages.count %>
+           <% end %>
+           
+           <% actual_lesson_position = lesson_progress.position %>
+           
+           <% number_of_absolved_pages = 0 %>
+           <% @course.lessons.each do |lesson| %>
+            <% if lesson.position < actual_lesson_position %>
+              <% number_of_absolved_pages += lesson.pages.count %>
+            <% else %>
+              <% number_of_absolved_pages += page_progress.position %>
+            <% end %>
+           <% end %>
+           
+           Course Progress: <%= course_progress = number_of_pages/number_of_absolved_pages*100 %>
+           
+           <div class="progress progress-striped">
+             <div class="bar" style="width: <%= course_progress %>%;"></div>
+           </div>
+           
+           
+           <%= link_to "continue course", "/courses/#{@course.id}/lessons/#{lesson_progress.id}/pages/#{page_progress.id}", :class=>"btn btn-primary start-course btn-block btn-large" %>
        <% else %>
         <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
 
