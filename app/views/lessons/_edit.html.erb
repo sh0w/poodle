@@ -28,7 +28,7 @@
         <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
         <%= link_to '(x) Destroy', [ @course, @lesson, page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
         <br /><br />
-        <%= link_to '(+) Add Text', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/texts/new", id: "add_text_link", remote: true %>
+        <%= link_to '(+) Add Text!!', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/texts/new", id: "add_text_link", remote: true %>
         <br />
         <%= link_to '(+) Add Link', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/links/new", id: "add_link_link", remote: true %>
         <br />

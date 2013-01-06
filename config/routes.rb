@@ -1,15 +1,4 @@
 Poodle::Application.routes.draw do
-
-  resources :pagecomments
-
-  resources :add_page_id_to_activities
-
-  resources :uploads
-
-  resources :images
-
-  resources :links
-
   devise_for :users,
              path_names: {sign_in: "login", sign_out: "logout"},
              :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
