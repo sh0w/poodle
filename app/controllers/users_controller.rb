@@ -12,6 +12,9 @@ class UsersController < ApplicationController
       end
     end
 
+    @tc = TakesCourse.find_all_by_user_id(@user.id)
+
+
     @recent_activity = Activity.where("creator_id = ? OR user_id = ?", @user.id, @user.id)
   end
 

@@ -38,7 +38,7 @@
 
 </section>
 
-<% if ! @created_courses.nil? %>
+<% if ! @tc.nil? %>
 
     <section id="popular">
       <header>
@@ -46,49 +46,29 @@
 
       </header>
     <div id="favorites">
-      <% @created_courses.each do |c| %>
+      <% @tc.each do |tc| %>
+          <%
+             c = Course.find(tc.course_id)
+          %>
           <section class="course">
             <figure >
               <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
               <%= link_to image_tag(c.image.url :medium, :class=>"course_pic"), course_path(c) %>
             </figure>
             <h2><%= link_to c.title, course_path(c) %></h2>
-            <div class="introtext"><%= c.description[/(\s*\S+){#{30}}/] %>...</div>
+
+            <%= render 'shared/progressbar', { :progress => tc.lesson_progress_percent } %>
+
+            <%= link_to "continue course", "/courses/#{c.slug}/lessons/#{tc.lesson_progress}/pages/#{tc.page_progress}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+
+
+
+
+
           </section>
 
       <% end %>
 
     </div>
       </section>
-
- <%  @created_courses.each do |c| %>
-    <section class="course">
-      <figure >
-        <img src="/img/rating.png" class="rating_bar" width="186" height="39" />
-        <%= link_to image_tag(c.image.url :medium, :class=>"course_pic"), course_path(c) %>
-      </figure>
-      <h2><%= link_to c.title, course_path(c) %></h2>
-      <aside><%= time_ago_in_words(c.created_at) %> ago</aside>
-      <div class="introtext"><%= c.description[/(\s*\S+){#{30}}/] %>...</div>
-    </section>
-
-    <% end %>
 <% end %>
-
-
-
-<hr /><h1 class="main">Courses</h1><hr />
-
-<div id="courses" class="row-fluid">
-
-
-  <div class="row">
-    <div class="span4">
-      <h2>Your current courses</h2>
-      <% current_user.courses.each do |c| %>
-          <%= link_to c.title, course_path(c) %> <br>
-      <% end  %>
-    </div>
-
-
-  </div>

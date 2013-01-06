@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106140913) do
+ActiveRecord::Schema.define(:version => 20130106180659) do
 
   create_table "acitivities", :force => true do |t|
     t.string   "text"
@@ -148,9 +148,10 @@ ActiveRecord::Schema.define(:version => 20130106140913) do
     t.integer  "user_id"
     t.integer  "course_id"
     t.integer  "lesson_progress"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "page_progress"
+    t.integer  "lesson_progress_percent", :default => 0
   end
 
   create_table "texts", :force => true do |t|
