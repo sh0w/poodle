@@ -10,8 +10,8 @@ class Course < ActiveRecord::Base
   has_one :creates_course
   has_one :user, :through => :creates_course, :dependent => :destroy
 
-  has_many :takes_courses
-  has_many :users, :through => :takes_course, :dependent => :destroy
+  has_many :takes_course, :dependent => :destroy
+  has_many :users, :through => :takes_course
 
   validates_presence_of :title, :description
   validates_uniqueness_of :title

@@ -49,7 +49,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
 
-    takes_course = @course.takes_courses.find_by_user_id(current_user.id)
+    takes_course = @course.takes_course.find_by_user_id(current_user.id)
 
     if(! takes_course.blank?)
 
