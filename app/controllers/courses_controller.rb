@@ -31,9 +31,9 @@ class CoursesController < ApplicationController
   end
 
   def get_rating
-    @rating = @comments.average("rating");  
-    @rating = Integer(@rating * 2 + 0.9999) * 0.5; 
-    @rating = String(@rating).delete( "." ); 
+    @rating = @comments.average("rating")  
+    @rating = Integer(@rating * 2 + 0.9999) * 0.5
+    @rating = String(@rating).delete( "." )
   end
 
   def takes_course?

@@ -36,10 +36,10 @@ class Course < ActiveRecord::Base
     self.slug = self.title.parameterize
   end
   
-  def self.rating    
-    rating = self.comments.average("rating");  
-    rating = Integer(rating * 2 + 0.9999) * 0.5; 
-    rating = String(rating).delete( "." ); 
+  def rating    
+    rating = self.comments.average("rating") || 0
+    rating = Integer(rating*2+0.9999)*0.5 
+    rating = String(rating).delete( "." ) 
   end
 
 end
