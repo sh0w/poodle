@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
       )
 
       # we want to make sure facebook users won't have to confirm the email address:
-      user.skip_confirmation!
+      #user.skip_confirmation!
 
       user.save
     end

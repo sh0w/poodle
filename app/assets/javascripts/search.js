@@ -1,6 +1,6 @@
 $(function(){
 
-    $('#favorites').masonry({
+    $('.favorites').masonry({
         itemSelector: 'section'
     });
 
