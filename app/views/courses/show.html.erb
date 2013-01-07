@@ -31,13 +31,21 @@
 
      <!---Fortschritt--->
      <div class="progressbox">
-       <% if user_signed_in? and !@course.taken_by_user(current_user.id).blank? %>
+       <% if user_signed_in? and !@course.taken_by_user(current_user.id).blank?
+        if  @takes_course.lesson_progress_percent < 100
+
+       %>
+
+
 
            <%= render 'shared/progressbar', { :progress => @takes_course.lesson_progress_percent } %>
 
            <%= link_to "continue learning", "/courses/#{@course.slug}/lessons/#{@takes_course.lesson_progress}/pages/#{@takes_course.page_progress}", :class=>"btn btn-primary start-course btn-block btn-large" %>
 
-       <% else %>
+       <% else   %>
+                <div class="btn btn-disabled btn-large disabled">Course successfully completed.</div>
+            <%  end
+          else %>
         <%= link_to "Start this course", start_path(@course), :class=>"btn btn-primary start-course btn-block btn-large" %>
 
        <% end %>
