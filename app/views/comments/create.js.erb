@@ -1,5 +1,9 @@
 $("#new_comment_link").show();
 $('#new_comment').remove();
 var comment = '<%= j render :partial => "comment", :object => @comment %>';
-$('#comments').append( comment ).masonry( 'appended', comment );
 
+
+$(function(){
+    var $boxes = $(".comment").last;
+    $('#comments').append( comment ).masonry( 'reload' );
+});
