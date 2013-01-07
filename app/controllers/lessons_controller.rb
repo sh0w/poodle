@@ -5,6 +5,8 @@ class LessonsController < ApplicationController
   before_filter :find_course, :except => [:destroy]
   before_filter :get_pages, :only => [:edit, :show]
 
+  before_filter :authenticate_user!
+
   def find_course
     @course = Course.find_by_slug(params[:course_id])
   end
@@ -20,11 +22,21 @@ class LessonsController < ApplicationController
   # GET /lessons/1
   # GET /lessons/1.json
   def show
+    if ! @course.taken_by_user(current_user.id)
 
+      respond_to do |format|
+        format.html { redirect_to start_path(@course), notice: 'weiterleitung' }
+        format.json { render json: start_path(@course), status: :created, location: @course }
+      end
+    else
+
+    @lesson.pages.first.id
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @lesson }
+      format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@lesson.pages.first.id}", notice: 'weiterleitung' }
+      format.json { render json: "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@lesson.pages.first.id}", status: :created, location: @course }
     end
+    end
+
   end
 
   # GET /lessons/new

@@ -3,14 +3,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_username(params[:username]) || not_found
     #@created_courses
-    @cc = CreatesCourse.find_all_by_user_id(@user.id)
 
-    @created_courses = []
-    if !@cc.nil?
-      @cc.each do |cc|
-        @created_courses.push(Course.find(cc.course_id))
-      end
-    end
+
 
     @tc = TakesCourse.find_all_by_user_id(@user.id)
 

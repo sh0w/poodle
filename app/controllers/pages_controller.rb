@@ -38,7 +38,19 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    @tc = @course.takes_courses.find_by_user_id(current_user.id)
+
+    @tc = @course.takes_course.find_by_user_id(current_user.id)
+
+    # wenn der user diesen kurs noch nicht belegt hat -> leite zu course-start (erste lesson, erste page) weiter!!!!
+    if(@tc.nil?)
+      respond_to do |format|
+        format.html { redirect_to start_path(@course), notice: 'weiterleitung' }
+        format.json { render json: start_path(@course), status: :created, location: @course }
+      end
+      return
+    end
+
+
     @actual_lesson = @course.lessons.find_by_id(@tc.lesson_progress)
     @actual_page = @lesson.pages.find_by_id(@tc.page_progress)
     

@@ -8,10 +8,10 @@ class Course < ActiveRecord::Base
 
   has_and_belongs_to_many :categories
 
-  has_one :creates_course, :dependent => :destroy
+  has_one :creates_course
   has_one :user, :through => :creates_course
 
-  has_many :takes_course, :dependent => :destroy
+  has_many :takes_course
   has_many :users, :through => :takes_course
 
   validates_presence_of :title, :description
@@ -19,7 +19,7 @@ class Course < ActiveRecord::Base
   validates_uniqueness_of :slug
 
   def taken_by_user(user_id)
-   TakesCourse.where(:user_id => user_id, :course_id => id)
+   TakesCourse.where(:user_id => user_id, :course_id => self.id)
   end
   
   has_attached_file :image, :styles => { :thumb => "100x100>", :medium => "240>x240" }
@@ -42,6 +42,16 @@ class Course < ActiveRecord::Base
     r = Integer(r*2+0.9999)*0.5
     r = String(r).delete( "." )
     r
+  end
+
+  before_destroy :delete_takescourse
+
+  def delete_takescourse
+    @tc = TakesCourse.find_all_by_course_id(self.id)
+    @tc.each do |tc|
+      TakesCourse.delete(tc.id)
+
+    end
   end
 
 end

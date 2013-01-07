@@ -4,21 +4,10 @@ class CoursesController < ApplicationController
   before_filter :get_lessons, :only => [:show, :edit]
   before_filter :get_comments, :only => [:show]
   before_filter :takes_course?, :only => [:show, :take_course]
-  before_filter :only_creator, :only => :destroy
 
 
   def find_course
     @course = Course.find_by_slug(params[:id])
-  end
-
-  def only_creator
-    if @course.creates_course.user_id != current_user.id
-      respond_to do |format|
-          format.html { redirect_to course_path(@course), error: 'Sorry, only course managers can delete courses.' }
-          format.json { head :no_content }
-      end
-    end
-
   end
 
   def get_lessons
@@ -128,11 +117,16 @@ class CoursesController < ApplicationController
         @creates_course.course_id = @course.id
         @creates_course.save
 
-
         @lesson = Lesson.new
         @lesson.position = 1
         @lesson.course_id = @course.id
+        @lesson.title = "Lesson 1"
         @lesson.save
+
+        @page = Page.new
+        @page.position = 1
+        @page.lesson_id = @lesson.id
+        @page.save
 
         format.html { redirect_to proc { edit_course_url(@course) }, notice: 'Course was successfully created.' }
         format.json { render json: proc { edit_course_url(@post) }, status: :created, location: @course }
@@ -193,7 +187,7 @@ class CoursesController < ApplicationController
           @activity.text = "start_course"
           @activity.save
 
-          format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@first_lesson.id}/pages/#{@first_page.id}", notice: 'Start this course now.' }
+          format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@first_lesson.id}/pages/#{@first_page.id}", notice: "Welcome to #{@course.title}" }
           format.json { render json: @course, status: :created, location: @course }
         else
           format.html { render action: "show" }

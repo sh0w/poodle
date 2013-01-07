@@ -56,7 +56,7 @@
     <hr /><h1 class="main">Overview</h1><hr />
 
     <div id="lessons">
-                     <div class="row-fluid">
+      <div class="row-fluid">
       <% @lessons.each_with_index do |lesson, index| %>
           <a class="locked lesson span3" href="<%= "/courses/#{@course.slug}/lessons/#{lesson.id}" %>">
             <h2><%= lesson.title %></h2>
@@ -64,10 +64,10 @@
             <% first_lesson_page = lesson.pages.first %>
           </a>
           <% if index % 4 == 3 %>
-              </div>
-              <div class="row-fluid">
+              </div><div class="row-fluid">
           <% end %>
       <% end %>
+        </div>
 
     </div>
   </section>

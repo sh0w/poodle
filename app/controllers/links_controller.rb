@@ -2,6 +2,7 @@ class LinksController < ApplicationController
   
   before_filter :find_link, :only => [:show, :update, :destroy, :edit]
   before_filter :find, :except => [:destroy]
+  before_filter :authenticate_user!
 
   def find
     @course = Course.find_by_slug(params[:course_id])
