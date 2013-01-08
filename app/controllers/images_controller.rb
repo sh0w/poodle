@@ -8,17 +8,7 @@ class ImagesController < ApplicationController
     @image = image.find(params[:id])
     @resource = Resource.find(@image.resource_id)
   end
-  
-  # GET /images
-  # GET /images.json
-  def index
-    @images = image.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @images }
-    end
-  end
 
   # GET /images/1
   # GET /images/1.json

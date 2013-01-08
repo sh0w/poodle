@@ -7,12 +7,7 @@ class ResourcesController < ApplicationController
   def find_resource
     @resource = Resource.find(params[:id])
   end
-  
-  # GET /resources
-  # GET /resources.json
-  def index
-    @resources = Resource.all
-  end
+
 
   # GET /resources/1
   # GET /resources/1.json

@@ -9,17 +9,7 @@ class TextsController < ApplicationController
     @text = Text.find(params[:id])
     @resource = Resource.find(@text.resource_id)
   end
-  
-  # GET /texts
-  # GET /texts.json
-  def index
-    @texts = Text.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @texts }
-    end
-  end
 
   # GET /texts/1
   # GET /texts/1.json

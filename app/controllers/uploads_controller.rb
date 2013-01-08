@@ -8,17 +8,7 @@ class UploadsController < ApplicationController
     @upload = Upload.find(params[:id])
     @resource = Resource.find(@upload.resource_id)
   end
-  
-  # GET /uploads
-  # GET /uploads.json
-  def index
-    @uploads = upload.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @uploads }
-    end
-  end
 
   # GET /uploads/1
   # GET /uploads/1.json
