@@ -1,14 +1,9 @@
 class TextsController < ApplicationController
   
   before_filter :find_text, :only => [:show, :update, :destroy, :edit]
-  before_filter :find, :except => [:destroy]
+  before_filter :find_course_lesson_page, :except => [:destroy]
   before_filter :authenticate_user!
 
-  def find
-    @course = Course.find_by_slug(params[:course_id])
-    @lesson = Lesson.find(params[:lesson_id])
-    @page = Page.find(params[:page_id])
-  end
 
   def find_text
     @text = Text.find(params[:id])
