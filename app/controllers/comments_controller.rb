@@ -6,16 +6,6 @@ class CommentsController < ApplicationController
     @course = Course.find_by_slug(params[:course_id])
   end
 
-  # GET /comments
-  # GET /comments.json
-  def index
-    @comments = Comment.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: [@course, @comments] }
-    end
-  end
 
   # GET /comments/1
   # GET /comments/1.json
@@ -40,10 +30,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # GET /comments/1/edit
-  def edit
-    @comment = Comment.find(params[:id])
-  end
 
   # POST /comments
   # POST /comments.json
@@ -54,12 +40,12 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        @activity = Activity.new
-        @activity.creator_id = current_user.id
-        @activity.course_id = @course.id
-        @activity.comment_id = @comment.id
-        @activity.text = "comment_course"
-        @activity.save
+        @activity = Activity.create(
+            :creator_id => current_user.id,
+            :course_id => @course.id,
+            :comment_id => @comment.id,
+            :text => "comment_course"
+        )
 
         format.html { redirect_to [@course, @comments], notice: 'Comment was successfully created.' }
         format.json { render json: [@course, @comments], status: :created, location: @comment }
@@ -68,22 +54,6 @@ class CommentsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
       format.js
-    end
-  end
-
-  # PUT /comments/1
-  # PUT /comments/1.json
-  def update
-    @comment = Comment.find(params[:id])
-
-    respond_to do |format|
-      if @comment.update_attributes(params[:comment])
-        format.html { redirect_to [@course, @comments], notice: 'Comment was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
     end
   end
 

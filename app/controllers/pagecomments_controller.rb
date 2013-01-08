@@ -2,16 +2,6 @@ class PagecommentsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   before_filter :find_course_lesson_page, :except => [:destroy]
 
-  # GET /pagecomments
-  # GET /pagecomments.json
-  def index
-    @pagecomments = Pagecomment.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: [@page, @pagecomments] }
-    end
-  end
 
   # GET /pagecomments/1
   # GET /pagecomments/1.json
@@ -36,11 +26,6 @@ class PagecommentsController < ApplicationController
     end
   end
 
-  # GET /pagecomments/1/edit
-  def edit
-    @pagecomment = Pagecomment.find(params[:id])
-  end
-
   # POST /pagecomments
   # POST /pagecomments.json
   def create
@@ -50,12 +35,6 @@ class PagecommentsController < ApplicationController
 
     respond_to do |format|
       if @pagecomment.save
-        @activity = Activity.new
-        @activity.creator_id = current_user.id
-        @activity.page_id = @page.id
-        @activity.pagecomment_id = @pagecomment.id
-        @activity.text = "pagecomment_page"
-        @activity.save
 
         format.html { redirect_to [@page, @pagecomments], notice: 'pagecomment was successfully created.' }
         format.json { render json: [@page, @pagecomments], status: :created, location: @pagecomment }
@@ -64,22 +43,6 @@ class PagecommentsController < ApplicationController
         format.json { render json: @pagecomment.errors, status: :unprocessable_entity }
       end
       format.js
-    end
-  end
-
-  # PUT /pagecomments/1
-  # PUT /pagecomments/1.json
-  def update
-    @pagecomment = Pagecomment.find(params[:id])
-
-    respond_to do |format|
-      if @pagecomment.update_attributes(params[:pagecomment])
-        format.html { redirect_to [@page, @pagecomments], notice: 'pagecomment was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @pagecomment.errors, status: :unprocessable_entity }
-      end
     end
   end
 
