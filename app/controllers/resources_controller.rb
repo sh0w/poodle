@@ -72,9 +72,7 @@ class ResourcesController < ApplicationController
   end
   
   def updatePosition
-   
-    position = params[:position]
-    @resource.position = position
+    @resource.position = params[:position]
 
     respond_to do |format|
       if @resource.save    

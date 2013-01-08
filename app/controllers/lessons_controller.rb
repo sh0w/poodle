@@ -101,9 +101,7 @@ class LessonsController < ApplicationController
   end
 
   def updatePosition
-   
-    position = params[:position]
-    @lesson.position = position
+    @lesson.position = params[:position]
 
     respond_to do |format|
       if @lesson.save    

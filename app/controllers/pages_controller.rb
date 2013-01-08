@@ -149,9 +149,7 @@ class PagesController < ApplicationController
   end
 
   def updatePosition
-   
-    position = params[:position]
-    @page.position = position
+    @page.position = params[:position]
 
     respond_to do |format|
       if @page.save          
