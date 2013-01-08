@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :comments, :dependent => :destroy
 
-
   has_many :courses, :through => :creates_courses, :dependent => :destroy
   has_one :creates_course, :through => :creates_course, :dependent => :destroy
 

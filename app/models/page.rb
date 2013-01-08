@@ -6,4 +6,5 @@ class Page < ActiveRecord::Base
   
   has_many :resources, :dependent => :destroy
   has_many :pagecomments, :dependent => :destroy
+
 end

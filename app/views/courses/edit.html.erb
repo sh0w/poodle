@@ -1,23 +1,49 @@
+<section class="intro course_overview">
 
-<h1>Editing course</h1>
-<div class="courseeditor">
-<div id="coursetitle">
-  <h1>Lesson: <%= @course.title %></h1>
-</div>
-<%= link_to '-> (edit coursetitle)', "/courses/#{@course.slug}/editTitle", id: "edit_coursetitle_link", remote: true %>
-<br /><br />
-<h2>Description:</h2>
-<div id ="coursedescription">
-  <p><%= @course.description %></p>
-</div>
-<%= link_to '-> (edit course description)', "/courses/#{@course.slug}/editDescription", id: "edit_coursedescription_link", remote: true %>
-<br /><br />
-<h2>Image:</h2>
-<div id ="courseimage">
-  <%= image_tag @course.image.url(:thumb) %> 
-</div>
-<%= link_to '-> (edit course image)', "/courses/#{@course.slug}/editImage", id: "edit_courseimage_link", remote: true %>
-<br /><br />
+  <header><h1 id="coursetitle">Edit <%= @course.title %>
+    <%= link_to "edit", "/courses/#{@course.slug}/editTitle", id: "edit_coursetitle_link", remote: true, class: "btn btn-small" %></h1></header>
+
+  <div class="intro_content clearfix">
+
+    <!---Bild und Bewertung--->
+    <figure id="courseimage">
+      <%= link_to image_tag(@course.image.url(:medium), :class => "course_pic"), "/courses/#{@course.slug}/editImage", id: "edit_courseimage_link", remote: true %>
+      <div id="rating">
+        <div id="rated_stars" class="rating_<%= @course.rating %>" >&nbsp;</div>
+      </div>
+    </figure>
+
+    <!---Beschreibung--->
+    <div class="intro_text">
+      <div id ="coursedescription">
+        <p><%= @course.description %></p>
+      </div>
+      <%= link_to "edit", "/courses/#{@course.slug}/editDescription", id: "edit_coursedescription_link", remote: true, class: "btn btn-small" %>
+
+
+          <%= link_to 'Delete Course', [ @course ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_course_link", class: "btn btn-small btn-danger"%>
+  </div>
+
+</section>
+
+<div id="lessons">
+  <div class="row-fluid">
+    <% @lessons.each_with_index do |lesson, index| %>
+        <a class="locked lesson span3" href="<%= "/courses/#{@course.slug}/lessons/#{lesson.id}" %>">
+          <h2><%= lesson.title %></h2>
+          <p><%= lesson.description %></p>
+          <% first_lesson_page = lesson.pages.first %>
+        </a>
+        <% if index % 4 == 3 %>
+            </div><div class="row-fluid">
+        <% end %>
+    <% end %>
+    </div>
+
+    </div>
+</section>
+
+
 <div id = "courseeditor">
 <div data-slug="<%= @course.slug %>">
  <div id="lessoneditor">
