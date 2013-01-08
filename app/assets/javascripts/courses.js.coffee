@@ -4,7 +4,7 @@
 
 $ ->
   $(".bar").animate width: "0%", duration: 'slow', ->
-    $(".bar").animate width: $("#course_progress").html(), duration: 'slow'
+    $(this).animate width: $(this).data("progress")+"%", duration: 'slow'
     0
   0
  
