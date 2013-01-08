@@ -16,8 +16,6 @@
         <div class="progressbox">
         <% if @user == current_user %>
             <%= link_to "Edit Profile", edit_user_registration_path, :class=>"btn btn-block btn-large" %>
-        <% else %>
-            <%= link_to "Follow", "/dashboard", :class=>"btn btn-primary start-course btn-block btn-large" %>
         <% end %>
         </div>
     </div>

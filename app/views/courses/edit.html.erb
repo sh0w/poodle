@@ -7,7 +7,7 @@
 
     <!---Bild und Bewertung--->
     <figure id="courseimage" class="tooltips">
-      <%= link_to image_tag(@course.image.url(:medium), :class => "course_pic"), "/courses/#{@course.slug}/editImage", id: "edit_courseimage_link", remote: true, title: "Change Course Image" %>
+      <%= link_to image_tag(@course.image.url(:medium), :class => "course_pic"), "/courses/#{@course.slug}/editImage", id: "edit_courseimage_link", remote: true, title: "Change Course Image", class: "fadefocus" %>
       <div id="rating">
         <div id="rated_stars" class="rating_<%= @course.rating %>" >&nbsp;</div>
       </div>
@@ -39,9 +39,10 @@
 	   <%= link_to 'delete', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true, class: "btn btn-small btn-danger" %>
         </li>
      <% end %>
-    </ul>  
-    <%= link_to 'Add Lesson', "/courses/#{@course.slug}/lessons/new", id: "add_lesson_link", remote: true, class: "btn btn-success" %>
-    <div id="add_lesson_form"></div>
+
+      <%= link_to '<i class="icon-plus-sign"></i> New Lesson'.html_safe, new_course_lesson_path(@course), id: "add_lesson_link", remote: true, class: "lesson new fadefocus" %>
+      <div id="add_lesson_form"></div>
+    </ul>
  </div>
  <div id="pageeditor" class="clearfix">
  </div>

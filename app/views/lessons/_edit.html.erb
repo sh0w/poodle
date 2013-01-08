@@ -24,7 +24,7 @@
     <% @pages.each do |page| %>
         <%= render :partial => 'shared/course_editor/page', :object => page %>
     <% end %>
-        <%= link_to '<i class="icon-plus-sign"></i> Add Page'.html_safe, new_course_lesson_page_path(@course,@lesson), id: "add_page_link", remote: true, class: "page new " %>
+        <%= link_to '<i class="icon-plus-sign"></i> New Page'.html_safe, new_course_lesson_page_path(@course,@lesson), id: "add_page_link", remote: true, class: "page new fadefocus" %>
         <div id="add_page_form"></div>
   </ul>
 </div>

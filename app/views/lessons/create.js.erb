@@ -1,4 +1,5 @@
-$('#lessons').append('<%= j render :partial => "lesson" , :object => @lesson %>');
+
+$('#lessons .lesson.new').before('<%= j render :partial => "lesson" , :object => @lesson %>');
 
 $("#overlay").remove();
 $("#overlay_center").remove();
