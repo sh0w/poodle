@@ -1,85 +1,31 @@
 <div id = "<%= @lesson.id %>">
 <div id="title">
   <h1>Lesson: <%= @lesson.title %></h1>
+  <%= link_to 'edit title', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editTitle", id: "edit_title_link", remote: true, class: "btn btn-small" %>
 </div>
-<%= link_to '-> (edit title)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editTitle", id: "edit_title_link", remote: true %>
-<br /><br />
+
 <h2>Description:</h2>
 <div id ="description">
   <p><%= @lesson.description %></p>
 </div>
-<%= link_to '-> (edit description)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editDescription", id: "edit_description_link", remote: true %>
-<br /><br /><h2>Image:</h2>
+<%= link_to 'edit description', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editDescription", id: "edit_description_link", remote: true, class: "btn btn-small" %>
+
+  <h2>Image:</h2>
 <div id ="image">
   <%= image_tag @lesson.image.url(:thumb) %>
 </div>
-<%= link_to '-> (edit image)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editImage", id: "edit_image_link", remote: true %>
-<br /><br />
-<%= link_to 'Add Page', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/new", id: "add_page_link", remote: true %>
-<br /><br />
-<div id=add_page_form>
-</div>
+<%= link_to 'edit image', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editImage", id: "edit_image_link", remote: true, class: "btn btn-small" %>
+
+
 <h2>Your Pages:</h2>
 <br />
 <div id="pagescontainer">
   <ul id="pages">
     <% @pages.each do |page| %>
-      <li class="page" id="page_<%= page.id %>" >
-        <h2>Page <span class="position"><%= page.position %></span>:</h2>	 
-        <%= link_to '(x) Destroy', [ @course, @lesson, page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true %>
-        <br /><br />
-        <%= link_to '(+) Add Text!!', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/texts/new", id: "add_text_link", remote: true %>
-        <br />
-        <%= link_to '(+) Add Link', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/links/new", id: "add_link_link", remote: true %>
-        <br />
-        <%= link_to '(+) Add Image', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/images/new", id: "add_image_link", remote: true %>
-        <br />
-        <%= link_to '(+) Add File', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/uploads/new", id: "add_upload_link", remote: true %>
-        <br /><br />
-        <ul class="resources">
-          <% page.resources.each do |resource| %>
-              <li class = "resource" id="resource_<%= resource.id %>">
-                
-              
-                <% if resource.text %>
-                  <span class="position"><%= resource.position %></span>. Text: <%= resource.headline %> 
-                  &nbsp;
-                
-                  <%= link_to '(x)', [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-                  &nbsp;
-                  <%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/texts/#{resource.text.id}/edit", id: "edit_text_link", remote: true %>
-                <% end %>
-                <% if resource.link %>
-                  <span class="position"><%= resource.position %></span>. Link: <%= resource.headline %> 
-                  &nbsp;
-                
-                  <%= link_to '(x)', [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-                  &nbsp;
-                  <%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/links/#{resource.link.id}/edit", id: "edit_link_link", remote: true %>
-                <% end %>
-                <% if resource.image %>
-                  <span class="position"><%= resource.position %></span>. Image: <%= resource.headline %> 
-                  <br />
-                  <%= image_tag resource.image.image.url(:thumb) %> 
-                  <br />
-                  <%= link_to '(x)', [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-                  &nbsp;
-                  <%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/links/#{resource.image.id}/edit", id: "edit_image_link", remote: true %>
-                <% end %>
-                <% if resource.upload %>
-                  <span class="position"><%= resource.position %></span>. File: 
-                  <a href ="<%= resource.upload.upload.url %>">-> <%= resource.upload.upload_file_name %></a> 
-                  <br />
-                  <%= link_to '(x)', [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-                  &nbsp;
-                  <%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{page.id}/links/#{resource.upload.id}/edit", id: "edit_upload_link", remote: true %>
-                <% end %>
-                            
-              </li>
-          <% end %>
-        </ul>
-      </li>
+        <%= render :partial => 'shared/course_editor/page', :object => page %>
     <% end %>
+        <%= link_to '<i class="icon-plus-sign"></i> Add Page'.html_safe, new_course_lesson_page_path(@course,@lesson), id: "add_page_link", remote: true, class: "page new " %>
+        <div id="add_page_form"></div>
   </ul>
 </div>
     </div>

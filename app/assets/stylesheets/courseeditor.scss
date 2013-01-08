@@ -1,84 +1,94 @@
-#courseeditor{
+#courseeditor {
   width: 100%;
   height: 600px;
 
-    #lessoneditor{
-	    width: 220px;
-	    height:500px;
-	    float: left;        
+  #lessoneditor {
+    width: 220px;
+    height: 500px;
+    float: left;
 
-        #lessons{
-          width: 220px;
-          height:400px;
-          overflow-y:scroll;
+    #lessons {
+      width: 220px;
+      height: 400px;
+      overflow-y: scroll;
+      float: left;
+      margin: 0 0 20px 0;
+      background-color: #cccccc;
+
+      .lesson {
+        width: 177px;
+        background-color: #ffffff;
+        margin: 5px;
+        margin-bottom: 0;
+        padding: 10px;
+      }
+    }
+  }
+
+  #pageeditor {
+    width: 620px;
+    margin-left: 20px;
+    padding: 20px;
+    float: left;
+    background-color: #cccccc;
+
+    #pagescontainer {
+      width: 620px;
+      overflow-x: scroll;
+      float: left;
+      background-color: #eeeeee;
+
+      #pages {
+        min-height: 80px;
+
+        .page {
+          width: 180px;
+          min-height: 80px;
+          padding: 20px;
+          margin: 5px;
+          margin-right: 0;
+          background-color: #ffffff;
+          display: block;
           float: left;
-          margin: 0 0 20px 0;
-          background-color: #cccccc;
-  
-            .lesson{
-	            width: 177px;
-	            background-color: #ffffff;
-	            margin: 5px;
-	            margin-bottom: 0;
-	            padding: 10px;
-	          }
         }
-	  }
 
-	  #pageeditor{
-	    height:360px;
-	    width:620px;
-	    margin-left:20px;
-	    padding: 20px;
-	    float: left;
-	    background-color: #cccccc;
+        #resources {
+          li {
+            display: block;
+            border-bottom: 1px solid #cccccc;
+            padding: 5px 0 5px 0;
+          }
 
-        #pagescontainer{
-	        width: 620px;
-	        overflow-x:scroll;
-	        float: left;
-	        background-color: #eeeeee;
+          li:first-child {
+            border-top: 1px solid #cccccc;
+          }
+        }
 
-            #pages{
-	            min-height: 80px;
+        .resources {
+          li {
+            display: block;
+            border-bottom: 1px solid #cccccc;
+            padding: 5px 0 5px 0;
+          }
 
-                .page{
-	                width: 180px;
-	                min-height: 80px;
-	                padding: 20px;
-	                margin: 5px;
-	                margin-right: 0;
-	                background-color: #ffffff;
-	                display: block;
-	                float: left;
-	              }
-	              
-	              #resources{
-	                li{
-	                  display: block;
-	                  border-bottom: 1px solid #cccccc;
-	                  padding: 5px 0 5px 0;
-	                }
-	                
-	                li:first-child{
-	                  border-top: 1px solid #cccccc;
-	                }
-	              }
-	              
-	              .resources{
-	                li{
-	                  display: block;
-	                  border-bottom: 1px solid #cccccc;
-	                  padding: 5px 0 5px 0;
-	                }
-	                
-	                li:first-child{
-	                  border-top: 1px solid #cccccc;
-	                }
-	              }
-	          }
-	      }
-	  }
+          li:first-child {
+            border-top: 1px solid #cccccc;
+          }
+        }
+        .new {
+          opacity: 0.5;
+          webkit-transition: opacity 0.3s linear; -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; transition: all 0.3s linear;
+        }
+        .new:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+#edit_courseimage_link {
+  display:block;
 }
 
 #overlay {
@@ -88,12 +98,13 @@
   width: 100%;
   height: 100%;
   background-color: #000;
-  -moz-opacity:0.5;
+  -moz-opacity: 0.5;
   -khtml-opacity: 0.5;
   opacity: 0.5;
   z-index: 10000;
 }
-#overlay_center{
+
+#overlay_center {
   position: fixed;
   top: 0;
   left: 0;
@@ -101,13 +112,13 @@
   height: 100%;
   margin-left: -250px;
   z-index: 10001;
-        
-    #overlay_content{
-      width: 460px;
-      background-color:#fff;
-      margin-left:50%;
-      margin-top: 10%;
-      padding:20px;
-    }
+
+  #overlay_content {
+    width: 460px;
+    background-color: #fff;
+    margin-left: 50%;
+    margin-top: 10%;
+    padding: 20px;
+  }
 }
 

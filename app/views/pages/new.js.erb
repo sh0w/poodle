@@ -6,4 +6,5 @@ var pageswidth = $('#pages').css("width").replace('px', "");
 newpageswidth = (parseInt(pageswidth)+225) + "px";
 $('#pages').css("width", newpageswidth);
 
-$('#pages').append('<%= j render :partial => "page" , :object => @page %>');
+$('#pages .page.new').before('<%= j render :partial => "shared/course_editor/page" , :object => @page %>');
+

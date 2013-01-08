@@ -1,10 +1,11 @@
-$( ".courseeditor #lessons" ).sortable({
+$( "#courseeditor #lessons" ).sortable({
   update: function(){
     update_lesson_position();
   }
 });
 
-$( ".courseeditor #lessons" ).disableSelection();
+
+$( "#courseeditor #lessons" ).disableSelection();
 
 function update_lesson_position(){  
   var list = $("#lessons");  
@@ -70,5 +71,6 @@ function do_requests(url, neworder){
 	}  
   alert("end of requests");
 }
-   
 
+    $("#edit_courseimage_link").tooltip();
+   
