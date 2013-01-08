@@ -45,4 +45,12 @@ class ApplicationController < ActionController::Base
     @page = Page.find(params[:page_id])
   end
 
+  def find_course
+    @course = Course.find_by_slug(params[:id])
+  end
+
+  def get_lessons
+    @lessons = @course.lessons.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
+  end
+
 end

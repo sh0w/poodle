@@ -2,21 +2,8 @@ class CoursesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   before_filter :find_course, :only => [:show, :update, :destroy, :edit, :editTitle, :editDescription, :editImage, :take_course]
   before_filter :get_lessons, :only => [:show, :edit]
-  before_filter :get_comments, :only => [:show]
   before_filter :takes_course?, :only => [:show, :take_course]
 
-
-  def find_course
-    @course = Course.find_by_slug(params[:id])
-  end
-
-  def get_lessons
-    @lessons = @course.lessons.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
-  end
-
-  def get_comments
-    @comments = @course.comments
-  end
 
   def takes_course?
     if user_signed_in?
@@ -27,20 +14,10 @@ class CoursesController < ApplicationController
     @takes_course
   end
 
-  # GET /courses
-  # GET /courses.json
-  def index
-    @courses = Course.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @courses }
-    end
-  end
-
   # GET /courses/1
   # GET /courses/1.json
   def show
+    @comments = @course.comments
 
     if user_signed_in?
       @takes_course = @course.takes_course.find_by_user_id(current_user.id)
