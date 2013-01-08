@@ -16,27 +16,24 @@ class LessonsController < ApplicationController
   end
   
   def get_pages
-    @pages = @lesson.pages.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
+    @pages = @lesson.pages.sort{ |a,b|
+      ( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 )
+    }
   end
 
   # GET /lessons/1
   # GET /lessons/1.json
   def show
-    if ! @course.taken_by_user(current_user.id)
-
-      respond_to do |format|
+    respond_to do |format|
+      if ! @course.taken_by_user(current_user.id)
         format.html { redirect_to start_path(@course), notice: 'weiterleitung' }
         format.json { render json: start_path(@course), status: :created, location: @course }
+      else
+        @lesson.pages.first.id
+        format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@lesson.pages.first.id}", notice: 'weiterleitung' }
+        format.json { render json: "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@lesson.pages.first.id}", status: :created, location: @course }
       end
-    else
-
-    @lesson.pages.first.id
-    respond_to do |format|
-      format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@lesson.pages.first.id}", notice: 'weiterleitung' }
-      format.json { render json: "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@lesson.pages.first.id}", status: :created, location: @course }
     end
-    end
-
   end
 
   # GET /lessons/new

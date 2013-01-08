@@ -17,13 +17,15 @@ class PagesController < ApplicationController
   end
   
   def get_resources
-    @resources = @page.resources.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
+    @resources = @page.resources.sort { |a,b|
+      ( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 )
+    }
   end
   
   def get_pagecomments
     @pagecomments = @page.pagecomments
   end
-  
+
   # GET /pages
   # GET /pages.json
   def index
