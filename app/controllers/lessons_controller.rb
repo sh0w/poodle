@@ -67,10 +67,7 @@ class LessonsController < ApplicationController
     respond_to do |format|
       if @lesson.save
 
-        @page = Page.new
-        @page.position = 1
-        @page.lesson_id = @lesson.id
-        @page.save
+        Page.create(:position => 1, :lesson_id => @lesson.id)
 
         format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully created.' }
         format.json { render json: @course, status: :created, location: @lesson }

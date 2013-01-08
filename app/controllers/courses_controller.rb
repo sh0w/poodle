@@ -106,27 +106,13 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        @activity = Activity.new
-        @activity.creator_id = current_user.id
-        @activity.course_id = @course.id
-        @activity.text = "create_course"
-        @activity.save
+        Activity.create(:creator_id => current_user.id, :course_id => @course.id, :text =>"create_course")
 
-        @creates_course = CreatesCourse.new
-        @creates_course.user_id = current_user.id
-        @creates_course.course_id = @course.id
-        @creates_course.save
+        CreatesCourse.create(:user_id => current_user.id, :course_id => @course.id )
 
-        @lesson = Lesson.new
-        @lesson.position = 1
-        @lesson.course_id = @course.id
-        @lesson.title = "Lesson 1"
-        @lesson.save
+        @lesson = Lesson.create(:position => 1, :course_id => @course.id, :title => "Lesson 1")
 
-        @page = Page.new
-        @page.position = 1
-        @page.lesson_id = @lesson.id
-        @page.save
+        Page.create(:position => 1, :lesson_id => @lesson.id)
 
         format.html { redirect_to proc { edit_course_url(@course) }, notice: 'Course was successfully created.' }
         format.json { render json: proc { edit_course_url(@post) }, status: :created, location: @course }
@@ -181,11 +167,7 @@ class CoursesController < ApplicationController
 
       respond_to do |format|
         if @tc.save
-          @activity = Activity.new
-          @activity.creator_id = current_user.id
-          @activity.course_id = @course.id
-          @activity.text = "start_course"
-          @activity.save
+          Activity.create(:creator_id => current_user.id, :course_id => @course.id, :text =>"start_course")
 
           format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@first_lesson.id}/pages/#{@first_page.id}", notice: "Welcome to #{@course.title}" }
           format.json { render json: @course, status: :created, location: @course }
