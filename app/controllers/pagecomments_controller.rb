@@ -1,6 +1,8 @@
 class PagecommentsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_course_lesson_page, :except => [:destroy]
+  before_filter :find_course, :except => [:destroy]
+  before_filter :find_lesson, :except => [:destroy]
+  before_filter :find_page, :except => [:destroy]
 
 
   # GET /pagecomments/1

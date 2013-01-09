@@ -39,14 +39,20 @@ class ApplicationController < ActionController::Base
     ret
   end
 
-  def find_course_lesson_page
+  def find_course
     @course = Course.find_by_slug(params[:course_id])
+  end
+
+  def find_lesson
     @lesson = Lesson.find(params[:lesson_id])
+  end
+
+  def find_page
     @page = Page.find(params[:page_id])
   end
 
-  def find_course
-    @course = Course.find_by_slug(params[:id])
+  def find_resource
+    @resource = Resource.find(params[:resource_id])
   end
 
   def get_lessons

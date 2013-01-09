@@ -1,17 +1,12 @@
 class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
-  before_filter :find_lesson, :except => [:new, :create]
+  before_filter :authenticate_user!
   before_filter :find_course, :except => [:destroy]
+  before_filter :find_lesson_params_id, :except => [:new, :create]
   before_filter :get_pages, :only => [:edit, :show]
 
-  before_filter :authenticate_user!
-
-  def find_course
-    @course = Course.find_by_slug(params[:course_id])
-  end
-
-  def find_lesson
+  def find_lesson_params_id
     @lesson = Lesson.find(params[:id])
   end
   

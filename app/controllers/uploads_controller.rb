@@ -1,14 +1,14 @@
 class UploadsController < ApplicationController
-  
-  before_filter :find_upload, :only => [:show, :update, :destroy, :edit]
-  before_filter :find_course_lesson_page, :except => [:destroy]
   before_filter :authenticate_user!
+  before_filter :find_upload, :only => [:show, :update, :destroy, :edit]
+  before_filter :find_course, :except => [:destroy]
+  before_filter :find_lesson, :except => [:destroy]
+  before_filter :find_page,   :except => [:destroy]
 
   def find_upload
     @upload = Upload.find(params[:id])
     @resource = Resource.find(@upload.resource_id)
   end
-
 
   # GET /uploads/1
   # GET /uploads/1.json

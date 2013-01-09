@@ -1,7 +1,9 @@
 class ImagesController < ApplicationController
   
   before_filter :find_image, :only => [:show, :update, :destroy, :edit]
-  before_filter :find_course_lesson_page, :except => [:destroy]
+  before_filter :find_course, :except => [:destroy]
+  before_filter :find_lesson, :except => [:destroy]
+  before_filter :find_page, :except => [:destroy]
   before_filter :authenticate_user!
 
   def find_image

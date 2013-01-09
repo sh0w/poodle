@@ -1,9 +1,16 @@
 class CoursesController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_course, :only => [:show, :update, :destroy, :edit, :editTitle, :editDescription, :editImage, :take_course]
-  before_filter :get_lessons, :only => [:show, :edit]
-  before_filter :takes_course?, :only => [:show, :take_course]
+  before_filter :authenticate_user!,    :except =>   [:index, :show]
 
+  before_filter :find_course,           :except =>  [:show, :edit, :destroy]
+  before_filter :find_course_params_id, :only =>    [:show, :edit, :destroy]
+
+  before_filter :get_lessons,            :only => [:show, :edit]
+  before_filter :takes_course?,          :only => [:show, :take_course]
+
+
+  def find_course_params_id
+    @course = Course.find_by_slug(params[:id])
+  end
 
   def takes_course?
     if user_signed_in?
@@ -96,6 +103,7 @@ class CoursesController < ApplicationController
   # PUT /courses/1
   # PUT /courses/1.json
   def update
+    puts @course
 
     respond_to do |format|
       if @course.update_attributes(params[:course])

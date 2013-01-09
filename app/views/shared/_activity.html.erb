@@ -1,0 +1,32 @@
+<li>
+  <%
+
+   if(!activity.course_id.blank?)
+     @c = Course.find(activity.course_id)
+   end
+
+   case activity.text
+     when "create_course" %>
+      <%= User.find(activity.creator_id).username %>
+      created the course
+      <%= link_to @c.title, course_path(@c) %>
+
+  <% when "start_course" %>
+      <%= User.find(activity.creator_id).username %>
+      started taking
+      <%= link_to @c.title, course_path(@c) %>
+
+  <%  when "comment_course" %>
+      <%= User.find(activity.creator_id).username %>
+      <%= link_to "commented", "#{course_path(@c)}#comment_#{activity.comment_id}" %> on
+      <%= link_to @c.title, course_path(@c) %>
+
+  <% when "signup" %>
+      <%= User.find(activity.user_id).username %>
+      has signed up.
+
+  <%
+     end
+%>
+  <span class="when"> <%= time_ago_in_words(activity.created_at) %> ago</span>
+</li>

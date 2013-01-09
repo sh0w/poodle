@@ -2,10 +2,6 @@ class CommentsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   before_filter :find_course, :except => [:delete]
 
-  def find_course
-    @course = Course.find_by_slug(params[:course_id])
-  end
-
 
   # GET /comments/1
   # GET /comments/1.json
@@ -64,8 +60,9 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to course_comments_url }
+      format.html { redirect_to course_url }
       format.json { head :no_content }
+      format.js
     end
   end
 end

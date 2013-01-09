@@ -1,13 +1,9 @@
 class ResourcesController < ApplicationController
-  
-  before_filter :find_resource, :only => [:show, :update, :destroy, :edit, :updatePosition]
-  before_filter :find_course_lesson_page, :except => [:destroy]
   before_filter :authenticate_user!
-
-  def find_resource
-    @resource = Resource.find(params[:id])
-  end
-
+  before_filter :find_resource, :only => [:show, :update, :destroy, :edit, :updatePosition]
+  before_filter :find_course, :except => [:destroy]
+  before_filter :find_lesson, :except => [:destroy]
+  before_filter :find_page,   :except => [:destroy]
 
   # GET /resources/1
   # GET /resources/1.json

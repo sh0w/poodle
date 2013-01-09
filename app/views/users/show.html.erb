@@ -26,9 +26,7 @@
       <div class="recent_activity">
       <ul>
       <% @recent_activity.each do |a| %>
-          <li><%= convert_to_message(a)  %>
-          <span class="when"> <%= time_ago_in_words(a.created_at) %> ago</span>
-          </li>
+            <%= render :partial => "shared/activity", :object => a %>
       <% end %>
       </ul>
       </div>
@@ -74,7 +72,9 @@
 
             <%= render 'shared/progressbar', { :progress => tc.lesson_progress_percent } %>
 
-            <%= link_to "continue course", "/courses/#{c.slug}/lessons/#{tc.lesson_progress}/pages/#{tc.page_progress}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+              <% if @user == current_user %>
+                <%= link_to "continue course", "/courses/#{c.slug}/lessons/#{tc.lesson_progress}/pages/#{tc.page_progress}", :class=>"btn btn-primary start-course btn-block btn-large" %>
+              <% end %>
 
             </div>
           </section>

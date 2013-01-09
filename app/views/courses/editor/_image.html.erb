@@ -1,0 +1,8 @@
+
+<%= link_to image_tag(@course.image.url(:medium), :class => "course_pic"), "/courses/#{@course.slug}/editImage", id: "edit_courseimage_link", remote: true, title: "Change Course Image", class: "fadefocus" %>
+<div id="rating">
+  <div id="rated_stars" class="rating_<%= @course.rating %>" >&nbsp;</div>
+</div>
+<script>
+    $(".tooltips a").tooltip();
+</script>

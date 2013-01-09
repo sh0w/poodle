@@ -1,35 +1,24 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find
-  before_filter :find_page, :except => [:new]
+  before_filter :find_course, :except => [:destroy]
+  before_filter :find_lesson, :except => [:destroy]
+  before_filter :find_lesson_params_id, :except => [:create, :new]
   before_filter :get_resources, :only => [:edit, :show]
-  before_filter :get_pagecomments, :only => [:show]
 
-
-  def find
-    @course = Course.find_by_slug(params[:course_id])
-    @lesson = Lesson.find(params[:lesson_id])
-  end
-
-  def find_page
-
+  def find_lesson_params_id
     @page = Page.find(params[:id])
   end
-  
+
   def get_resources
     @resources = @page.resources.sort { |a,b|
       ( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 )
     }
   end
-  
-  def get_pagecomments
-    @pagecomments = @page.pagecomments
-  end
 
   # GET /pages/1
   # GET /pages/1.json
   def show
-
+    @pagecomments = @page.pagecomments
     @tc = @course.takes_course.find_by_user_id(current_user.id)
 
     # wenn der user diesen kurs noch nicht belegt hat -> leite zu course-start (erste lesson, erste page) weiter!!!!

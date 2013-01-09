@@ -24,17 +24,18 @@ Poodle::Application.routes.draw do
   match "/about" => "static_pages#about", :as => "about"
   match "/team" => "static_pages#team", :as => "team"
 
-  match 'courses/:id/start' => 'courses#take_course', :as => "start"
+  match 'courses/:course_id/start' => 'courses#take_course', :as => "start"
+  match 'courses/:course_id/editDescription' => 'courses#editDescription'
+  match 'courses/:course_id/editTitle' => 'courses#editTitle'
+  match 'courses/:course_id/editImage' => 'courses#editImage'
+  match 'courses/:course_id/update' => 'courses#update'
 
-  match 'courses/:course_id/lessons/:id/editDescription' => 'lessons#editDescription'
-  match 'courses/:course_id/lessons/:id/editTitle' => 'lessons#editTitle'
-  match 'courses/:course_id/lessons/:id/editImage' => 'lessons#editImage'
-  match 'courses/:id/editDescription' => 'courses#editDescription'
-  match 'courses/:id/editTitle' => 'courses#editTitle'
-  match 'courses/:id/editImage' => 'courses#editImage'
-  match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:id/updatePosition' => 'resources#updatePosition', :as => "updateResourcePosition"
-  match 'courses/:course_id/lessons/:lesson_id/pages/:id/updatePosition' => 'pages#updatePosition'
-  match 'courses/:course_id/lessons/:id/updatePosition' => 'lessons#updatePosition'
+  match 'courses/:course_id/lessons/:lesson_id/editDescription' => 'lessons#editDescription'
+  match 'courses/:course_id/lessons/:lesson_id/editTitle' => 'lessons#editTitle'
+  match 'courses/:course_id/lessons/:lesson_id/editImage' => 'lessons#editImage'
+  match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:resource_id/updatePosition' => 'resources#updatePosition', :as => "updateResourcePosition"
+  match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/updatePosition' => 'pages#updatePosition'
+  match 'courses/:course_id/lessons/:lesson_id/updatePosition' => 'lessons#updatePosition'
 
   match 'users/:username' => "users#show", :as => "user"
   match 'profile' => "users#current"

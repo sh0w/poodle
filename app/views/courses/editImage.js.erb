@@ -2,5 +2,5 @@ var elem = $('#courseimage')
 elem.html("<%= j render :partial => "editImageForm", :locals => { :course => @course } %>");
 elem.append("<input type='button' value='cancel' class='cancelbutton'>");
 elem.find(".cancelbutton").button().click(function(){
-  elem.html("<img src='<%= @course.image.url(:thumb) %>' alt='<%= @course.image_file_name %>' />");
+    elem.html("<%= j render :partial => "courses/editor/image", :object => @course %>");
 });

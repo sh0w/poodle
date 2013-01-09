@@ -1,0 +1,23 @@
+<% user = User.find(comment.user_id) %>
+
+<div class="comment">
+  <div class="comment_content">
+    <% if user_signed_in? and user == current_user %>
+    <div class="delete_comment tooltips fadefocus">
+      <%= link_to button_tag('<i class="icon-trash"></i>'.html_safe, class: "btn btn-mini"), [ comment.course, comment ], method: :delete, data: { confirm: 'Are you sure?' }, remote: true, title: "delete comment" %>
+    </div>
+    <% end %>
+    <header>
+      <div class="info">
+        <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.username), :name=>"comment_#{comment.id}" %>
+        <div class="cmt_info">
+          <p><%= link_to user.username, user_path(user.username) %> </p>
+          <p><span class="when"><%= time_ago_in_words(comment.created_at) %> ago</span></p>
+        </div>
+      </div>
+    </header>
+    <div class="content">
+      <%= comment.content %>
+    </div>
+  </div>
+</div>
