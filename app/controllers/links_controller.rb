@@ -10,17 +10,6 @@ class LinksController < ApplicationController
     @resource = Resource.find(@link.resource_id)
   end
 
-  # GET /links/1
-  # GET /links/1.json
-  def show
-    @link = Link.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @link }
-    end
-  end
-
   # GET /links/new
   # GET /links/new.json
   def new

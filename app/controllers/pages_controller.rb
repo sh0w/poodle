@@ -24,27 +24,18 @@ class PagesController < ApplicationController
     # wenn der user diesen kurs noch nicht belegt hat -> leite zu course-start (erste lesson, erste page) weiter!!!!
     if(@tc.nil?)
       respond_to do |format|
-        format.html { redirect_to start_path(@course), notice: 'weiterleitung' }
+        format.html { redirect_to start_path(@course), notice: "Welcome to #{@course.title}" }
         format.json { render json: start_path(@course), status: :created, location: @course }
       end
       return
     end
 
-
-    @actual_lesson = @course.lessons.find_by_id(@tc.lesson_progress)
-    @actual_page = @lesson.pages.find_by_id(@tc.page_progress)
-    
-    if @actual_lesson.blank?
-      @actual_lesson = @course.lessons.find_by_position(1)
-    end
-    if @actual_page.blank?
-      @actual_page = @lesson.pages.find_by_position(1)
-    end
+    @actual_lesson = @course.lessons.find_by_id(@tc.lesson_progress) || @course.lessons.find_by_position(1)
+    @actual_page = @lesson.pages.find_by_id(@tc.page_progress) || @lesson.pages.find_by_position(1)
 
     if @lesson.position >= @actual_lesson.position and @page.position >= @actual_page.position
       @tc.lesson_progress = @lesson.id
       @tc.page_progress = @page.id
-
       @tc.save
     end
     

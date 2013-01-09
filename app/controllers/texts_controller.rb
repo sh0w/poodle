@@ -5,21 +5,9 @@ class TextsController < ApplicationController
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_page,   :except => [:destroy]
 
-
   def find_text
     @text = Text.find(params[:id])
     @resource = Resource.find(@text.resource_id)
-  end
-
-
-  # GET /texts/1
-  # GET /texts/1.json
-  def show
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @text }
-    end
   end
 
   # GET /texts/new
