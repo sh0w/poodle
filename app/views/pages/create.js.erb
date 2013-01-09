@@ -1,11 +1,6 @@
 $('#new_page').remove();
 $('#add_page_link').show();
 
-//neue Breite für #pages bestimmen (für horizontales Scrollen)
-var pageswidth = $('#pages').css("width").replace('px', "");
-newpageswidth = (parseInt(pageswidth)+225) + "px";
-$('#pages').css("width", newpageswidth);
-
 $('#pages .page.new').prependTo('<%= j render :partial => "page" , :object => @page %>');
 
 

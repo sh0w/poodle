@@ -1,21 +1,10 @@
 class User < ActiveRecord::Base
-  has_many :activities, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
-
-  has_many :courses, :through => :creates_courses, :dependent => :destroy
-  has_one :creates_course, :through => :creates_course, :dependent => :destroy
-
-  has_many :courses, :through => :takes_courses, :dependent => :destroy
-  has_many :takes_courses, :dependent => :destroy
-
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,# :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
-
-
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
@@ -25,6 +14,16 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "240>x240", :thumb => "28x28", :mini => "15x15" }
 
   validates_presence_of :username, :email
+
+
+  has_many :activities, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+
+  has_many :courses, :through => :creates_courses, :dependent => :destroy
+  has_one :creates_course, :through => :creates_course, :dependent => :destroy
+
+  has_many :courses, :through => :takes_courses, :dependent => :destroy
+  has_many :takes_courses, :dependent => :destroy
 
   # attr_accessible :title, :body
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)

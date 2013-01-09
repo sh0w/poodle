@@ -16,6 +16,11 @@
       started taking
       <%= link_to @c.title, course_path(@c) %>
 
+  <% when "finish_course" %>
+      <%= User.find(activity.user_id).username %>
+      completed learning
+      <%= link_to @c.title, course_path(@c) %>
+
   <%  when "comment_course" %>
       <%= User.find(activity.creator_id).username %>
       <%= link_to "commented", "#{course_path(@c)}#comment_#{activity.comment_id}" %> on

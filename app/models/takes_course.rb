@@ -31,6 +31,10 @@ class TakesCourse < ActiveRecord::Base
     end
 
     self.lesson_progress_percent = Float(number_of_absolved_pages) / Float(number_of_pages) * 100
+
+    if self.lesson_progress_percent == 100
+      Activity.create(:user_id => self.user_id, :course_id => self.course_id, :text => "finish_course")
+    end
   end
 
 

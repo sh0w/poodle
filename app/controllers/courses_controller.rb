@@ -25,7 +25,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @comments = @course.comments
-    @creator = User.find(@course.creates_course.user_id)
+    @creator = User.find(@course.creates_course.user_id) if !@course.creates_course.nil?
     @takes_course = @course.takes_course.find_by_user_id(current_user.id) if user_signed_in?
 
     if(! @takes_course.blank?)
@@ -122,7 +122,6 @@ class CoursesController < ApplicationController
   # DELETE /courses/1.json
   def destroy
     @course.destroy
-
     respond_to do |format|
       format.html { redirect_to courses_url }
       format.json { head :no_content }

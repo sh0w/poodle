@@ -1,9 +1,4 @@
-$('#pageeditor').html("");
-$('#pageeditor').append('<%= j render("edit") %>');
-
-var numberofpages = $( ".page" ).length;
-var pageswidth = 225 * numberofpages + 5;
-$('#pages').css("width", pageswidth);
+$('#pageeditor').html('<%= j render("edit") %>');
 
 $( "#pages" ).sortable({
   update: function(){
