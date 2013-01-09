@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    @pagecomments = @page.pagecomments
+    @comments = @page.comments
     @tc = @course.takes_course.find_by_user_id(current_user.id)
 
     # wenn der user diesen kurs noch nicht belegt hat -> leite zu course-start (erste lesson, erste page) weiter!!!!

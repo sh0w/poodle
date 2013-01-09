@@ -18,6 +18,7 @@ class CommentsController < ApplicationController
   # GET /comments/new.json
   def new
     @comment = Comment.new
+    @comment.page_id = params[:page_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -33,6 +34,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.course_id = @course.id
     @comment.user_id = current_user.id
+    @comment.rating = nil unless @comment.page_id.blank?
 
     respond_to do |format|
       if @comment.save
