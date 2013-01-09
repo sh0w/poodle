@@ -28,22 +28,6 @@ class CoursesController < ApplicationController
     @creator = User.find(@course.creates_course.user_id) if !@course.creates_course.nil?
     @takes_course = @course.takes_course.find_by_user_id(current_user.id) if user_signed_in?
 
-    if(! @takes_course.blank?)
-
-      if @lesson_progress = @course.lessons.find_by_id(@takes_course.lesson_progress)
-        if @lesson_progress.pages.find_by_id(@takes_course.page_progress)
-          @page_progress = @lesson_progress.pages.find_by_id(@takes_course.page_progress)
-        else
-          @page_progress = @lesson_progress.pages.find_by_position(1)
-        end
-
-      else
-        @lesson_progress = @course.lessons.find_by_position(1)
-        @page_progress = @lesson_progress.pages.find_by_position(1)
-      end
-
-    end
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @course }
@@ -62,34 +46,16 @@ class CoursesController < ApplicationController
     end
   end
 
-  # GET /courses/1/edit
-  def edit
-  end
-  
-  def editDescription
-  end
-  
-  def editTitle
-  end
-  
-  def editImage
-  end
-
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(params[:course])
-    #@course.category_ids
 
     respond_to do |format|
       if @course.save
+
         Activity.create(:user_id => current_user.id, :course_id => @course.id, :text =>"create_course")
-
         CreatesCourse.create(:user_id => current_user.id, :course_id => @course.id )
-
-        @lesson = Lesson.create(:position => 1, :course_id => @course.id, :title => "Lesson 1")
-
-        Page.create(:position => 1, :lesson_id => @lesson.id)
 
         format.html { redirect_to proc { edit_course_url(@course) }, notice: 'Course was successfully created.' }
         format.json { render json: proc { edit_course_url(@post) }, status: :created, location: @course }
@@ -103,8 +69,6 @@ class CoursesController < ApplicationController
   # PUT /courses/1
   # PUT /courses/1.json
   def update
-    puts @course
-
     respond_to do |format|
       if @course.update_attributes(params[:course])
         format.html { redirect_to edit_course_path(@course), notice: 'Course was successfully updated.' }
@@ -135,18 +99,14 @@ class CoursesController < ApplicationController
       @tc = TakesCourse.new
       @tc.user_id = current_user.id
       @tc.course_id = @course.id
-
-      @first_lesson = @course.lessons.first
-      @first_page = @first_lesson.pages.first
-
-      @tc.lesson_progress = @first_lesson.id
-      @tc.page_progress = @first_page.id
+      @tc.lesson_progress = @course.lessons.first.id
+      @tc.page_progress = @course.lessons.first.pages.first.id
 
       respond_to do |format|
         if @tc.save
           Activity.create(:user_id => current_user.id, :course_id => @course.id, :text =>"start_course")
 
-          format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@first_lesson.id}/pages/#{@first_page.id}", notice: "Welcome to #{@course.title}" }
+          format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@tc.lesson_progress}/pages/#{@tc.page_progress}", notice: "Welcome to #{@course.title}" }
           format.json { render json: @course, status: :created, location: @course }
         else
           format.html { render action: "show" }
@@ -160,6 +120,19 @@ class CoursesController < ApplicationController
       end
     end
 
+  end
+
+
+  def edit
+  end
+
+  def editDescription
+  end
+
+  def editTitle
+  end
+
+  def editImage
   end
 
 end
