@@ -3,8 +3,8 @@
    course = lesson.course
    %>
 
-<li class="page" id="page_<%= page.id %>" >
-  <div class="delete_page tooltips">
+<li class="page" id="page_<%= page.id %>" data-position="<%= page.position %>" >
+  <div class="delete_page tooltips fadefocus">
     <%= link_to button_tag('<i class="icon-trash"></i>'.html_safe, class: "btn btn-mini"), [course, lesson, page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true, title: "Delete page" %>
   </div>
 
@@ -17,7 +17,7 @@
     <% end %>
   </ul>
 
-  <div class="add_resource tooltips">
+  <div class="clearfix add_resource tooltips fadefocus">
   <%= link_to button_tag('<i class="icon-font"></i>'.html_safe, class: "btn btn-mini"), new_course_lesson_page_text_path(course,lesson,page), id: "add_text_link", remote: true, title: "Add some text" %>
   <%= link_to button_tag('<i class="icon-globe"></i>'.html_safe, class: "btn btn-mini"), new_course_lesson_page_link_path(course,lesson,page), id: "add_link_link", remote: true, title: "Add a hyperlink" %>
   <%= link_to button_tag('<i class="icon-picture"></i>'.html_safe, class: "btn btn-mini"),new_course_lesson_page_image_path(course,lesson,page), id: "add_image_link", remote: true, title: "Add an image" %>

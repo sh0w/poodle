@@ -72,5 +72,5 @@ function do_requests(url, neworder){
   alert("end of requests");
 }
 
-    $("#edit_courseimage_link").tooltip();
+    $(".tooltips a").tooltip();
    

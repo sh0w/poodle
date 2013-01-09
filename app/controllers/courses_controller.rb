@@ -18,19 +18,12 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @comments = @course.comments
-
-    if user_signed_in?
-      @takes_course = @course.takes_course.find_by_user_id(current_user.id)
-    else
-      @takes_course = false
-    end
-
     @creator = User.find(@course.creates_course.user_id)
+    @takes_course = @course.takes_course.find_by_user_id(current_user.id) if user_signed_in?
 
     if(! @takes_course.blank?)
 
-      if @course.lessons.find_by_id(@takes_course.lesson_progress)
-        @lesson_progress = @course.lessons.find_by_id(@takes_course.lesson_progress)
+      if @lesson_progress = @course.lessons.find_by_id(@takes_course.lesson_progress)
         if @lesson_progress.pages.find_by_id(@takes_course.page_progress)
           @page_progress = @lesson_progress.pages.find_by_id(@takes_course.page_progress)
         else

@@ -14,3 +14,6 @@ $ ->
   0
 0
 
+
+$(".tooltips a").tooltip()
+

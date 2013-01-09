@@ -1,7 +1,8 @@
 <section class="intro course_overview">
 
-  <header><h1 id="coursetitle">Edit <%= @course.title %>
-    <%= link_to "edit", "/courses/#{@course.slug}/editTitle", id: "edit_coursetitle_link", remote: true, class: "btn btn-small" %></h1></header>
+  <header><h1 id="coursetitle" class="tooltips">
+    <%= render :partial => "courses/editor/title", :object => @course %>
+  </h1></header>
 
   <div class="intro_content clearfix">
 
