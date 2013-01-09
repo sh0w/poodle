@@ -83,7 +83,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        Activity.create(:creator_id => current_user.id, :course_id => @course.id, :text =>"create_course")
+        Activity.create(:user_id => current_user.id, :course_id => @course.id, :text =>"create_course")
 
         CreatesCourse.create(:user_id => current_user.id, :course_id => @course.id )
 
@@ -144,7 +144,7 @@ class CoursesController < ApplicationController
 
       respond_to do |format|
         if @tc.save
-          Activity.create(:creator_id => current_user.id, :course_id => @course.id, :text =>"start_course")
+          Activity.create(:user_id => current_user.id, :course_id => @course.id, :text =>"start_course")
 
           format.html { redirect_to "/courses/#{@course.slug}/lessons/#{@first_lesson.id}/pages/#{@first_page.id}", notice: "Welcome to #{@course.title}" }
           format.json { render json: @course, status: :created, location: @course }

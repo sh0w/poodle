@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         @activity = Activity.create(
-            :creator_id => current_user.id,
+            :user_id => current_user.id,
             :course_id => @course.id,
             :comment_id => @comment.id,
             :text => "comment_course"
