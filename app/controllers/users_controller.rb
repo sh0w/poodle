@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     @tc = TakesCourse.find_all_by_user_id(@user.id)
 
-    @recent_activity = Activity.find(@user.id).reverse_order
+    @recent_activity = Activity.find_all_by_user_id(@user.id).reverse
   end
 
   def current
