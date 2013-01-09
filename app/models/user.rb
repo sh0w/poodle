@@ -19,11 +19,10 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :comments, :dependent => :destroy
 
-  has_many :courses, :through => :creates_courses, :dependent => :destroy
-  has_one :creates_course, :through => :creates_course, :dependent => :destroy
-
-  has_many :courses, :through => :takes_courses, :dependent => :destroy
   has_many :takes_courses, :dependent => :destroy
+
+  has_many :courses, :through => :creates_courses, :dependent => :destroy
+  has_many :creates_courses, :dependent => :destroy
 
   # attr_accessible :title, :body
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
