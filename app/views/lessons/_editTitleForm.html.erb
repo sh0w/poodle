@@ -1,21 +1,21 @@
-<%= form_for ([@course, @lesson]), :url => { :action => "update" }, remote: true do |f| %>
-  <% if @lesson.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
+<%= form_for ([course, lesson]), remote: true do |f| %>
+    <% if lesson.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
 
-      <ul>
-      <% @lesson.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% lesson.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <h1>Lesson: </h1>
+      <%= f.text_field :title %>
     </div>
-  <% end %>
-  
-  <div class="field">
-    <h1>Lesson: </h1>
-    <%= f.text_field :title %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Update Title" %>
-  </div>
+    <div class="actions">
+      <%= f.submit "Update Title", :class=>"btn" %>
+    </div>
 <% end %>

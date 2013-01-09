@@ -2,9 +2,10 @@ class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
   before_filter :authenticate_user!
-  before_filter :find_course, :except => [:destroy]
-  before_filter :find_lesson_params_id, :except => [:new, :create]
-  before_filter :get_pages, :only => [:edit, :show]
+  before_filter :find_course,           :except => [:destroy]
+  before_filter :find_lesson_params_id, :only => [:edit, :show, :update, :destroy]
+  before_filter :find_lesson,           :only => [:editTitle, :editDescription, :editImage, :updatePosition]
+  before_filter :get_pages,             :only => [:edit, :show]
 
   def find_lesson_params_id
     @lesson = Lesson.find(params[:id])
@@ -86,7 +87,7 @@ class LessonsController < ApplicationController
         format.js
       else
         format.html { render action: "edit" }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity } 
+        format.json { render json: @lesson.errors, status: :unprocessable_entity }
         format.js
       end
     end
