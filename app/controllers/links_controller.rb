@@ -24,11 +24,11 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    @resource = Resource.new(params[:resource])
-    @resource.page_id = @page.id
-    @resource.position = @page.resources.count+1    
-    @resource.save
-    
+    @resource = Resource.create(
+        :page_id => @page.id,
+        :position => @page.resources.count+1
+    )
+
     @link = Link.new(params[:link])
     @link.resource_id = @resource.id
     @link.save
@@ -62,14 +62,4 @@ class LinksController < ApplicationController
     end
   end
 
-  # DELETE /links/1
-  # DELETE /links/1.json
-  def destroy
-    @link.destroy
-
-    respond_to do |format|
-      format.html { redirect_to edit_course_path(@course) }
-      format.json { head :no_content }
-    end
-  end
 end

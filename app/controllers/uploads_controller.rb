@@ -34,12 +34,12 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-  
-    @resource = Resource.new(params[:resource])
-    @resource.page_id = @page.id
-    @resource.position = @page.resources.count+1    
-    @resource.save
-    
+
+    @resource = Resource.create(
+        :page_id => @page.id,
+        :position => @page.resources.count+1
+    )
+
     @upload = Upload.new(params[:upload])
     @upload.resource_id = @resource.id
     @upload.save
@@ -74,14 +74,4 @@ class UploadsController < ApplicationController
     end
   end
 
-  # DELETE /uploads/1
-  # DELETE /uploads/1.json
-  def destroy
-    @upload.destroy
-
-    respond_to do |format|
-      format.html { redirect_to edit_course_path(@course) }
-      format.json { head :no_content }
-    end
-  end
 end

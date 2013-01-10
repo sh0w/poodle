@@ -24,12 +24,11 @@ class TextsController < ApplicationController
   # POST /texts
   # POST /texts.json
   def create
-  
-    @resource = Resource.new(params[:resource])
-    @resource.page_id = @page.id
-    @resource.position = @page.resources.count+1    
-    @resource.save
-    
+    @resource = Resource.create(
+        :page_id => @page.id,
+        :position => @page.resources.count+1
+    )
+
     @text = Text.new(params[:text])
     @text.resource_id = @resource.id
     @text.save
@@ -61,17 +60,6 @@ class TextsController < ApplicationController
         format.json { render json: @text.errors, status: :unprocessable_entity }
         format.js        
       end
-    end
-  end
-
-  # DELETE /texts/1
-  # DELETE /texts/1.json
-  def destroy
-    @text.destroy
-
-    respond_to do |format|
-      format.html { redirect_to texts_url }
-      format.json { head :no_content }
     end
   end
 end

@@ -70,26 +70,6 @@ class PagesController < ApplicationController
   def edit
   end
 
-  # POST /pages
-  # POST /pages.json
-  def create
-    @page = Page.new(params[:page])
-    @page.lesson_id = @lesson.id
-    @page.position = @lesson.pages.count+1
-
-    respond_to do |format|
-      if @page.save
-        format.html { redirect_to edit_course_path(@course), notice: 'Page was successfully created.' }
-        format.json { render json: @page, status: :created, location: @page }
-        format.js
-      else
-        format.html { render action: "new" }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
-        format.js
-      end
-    end
-  end
-
   # PUT /pages/1
   # PUT /pages/1.json
   def update
@@ -119,15 +99,6 @@ class PagesController < ApplicationController
 
   def updatePosition
     @page.position = params[:position]
-
-    respond_to do |format|
-      if @page.save          
-        format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: lesson.errors, status: :unprocessable_entity }
-      end
-    end
+    @page.save
   end
 end

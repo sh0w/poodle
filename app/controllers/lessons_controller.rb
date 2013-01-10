@@ -95,16 +95,7 @@ class LessonsController < ApplicationController
 
   def updatePosition
     @lesson.position = params[:position]
-
-    respond_to do |format|
-      if @lesson.save    
-        format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: lesson.errors, status: :unprocessable_entity }
-      end
-    end
+    @lesson.save
   end
   
 

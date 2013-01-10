@@ -36,12 +36,10 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
-  
-    @resource = Resource.new(params[:resource])
-    @resource.page_id = @page.id
-    @resource.position = @page.resources.count+1    
-    @resource.save
-    
+    @resource = Resource.create(
+        :page_id => @page.id,
+        :position => @page.resources.count+1
+    )
     @image = Image.new(params[:image])
     @image.resource_id = @resource.id
     @image.save
@@ -76,14 +74,4 @@ class ImagesController < ApplicationController
     end
   end
 
-  # DELETE /images/1
-  # DELETE /images/1.json
-  def destroy
-    @image.destroy
-
-    respond_to do |format|
-      format.html { redirect_to edit_course_path(@course) }
-      format.json { head :no_content }
-    end
-  end
 end

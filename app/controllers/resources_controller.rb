@@ -1,6 +1,6 @@
 class ResourcesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_resource, :only => [:show, :update, :destroy, :edit, :updatePosition]
+  before_filter :find_resource, :only => [:show, :update, :edit, :updatePosition]
   before_filter :find_course, :except => [:destroy]
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_page,   :except => [:destroy]
@@ -64,21 +64,13 @@ class ResourcesController < ApplicationController
   
   def updatePosition
     @resource.position = params[:position]
-
-    respond_to do |format|
-      if @resource.save    
-        format.html { redirect_to edit_course_path(@course), notice: 'Lesson was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: lesson.errors, status: :unprocessable_entity }
-      end
-    end
+    @resource.save
   end
 
   # DELETE /resources/1
   # DELETE /resources/1.json
   def destroy
+    @resource = Resource.find(params[:id])
     @resource.destroy
 
     respond_to do |format|
