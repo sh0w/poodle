@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
+  def not_found msg=""
+    raise ActionController::RoutingError.new(msg.blank? ? 'Not Found': msg + " not found")
   end
 
   def to_slug
@@ -57,6 +57,13 @@ class ApplicationController < ActionController::Base
 
   def get_lessons
     @lessons = @course.lessons.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
+  end
+
+  def create_resource
+    @resource = Resource.create(
+        :page_id => @page.id,
+        :position => @page.resources.count+1
+    )
   end
 
 end

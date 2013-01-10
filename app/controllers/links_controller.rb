@@ -4,6 +4,7 @@ class LinksController < ApplicationController
   before_filter :find_course, :except => [:destroy]
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_page, :except => [:destroy]
+  before_filter :create_resource, :only => :create
 
   def find_link
     @link = Link.find(params[:id])
@@ -24,23 +25,13 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    @resource = Resource.create(
-        :page_id => @page.id,
-        :position => @page.resources.count+1
-    )
 
     @link = Link.new(params[:link])
     @link.resource_id = @resource.id
     @link.save
-    
+
     respond_to do |format|
       if @link.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
-        format.html { redirect_to edit_course_path(@course), notice: 'Text was successfully updated.' }
-        format.json { head :no_content }
-        format.js
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @link.errors, status: :unprocessable_entity }
         format.js
       end
     end  
@@ -51,12 +42,6 @@ class LinksController < ApplicationController
   def update
     respond_to do |format|
       if @link.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
-        format.html { redirect_to edit_course_path(@course), notice: 'Text was successfully updated.' }
-        format.json { head :no_content }
-        format.js
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @link.errors, status: :unprocessable_entity }
         format.js
       end
     end

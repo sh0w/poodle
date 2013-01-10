@@ -1,13 +1,13 @@
 class ImagesController < ApplicationController
-  
+  before_filter :authenticate_user!
   before_filter :find_image, :only => [:show, :update, :destroy, :edit]
   before_filter :find_course, :except => [:destroy]
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_page, :except => [:destroy]
-  before_filter :authenticate_user!
+  before_filter :create_resource, :only => :create
 
   def find_image
-    @image = image.find(params[:id])
+    @image = Image.find(params[:id])
     @resource = Resource.find(@image.resource_id)
   end
 
@@ -36,10 +36,6 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
-    @resource = Resource.create(
-        :page_id => @page.id,
-        :position => @page.resources.count+1
-    )
     @image = Image.new(params[:image])
     @image.resource_id = @resource.id
     @image.save
@@ -47,11 +43,11 @@ class ImagesController < ApplicationController
     respond_to do |format|
       if @image.update_attributes(params[:image]) && @resource.update_attributes(params[:resource])
         format.html { redirect_to edit_course_path(@course), notice: 'image was successfully updated.' }
-        format.json { head :no_content }
+       # format.json { head :no_content }
         format.js
       else
         format.html { render action: "edit" }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+  #      format.json { render json: @image.errors, status: :unprocessable_entity }
         format.js
       end
     end    
@@ -64,14 +60,13 @@ class ImagesController < ApplicationController
     respond_to do |format|
       if @image.update_attributes(params[:image]) && @resource.update_attributes(params[:resource])
         format.html { redirect_to edit_course_path(@course), notice: 'image was successfully updated.' }
-        format.json { head :no_content }
+     #   format.json { head :no_content }
         format.js
       else
         format.html { render action: "edit" }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+     #   format.json { render json: @image.errors, status: :unprocessable_entity }
         format.js        
       end
     end
   end
-
 end

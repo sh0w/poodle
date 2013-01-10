@@ -4,6 +4,7 @@ class UploadsController < ApplicationController
   before_filter :find_course, :except => [:destroy]
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_page,   :except => [:destroy]
+  before_filter :create_resource, :only => :create
 
   def find_upload
     @upload = Upload.find(params[:id])
@@ -34,24 +35,12 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-
-    @resource = Resource.create(
-        :page_id => @page.id,
-        :position => @page.resources.count+1
-    )
-
     @upload = Upload.new(params[:upload])
     @upload.resource_id = @resource.id
     @upload.save
     
     respond_to do |format|
       if @upload.update_attributes(params[:upload]) && @resource.update_attributes(params[:resource])
-        format.html { redirect_to edit_course_path(@course), notice: 'upload was successfully updated.' }
-        format.json { head :no_content }
-        format.js
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
         format.js
       end
     end    
@@ -60,15 +49,8 @@ class UploadsController < ApplicationController
   # PUT /uploads/1
   # PUT /uploads/1.json
   def update
-
     respond_to do |format|
       if @upload.update_attributes(params[:upload]) && @resource.update_attributes(params[:resource])
-        format.html { redirect_to edit_course_path(@course), notice: 'upload was successfully updated.' }
-        format.json { head :no_content }
-        format.js
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
         format.js        
       end
     end

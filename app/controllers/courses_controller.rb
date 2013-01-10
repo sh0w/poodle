@@ -7,9 +7,8 @@ class CoursesController < ApplicationController
   before_filter :get_lessons,            :only => [:show, :edit]
   before_filter :takes_course?,          :only => [:show, :take_course]
 
-
   def find_course_params_id
-    @course = Course.find_by_slug(params[:id])
+    @course = Course.find_by_slug(params[:id]) || not_found("Course")
   end
 
   def takes_course?

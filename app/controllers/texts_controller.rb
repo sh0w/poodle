@@ -4,6 +4,7 @@ class TextsController < ApplicationController
   before_filter :find_course, :except => [:destroy]
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_page,   :except => [:destroy]
+  before_filter :create_resource, :only => :create
 
   def find_text
     @text = Text.find(params[:id])
@@ -24,10 +25,7 @@ class TextsController < ApplicationController
   # POST /texts
   # POST /texts.json
   def create
-    @resource = Resource.create(
-        :page_id => @page.id,
-        :position => @page.resources.count+1
-    )
+
 
     @text = Text.new(params[:text])
     @text.resource_id = @resource.id
@@ -36,11 +34,6 @@ class TextsController < ApplicationController
     respond_to do |format|
       if @text.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
         format.html { redirect_to edit_course_path(@course), notice: 'Text was successfully updated.' }
-        format.json { head :no_content }
-        format.js
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @text.errors, status: :unprocessable_entity }
         format.js
       end
     end    
@@ -52,14 +45,9 @@ class TextsController < ApplicationController
 
     respond_to do |format|
       if @text.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
-        format.html { redirect_to edit_course_path(@course), notice: 'Text was successfully updated.' }
-        format.json { head :no_content }
         format.js
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @text.errors, status: :unprocessable_entity }
-        format.js        
       end
     end
   end
+
 end
