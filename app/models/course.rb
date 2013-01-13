@@ -1,5 +1,5 @@
 class Course < ActiveRecord::Base
-  attr_accessible :description, :title, :image, :category_ids
+  attr_accessible :description, :title, :image, :category_ids, :published
   attr_reader :rating
 
   has_many :lessons, :dependent => :destroy

@@ -66,4 +66,9 @@ class ApplicationController < ActionController::Base
     )
   end
 
+  def course_public!
+    redirect_to "/explore", :notice => "Sorry, this course is not public." unless
+        @course.published or (user_signed_in? and @course.creates_course.user_id == current_user.id)
+  end
+
 end
