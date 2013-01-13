@@ -14,19 +14,9 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        (function() {
-            var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-            t.parentNode.insertBefore(s, t);
-        })();
-        /* ]]> */</script>
-
   </head>
   <body>
+  <div id="fb-root"></div>
 
   <div class=" content-wrapper">
     <div class="navbar navbar-inverse navbar-fluid-top">
@@ -86,18 +76,19 @@
 
         <div class="container-fluid">
           <div class="row-fluid">
-          <section class="span4 links"> <!-- ist nicht im nav weil man ja ned damit navigieren kann...-->
+          <section class="span3 links"> <!-- ist nicht im nav weil man ja ned damit navigieren kann...-->
 
-            <h1>CONTACT</h1>
-            Poodle is a project created by students at the<br>
+            <h1>Contact</h1>
+            <div class="description">
             University of Applied Sciences Salzburg           <br>
             Campus Urstein Süd 1                                  <br>
-            A-5412 Puch/Salzburg
+            A-5412 Puch/Salzburg  </div>
+
 
           </section>
 
           <nav class="span2 links">
-            <h1>SITEMAP</h1>
+            <h1>Sitemap</h1>
                 <ul>
                   <li><a href="/courses/">Explore</a></li>
                   <li><a href="/courses/new">Create</a></li>
@@ -105,23 +96,33 @@
                   <li><%= link_to 'Settings', edit_user_registration_path %></li>
                 </ul>
           </nav>
-        <nav class="span3 links">
-          <h1>ABOUT</h1>
+
+        <nav class="span2 links">
+          <h1>About</h1>
             <ul>
               <li><a href="/about">About Poodle</a></li>
               <li><a href="/team">Our team</a></li>
             </ul>
 
-          <p></p>
-          <p>
-          <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://poodle.mediacube.at/"></a>
-          <noscript><a href="http://flattr.com/thing/1098982/Poodle-Learn-Teach-Collaborate-" target="_blank">
-            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
-          </p>
 
         </nav>
 
-        <div class="span3 poodle">
+            <nav class="span2 links">
+              <h1>Share & Support</h1>
+              <div class="share_support">
+                <div class="fb-like" data-href="http://poodle.mediacube.at/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="lucida grande"></div>
+
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://poodle.mediacube.at" data-text="Teach, Learn and Collaborate with Poodle:" data-via="mediaCUBE" data-hashtags="learning,teaching,education">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+                <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://poodle.mediacube.at/"></a>
+                <noscript><a href="http://flattr.com/thing/1098982/Poodle-Learn-Teach-Collaborate-" target="_blank">
+                  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+              </div>
+            </nav>
+
+
+            <div class="span3 poodle">
           <%= image_tag "img/footer_poodle_dark.png" %>
         </div>
 
