@@ -14,6 +14,17 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        (function() {
+            var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+            t.parentNode.insertBefore(s, t);
+        })();
+        /* ]]> */</script>
+
   </head>
   <body>
 
@@ -88,8 +99,8 @@
           <nav class="span2 links">
             <h1>SITEMAP</h1>
                 <ul>
-                  <li><a href="/courses/new">Create</a></li>
                   <li><a href="/courses/">Explore</a></li>
+                  <li><a href="/courses/new">Create</a></li>
                   <li><a href="/profile">View Profile</a></li>
                   <li><%= link_to 'Settings', edit_user_registration_path %></li>
                 </ul>
@@ -100,6 +111,14 @@
               <li><a href="/about">About Poodle</a></li>
               <li><a href="/team">Our team</a></li>
             </ul>
+
+          <p></p>
+          <p>
+          <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://poodle.mediacube.at/"></a>
+          <noscript><a href="http://flattr.com/thing/1098982/Poodle-Learn-Teach-Collaborate-" target="_blank">
+            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+          </p>
+
         </nav>
 
         <div class="span3 poodle">
