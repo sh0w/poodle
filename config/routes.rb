@@ -24,6 +24,7 @@ Poodle::Application.routes.draw do
   match "/team" => "static_pages#team", :as => "team"
 
   match 'courses/:course_id/start' => 'courses#take_course', :as => "start"
+  match 'courses/:course_id/toggleVisibility' => 'courses#toggleVisibility', :as => "toggle_visibility"
   match 'courses/:course_id/editDescription' => 'courses#editDescription'
   match 'courses/:course_id/editTitle' => 'courses#editTitle'
   match 'courses/:course_id/editImage' => 'courses#editImage'

@@ -20,6 +20,14 @@
         <%= link_to 'Delete Course', [ @course ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_course_link", class: "btn btn-small btn-danger"%>
   </div>
 
+    <!---Fortschritt--->
+    <div class="progressbox">
+      <% if @course.published %>
+          <%= link_to "Save as Draft", toggle_visibility_path(@course), :class => "btn btn-block btn-large" %>
+      <%  else %>
+          <%= link_to "Publish Course", toggle_visibility_path(@course), :class => "btn btn-block btn-large" %>
+      <% end %>
+    </div>
       </div>
 
 </section>

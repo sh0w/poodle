@@ -123,6 +123,14 @@ class CoursesController < ApplicationController
 
   end
 
+  def toggleVisibility
+    @course.published = ! @course.published
+    if @course.save
+      respond_to do |format|
+        format.html { redirect_to edit_course_path(@course), notice: "Course visibility successfully updated." }
+      end
+    end
+  end
 
   def edit
   end
