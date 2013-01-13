@@ -121,4 +121,42 @@
     </section>
 <% end %>
 
+
+<% if @user == current_user %>
+
+<section class="popular clearfix">
+  <header>
+    <h1>Manage Courses</h1>
+  </header>
+  <div class="favorites">
+
+    <%  if ! @cc.empty?
+          @cc.each do |cc|
+            c = Course.find(cc.course_id)  %>
+
+            <section class="course">
+              <h2><%= link_to c.title, course_path(c) %></h2>
+
+              <div class="introtext">
+
+                    <%= link_to "edit course", edit_course_path(c), :class=>"btn btn-block btn-large" %>
+
+              </div>
+            </section>
+
+        <% end
+           else %>
+
+        <div class="explore">
+          <h1>Hey! Looks like you're not taking any courses yet.</h1>
+          <%= link_to "Explore Poodle", explore_path, :class=> "btn btn-large" %>
+        </div>
+
+    <% end %>
+
+  </div>
+</section>
+
+<% end %>
+
 </div>

@@ -2,7 +2,8 @@ class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
   before_filter :authenticate_user!
-  before_filter :find_course,           :except => [:destroy]
+  before_filter :find_course
+  before_filter :course_public!
   before_filter :find_lesson_params_id, :only => [:edit, :show, :update, :destroy]
   before_filter :find_lesson,           :only => [:editTitle, :editDescription, :editImage, :updatePosition]
   before_filter :get_pages,             :only => [:edit, :show]

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_username(params[:username]) || not_found
     @tc = TakesCourse.find_all_by_user_id(@user.id)
+    @cc = CreatesCourse.find_all_by_user_id(@user.id)
     @recent_activity = Activity.find_all_by_user_id(@user.id).reverse
   end
 

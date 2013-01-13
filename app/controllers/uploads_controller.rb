@@ -1,7 +1,8 @@
 class UploadsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_upload, :only => [:show, :update, :destroy, :edit]
-  before_filter :find_course, :except => [:destroy]
+  before_filter :find_course
+  before_filter :course_public!
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_page,   :except => [:destroy]
   before_filter :create_resource, :only => :create

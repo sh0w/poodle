@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_course, :except => [:destroy]
+  before_filter :find_course
+  before_filter :course_public!
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_lesson_params_id, :except => [:create, :new]
   before_filter :get_resources, :only => [:edit, :show]

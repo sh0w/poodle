@@ -1,18 +1,7 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :find_course, :except => [:delete]
-
-
-  # GET /comments/1
-  # GET /comments/1.json
-  def show
-    @comment = Comment.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: [@course, @comments] }
-    end
-  end
+  before_filter :find_course
+  before_filter :course_public!
 
   # GET /comments/new
   # GET /comments/new.json
