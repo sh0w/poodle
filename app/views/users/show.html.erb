@@ -124,7 +124,7 @@
 
 <% if @user == current_user %>
 
-<section class="popular clearfix">
+<section class="created_courses popular clearfix">
   <header>
     <h1>Manage Courses</h1>
   </header>
@@ -162,7 +162,7 @@
                       <i class="icon-user"></i> <%= c.takes_course.count %> people are taking this course.
                     </p>
                     <p>
-                      <i class="icon-comment"></i> <%= c.comments.count %> Comments
+                      <i class="icon-comment"></i> <%= c.comments.count %> Comment<%= 's' unless c.comments.count==1 %>
                     </p>
                 </div>
 
