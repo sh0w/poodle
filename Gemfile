@@ -48,6 +48,4 @@ gem "twitter-bootstrap-rails"
 
 gem "paperclip", "~> 3.0"
 
-gem "ohembedr"
-
 gem 'mysql2'
