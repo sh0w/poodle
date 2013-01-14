@@ -8,7 +8,7 @@ class VideosController < ApplicationController
   before_filter :create_resource, :only => :create
 
   def find_video
-    @video = video.find(params[:id])
+    @video = Video.find(params[:id])
     @resource = Resource.find(@video.resource_id)
   end
 

@@ -22,5 +22,6 @@
   <%= link_to button_tag('<i class="icon-globe"></i>'.html_safe, class: "btn btn-mini"), new_course_lesson_page_link_path(course,lesson,page), id: "add_link_link", remote: true, title: "Add a hyperlink" %>
   <%= link_to button_tag('<i class="icon-picture"></i>'.html_safe, class: "btn btn-mini"),new_course_lesson_page_image_path(course,lesson,page), id: "add_image_link", remote: true, title: "Add an image" %>
   <%= link_to button_tag('<i class="icon-file"></i>'.html_safe, class: "btn btn-mini"), new_course_lesson_page_upload_path(course,lesson,page), id: "add_upload_link", remote: true, title: "Upload a file" %>
+  <%= link_to button_tag('<i class="icon-video"></i>'.html_safe, class: "btn btn-mini"), new_course_lesson_page_video_path(course,lesson,page), id: "add_video_link", remote: true, title: "Add a video" %>
   </div>
 </li>

@@ -173,10 +173,10 @@ ActiveRecord::Schema.define(:version => 20130114183338) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "videos", :force => true do |t|
+    t.integer  "resource_id"
     t.string   "video"
-    t.integer  "resourceId"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end
