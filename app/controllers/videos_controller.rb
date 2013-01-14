@@ -29,6 +29,11 @@ class VideosController < ApplicationController
 
     @video = Video.new(params[:video])
     @video.resource_id = @resource.id
+    
+    @video.video = @video.video.gsub("https://", "")
+    @video.video = @video.video.gsub("http://", "")
+    @video.video = @video.video.gsub("www.youtube.com/watch?v=", "")
+    
     @video.save
 
     respond_to do |format|

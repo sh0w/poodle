@@ -29,6 +29,11 @@ class LinksController < ApplicationController
 
     @link = Link.new(params[:link])
     @link.resource_id = @resource.id
+    
+    if !@link.link.include? "http://"
+       @link.link = "http://" + @link.link
+    end
+    
     @link.save
 
     respond_to do |format|

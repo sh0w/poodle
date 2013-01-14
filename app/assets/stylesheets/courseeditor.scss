@@ -105,6 +105,9 @@
         .page:hover .add_resource, .page:hover .delete_page  {
           opacity: 1;
 
+            a {
+              margin-right: -10px;
+            }
         }
 
         #resources {
