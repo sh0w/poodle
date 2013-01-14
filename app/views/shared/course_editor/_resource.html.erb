@@ -28,3 +28,8 @@
   <%= link_to '<i class="icon-trash"></i>'.html_safe, [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
 
 <% end %>
+<% if resource.video %>
+  <%= link_to button_tag("<i class='icon-globe'></i> #{resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_video_path(course,lesson,page,resource.video), id: "edit_video_link", remote: true, title: "edit resource" %>
+  <%= link_to '<i class="icon-trash"></i>'.html_safe, [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
+
+<% end %>

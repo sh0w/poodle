@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  video: MyString
+  resourceId: 1
+
+two:
+  video: MyString
+  resourceId: 1

@@ -1,0 +1,3 @@
+$("#overlay").remove();
+$("#overlay_center").remove();
+$("#page_<%= @page.id %> .resources").append('<%= j render :partial => "shared/course_editor/resource" , :object => @resource %>');

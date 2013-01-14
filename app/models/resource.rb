@@ -6,6 +6,7 @@ class Resource < ActiveRecord::Base
   has_one :link, :dependent => :destroy
   has_one :image, :dependent => :destroy
   has_one :upload, :dependent => :destroy
+  has_one :video, :dependent => :destroy
   
   default_scope :order => 'position'
 end

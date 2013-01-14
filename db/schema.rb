@@ -11,17 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109171510) do
-
-  create_table "acitivities", :force => true do |t|
-    t.string   "text"
-    t.integer  "creator_id"
-    t.integer  "user_id"
-    t.integer  "course_id"
-    t.integer  "comment_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130114183338) do
 
   create_table "activities", :force => true do |t|
     t.string   "text"
@@ -32,13 +22,6 @@ ActiveRecord::Schema.define(:version => 20130109171510) do
     t.datetime "updated_at",     :null => false
     t.integer  "page_id"
     t.integer  "pagecomment_id"
-  end
-
-  create_table "caregory", :force => true do |t|
-    t.string   "name"
-    t.string   "slug"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "categories", :force => true do |t|
@@ -74,13 +57,6 @@ ActiveRecord::Schema.define(:version => 20130109171510) do
     t.datetime "image_updated_at"
     t.string   "slug"
     t.boolean  "published",          :default => false
-  end
-
-  create_table "courses_categories", :force => true do |t|
-    t.integer  "course_id"
-    t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "creates_courses", :force => true do |t|
@@ -195,5 +171,12 @@ ActiveRecord::Schema.define(:version => 20130109171510) do
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "videos", :force => true do |t|
+    t.string   "video"
+    t.integer  "resourceId"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
