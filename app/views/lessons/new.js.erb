@@ -6,5 +6,6 @@ var content = $("#overlay_content");
 content.append("<input type='button' value='cancel' class='cancelbutton'>");
 content.find(".cancelbutton").button().click(function(){
   overlay.hide();
-  content.hide();
+  $("#overlay_center").remove();
 });
+
