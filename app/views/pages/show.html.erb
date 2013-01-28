@@ -1,4 +1,4 @@
- <section class="intro" class="course_overview">
+ <section class="intro page">
   <header>
    <h1>
      <%= @page.lesson.title %>
@@ -12,17 +12,17 @@
           <p><%= resource.text.text %></p>
         <% end %>
         <% if resource.link %>
-          <h2><%= resource.headline %></h2> 
-          <a href ="<%= resource.link.link %>">-> <%= resource.link.link %></a>
+          <a href ="<%= resource.link.link %>"><div class ="icon-arrow-right"></div> <%= resource.headline %></a>
+          
         <% end %>
         <% if resource.image %>
-          <h2><%= resource.headline %></h2>
-          <br />
-          <%= image_tag resource.image.image.url(:medium) %> 
+          <div class="image">
+            <%= image_tag resource.image.image.url(:medium), :alt => resource.headline %>     
+            <span><%= resource.headline %></span>
+          </div>
         <% end %>
         <% if resource.upload %>
-          <h2><%= resource.headline %></h2>
-          <a href ="<%= resource.upload.upload.url %>">-> <%= resource.upload.upload_file_name %></a> 
+          <a href ="<%= resource.upload.upload.url %>"><div class ="icon-file"></div> <%= resource.headline %></a> 
         <% end %>
         <% if resource.video %>
           <h2><%= resource.headline %></h2>
@@ -30,29 +30,29 @@
         <% end %>
       </div>
     <% end %>
-    <% page_position = @page.position %>
-    <% lesson_position = @page.lesson.position %>
-    <% if @page.lesson.pages.find_by_position(page_position - 1) %>
-      <% previous_page_id = @page.lesson.pages.find_by_position(page_position - 1).id %>
-      <%= link_to "previous page", "/courses/#{@course.slug}/lessons/#{@page.lesson.id}/pages/#{previous_page_id}" %>
-    <% end %>
-    <% if @page.lesson.pages.find_by_position(page_position + 1) %>
-      <% next_page_id = @page.lesson.pages.find_by_position(page_position + 1).id %>
-      <%= link_to "next page", "/courses/#{@course.slug}/lessons/#{@page.lesson.id}/pages/#{next_page_id}" %>
-    <% else %>
-      Lesson finished!
-      <% if @page.lesson.course.lessons.find_by_position(lesson_position + 1) %>
-        <% next_lesson_id = @page.lesson.course.lessons.find_by_position(lesson_position + 1).id %>
-        <% next_page_id = @page.lesson.course.lessons.find_by_position(lesson_position + 1).pages.first.id %>
-        <%= link_to "start next lesson", "/courses/#{@course.slug}/lessons/#{next_lesson_id}/pages/#{next_page_id}" %>
+    <div class="navigation" >
+      <% if @is_first_page == 0 %>
+        <%= link_to "previous page", course_lesson_page_path(@course, @lesson, @previous_page), :class => "btn btn-primary" %>
       <% else %>
-        Course finished!
+        <% unless @previous_lesson == -1 %>
+          <%= link_to "previous lesson", course_lesson_page_path(@course, @previous_lesson, @previous_page), :class => "btn btn-primary" %>
+        <% end %>
       <% end %>
-    <% end %>
-    <br />
-    <%= link_to "back to course overview", "/courses/#{@course.slug}" %>
+           
+      <%= link_to "back to course overview", course_path(@course), :class => "btn btn-primary" %>
+      
+      <% if @is_last_page == 0 %>
+        <%= link_to "next page", course_lesson_page_path(@course, @lesson, @next_page), :class => "btn btn-primary next" %>
+      <% else %>
+        <% unless @next_lesson == -1 %>
+          <%= link_to "start next lesson", course_lesson_page_path(@course, @next_lesson, @next_page), :class => "btn btn-primary next" %>
+        <% else %>
+          <%= link_to "finish course", course_path(@course), :class => "btn btn-primary next" %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-   </section>
+</section>
 
 
  <hr />
