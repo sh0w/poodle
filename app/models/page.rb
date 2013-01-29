@@ -7,6 +7,7 @@ class Page < ActiveRecord::Base
   has_many :resources, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   
+  default_scope :order => 'position'
   
   def is_first_page
     if self.lesson.pages.find_by_position(self.position - 1)

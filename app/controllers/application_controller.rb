@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_lessons
-    @lessons = @course.lessons.sort{|a,b|( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 ) }
+    @lessons = @course.lessons
   end
 
   def create_resource

@@ -36,7 +36,7 @@ function update_resource_position(id) {
 
 function new_positions(list) {
     var neworder = new Array();
-    list.find("> li").each(function (i) {
+    list.find("> .sortable").each(function (i) {
 
         var e = $(this);
 
@@ -49,18 +49,18 @@ function new_positions(list) {
             'position':position
         });
     });
-
+    
     return neworder;
 }
 
 function do_requests(url, neworder) {
-    for (i = 0; i <= neworder.length; i++) {
+    for (i = 0; i < neworder.length; i++) {
 
         var id = neworder[i].id;
         var position = neworder[i].position;
-        
+        console.log(id + " " + position);
         $.ajax({
-            type:"GET",
+            type:"POST",
             url:url + id + "/updatePosition",
             data:{
                 "position":position

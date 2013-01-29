@@ -41,18 +41,18 @@
  <div id="lessoneditor" class="clearfix">
     <ul id ="lessons">
      <% @lessons.each do |lesson| %>
-        <li class="lesson" id="lesson_<%= lesson.id %>" >
+        <li class="lesson locked sortable" id="lesson_<%= lesson.id %>" >
            <h2><span class="position"><%= lesson.position %></span>: <%= lesson.title %></h2>
 	   <%= link_to 'edit', edit_polymorphic_path([ @course, lesson ]), id: "edit_page_link", remote: true, class: "btn btn-small" %>
 	   <%= link_to 'delete', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true, class: "btn btn-small btn-danger" %>
         </li>
      <% end %>
-
-      <%= link_to '<i class="icon-plus-sign"></i> New Lesson'.html_safe, new_course_lesson_path(@course), id: "add_lesson_link", remote: true, class: "lesson new fadefocus" %>
-      <div id="add_lesson_form"></div>
+     <li>
+     <%= link_to '<i class="icon-plus-sign"></i> New Lesson'.html_safe, new_course_lesson_path(@course), id: "add_lesson_link", remote: true, class: "lesson new fadefocus" %>
+     </li>
     </ul>
  </div>
- <div id="pageeditor" class="clearfix">
+ <div id="pageeditor" class="clearfix intro_content">
  </div>
 </div>
 </div>

@@ -11,9 +11,7 @@ class PagesController < ApplicationController
   end
 
   def get_resources
-    @resources = @page.resources.sort { |a,b|
-      ( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 )
-    }
+    @resources = @page.resources
   end
   
 

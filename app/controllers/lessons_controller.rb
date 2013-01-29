@@ -13,9 +13,7 @@ class LessonsController < ApplicationController
   end
   
   def get_pages
-    @pages = @lesson.pages.sort{ |a,b|
-      ( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 )
-    }
+    @pages = @lesson.pages
   end
 
   # GET /lessons/1
