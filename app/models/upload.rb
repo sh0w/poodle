@@ -1,7 +1,8 @@
 class Upload < ActiveRecord::Base
   attr_accessible :resource_id, :upload
   
-  belongs_to :resource, :dependent => :destroy
+ # belongs_to :resource, :dependent => :destroy
+  has_one :resource, :as => :attachment
   
   has_attached_file :upload
   

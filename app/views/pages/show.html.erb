@@ -6,30 +6,38 @@
   </header>
   <div class="intro_content">
     <% @page.resources.each do |resource| %>
-      <div class = "resource" id="resource_<%= resource.id %>">
-        <% if resource.text %>
-          <h2><%= resource.headline %></h2>
-          <p><%= resource.text.text %></p>
-        <% end %>
-        <% if resource.link %>
-          <a href ="<%= resource.link.link %>"><div class ="icon-arrow-right"></div> <%= resource.headline %></a>
-          
-        <% end %>
-        <% if resource.image %>
-          <div class="image">
-            <%= image_tag resource.image.image.url(:medium), :alt => resource.headline %>     
-            <span><%= resource.headline %></span>
-          </div>
-        <% end %>
-        <% if resource.upload %>
-          <a href ="<%= resource.upload.upload.url %>"><div class ="icon-file"></div> <%= resource.headline %></a> 
-        <% end %>
-        <% if resource.video %>
-          <h2><%= resource.headline %></h2>
-          <iframe width="420" height="315" src="https://www.youtube.com/embed/<%= resource.video.video %>?rel=0" frameborder="0" allowfullscreen></iframe>
-        <% end %>
-      </div>
-    <% end %>
+
+        <%= render resource.attachment %>
+
+        <div class = "resource" id="resource_<%= resource.id %>">
+          <% if resource.text %>
+              <h2><%= resource.headline %></h2>
+              <p><%= resource.text.text %></p>
+          <% end %>
+          <% if resource.link %>
+              <a href ="<%= resource.link.link %>"><div class ="icon-arrow-right"></div> <%= resource.headline %></a>
+
+          <% end %>
+          <% if resource.image %>
+              <div class="image">
+                <%= image_tag resource.image.image.url(:medium), :alt => resource.headline %>
+                <span><%= resource.headline %></span>
+              </div>
+          <% end %>
+          <% if resource.upload %>
+              <a href ="<%= resource.upload.upload.url %>"><div class ="icon-file"></div> <%= resource.headline %></a>
+          <% end %>
+          <% if resource.video %>
+              <h2><%= resource.headline %></h2>
+              <iframe width="420" height="315" src="https://www.youtube.com/embed/<%= resource.video.video %>?rel=0" frameborder="0" allowfullscreen></iframe>
+          <% end %>
+        </div>
+
+
+
+  <% end %>
+
+
     <div class="navigation" >
       <% if @is_first_page == 0 %>
         <%= link_to "previous page", course_lesson_page_path(@course, @lesson, @previous_page), :class => "btn btn-primary" %>

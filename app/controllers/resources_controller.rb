@@ -6,6 +6,10 @@ class ResourcesController < ApplicationController
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_page,   :except => [:destroy]
 
+  def index
+    @resources = Resource.all
+  end
+
   # GET /resources/1
   # GET /resources/1.json
   def show

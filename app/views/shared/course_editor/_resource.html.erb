@@ -5,6 +5,7 @@
    %>
 
 
+
 <li class = "resource" id="resource_<%= resource.id %>">
 <% if resource.text %>
   <%= link_to button_tag("<i class='icon-font'></i> #{resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_text_path(course,lesson,page,resource.text), id: "edit_text_link", remote: true, title: "edit resource" %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130114183338) do
+ActiveRecord::Schema.define(:version => 20130129113223) do
 
   create_table "acitivities", :force => true do |t|
     t.string   "text"
@@ -131,8 +131,10 @@ ActiveRecord::Schema.define(:version => 20130114183338) do
     t.integer  "page_id"
     t.integer  "position"
     t.string   "headline"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "attachment_id"
+    t.string   "attachment_type"
   end
 
   create_table "takes_courses", :force => true do |t|

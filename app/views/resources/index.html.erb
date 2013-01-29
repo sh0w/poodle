@@ -15,13 +15,22 @@
     <td><%= resource.page_id %></td>
     <td><%= resource.position %></td>
     <td><%= resource.headline %></td>
-    <td><%= link_to 'Show', resource %></td>
-    <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
-    <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+    <td><%= resource.attachment_type %></td>
+    <td><%= resource.attachment_id %></td>
+    <td>
+      <% if ! resource.attachment_id.blank? %>
+      <%= render resource.attachment %>
+      <% end %>
+    </td>
+ </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Resource', new_resource_path %>
+<%= @course %>
+<%= @lesson %>
+<%= @page %>
+
+<%= link_to 'New Resource', new_course_lesson_page_resource_path(@course, @lesson, @page)
+%>

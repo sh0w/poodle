@@ -12,7 +12,9 @@
 
   <ul class="resources">
     <% page.resources.each do |resource| %>
-        <%= render :partial => "shared/course_editor/resource", :object => resource %>
+        <% if ! resource.attachment_id.blank? %>
+            <%= render resource.attachment %>
+        <% end %>
 
     <% end %>
   </ul>
