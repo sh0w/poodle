@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_lesson_params_id, :except => [:create, :new]
   before_filter :get_resources, :only => [:edit, :show]
-  before_filter :get_page_informations, :only => [:show]
+  before_filter :get_navinfo, :only => [:show]
 
   def find_lesson_params_id
     @page = Page.find(params[:id])
@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     }
   end
   
-  def get_page_informations
+  def get_navinfo
     page_position = @page.position
     lesson_position = @page.lesson.position
     
