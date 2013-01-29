@@ -9,13 +9,6 @@
 </div>
 <%= link_to 'edit description', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editDescription", id: "edit_description_link", remote: true, class: "btn btn-small" %>
 
-  <h2>Image:</h2>
-<div id ="image">
-  <%= image_tag @lesson.image.url(:thumb) %>
-</div>
-<%= link_to 'edit image', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editImage", id: "edit_image_link", remote: true, class: "btn btn-small" %>
-
-
 <h2>Your Pages:</h2>
 <br />
 <div id="pagescontainer">
