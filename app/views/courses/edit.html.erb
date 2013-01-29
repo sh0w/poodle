@@ -16,7 +16,7 @@
       <div id ="coursedescription">
         <p><%= @course.description %></p>
       </div>
-        <%= link_to "edit", "/courses/#{@course.slug}/editDescription", id: "edit_coursedescription_link", remote: true, class: "btn btn-small" %>
+        <%= link_to "edit", editCourseDescription_path(@course), id: "edit_coursedescription_link", remote: true, class: "btn btn-small" %>
         <%= link_to 'Delete Course', [ @course ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_course_link", class: "btn btn-small btn-danger"%>
   </div>
 

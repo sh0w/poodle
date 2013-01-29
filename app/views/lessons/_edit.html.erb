@@ -1,13 +1,13 @@
 <div id = "<%= @lesson.id %>">
 <div id="title">
-  <h1>Lesson: <%= @lesson.title %>  <%= link_to 'edit title', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editTitle", id: "edit_title_link", remote: true, class: "btn btn-small" %>
+  <h1>Lesson: <%= @lesson.title %>  <%= link_to 'edit title', editLessonTitle_path(@course,@lesson), id: "edit_title_link", remote: true, class: "btn btn-small" %>
   </h1>
 </div>
 
 <div id ="description">
   <p><%= @lesson.description %></p>
 </div>
-<%= link_to 'edit description', "/courses/#{@course.slug}/lessons/#{@lesson.id}/editDescription", id: "edit_description_link", remote: true, class: "btn btn-small" %>
+<%= link_to 'edit description', editLessonDescription_path(@course,@lesson), id: "edit_description_link", remote: true, class: "btn btn-small" %>
 
 <h2>Your Pages:</h2>
 <br />
