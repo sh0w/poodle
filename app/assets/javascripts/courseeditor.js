@@ -54,12 +54,11 @@ function new_positions(list) {
 }
 
 function do_requests(url, neworder) {
-
     for (i = 0; i <= neworder.length; i++) {
 
         var id = neworder[i].id;
         var position = neworder[i].position;
-
+        
         $.ajax({
             type:"GET",
             url:url + id + "/updatePosition",
@@ -68,7 +67,6 @@ function do_requests(url, neworder) {
             }
         });
     }
-    alert("end of requests");
 }
 
 $(".tooltips a").tooltip();
