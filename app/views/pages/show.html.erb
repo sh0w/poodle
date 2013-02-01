@@ -6,26 +6,26 @@
   </header>
   <div class="intro_content">
     <% @page.resources.each do |resource| %>
-        <%= render resource.attachment unless resource.attachment_id.blank? %>
-
-
+        <div class="resource">
+            <%= render :partial => "pages/#{resource.attachment_type.downcase}", :object => resource.attachment unless resource.attachment_id.blank? %>
+        </div>
     <% end %>
 
 
 
     <div class="navigation" >
       <% if @page.is_first_page == 0 %>
-        <%= link_to "previous page", course_lesson_page_path(@course, @page.lesson, @page.previous_page), :class => "btn btn-primary" %>
+        <%= link_to "previous page", course_lesson_page_path(@course, @page.lesson, @page.previous_page), :class => "btn" %>
       <% else %>
         <% unless @page.previous_lesson == -1 %>
-          <%= link_to "previous lesson", course_lesson_page_path(@course, @page.previous_lesson, @page.previous_page), :class => "btn btn-primary" %>
+          <%= link_to "previous lesson", course_lesson_page_path(@course, @page.previous_lesson, @page.previous_page), :class => "btn" %>
         <% end %>
       <% end %>
            
-      <%= link_to "back to course overview", course_path(@course), :class => "btn btn-primary" %>
+      <%= link_to "back to course overview", course_path(@course), :class => "btn" %>
       
       <% if @page.is_last_page == 0 %>
-        <%= link_to "next page", course_lesson_page_path(@course, @page.lesson, @page.next_page), :class => "btn btn-primary next" %>
+        <%= link_to "next page", course_lesson_page_path(@course, @page.lesson, @page.next_page), :class => "btn next" %>
       <% else %>
         <% unless @page.next_lesson == -1 %>
           <%= link_to "start next lesson", course_lesson_page_path(@course, @page.next_lesson, @page.next_page), :class => "btn btn-primary next" %>
