@@ -1,0 +1,5 @@
+<li class="lesson locked sortable" id="lesson_<%= lesson.id %>" >
+  <h2><span class="position"><%= lesson.position %></span>: <%= lesson.title %></h2>
+  <%= link_to 'edit', edit_polymorphic_path([ @course, lesson ]), id: "edit_page_link", remote: true, class: "btn btn-small" %>
+  <%= link_to 'delete', [ @course, lesson ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_lesson_link", remote: true, class: "btn btn-small btn-danger" %>
+</li>

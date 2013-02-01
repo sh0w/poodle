@@ -1,7 +1,7 @@
 <%
    lesson = page.lesson
    course = lesson.course
-   %>
+%>
 
 <li class="page sortable" id="page_<%= page.id %>" data-position="<%= page.position %>" >
   <div class="delete_page tooltips fadefocus">
@@ -12,10 +12,6 @@
 
   <ul class="resources">
     <% page.resources.each do |resource| %>
-        <% if ! resource.attachment_id.blank? %>
-            <%= render resource.attachment %>
-        <% end %>
-
         <%= render :partial => "shared/course_editor/resource", :object => resource %>
     <% end %>
   </ul>

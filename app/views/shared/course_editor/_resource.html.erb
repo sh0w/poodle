@@ -2,11 +2,10 @@
    @page = resource.page
    @lesson = @page.lesson
    @course = @lesson.course
-   %>
+%>
 
 <% if ! resource.attachment_id.blank? %>
-<li class="resource sortable" id="resource_<%= resource.id %>">
-  <%= render resource.attachment %>
-
+  <li class="resource sortable" id="resource_<%= resource.id %>">
+    <%= render resource.attachment %>
   </li>
 <% end %>
