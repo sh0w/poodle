@@ -33,6 +33,9 @@ class VideosController < ApplicationController
     @video.video = @video.video.gsub("https://", "")
     @video.video = @video.video.gsub("http://", "")
     @video.video = @video.video.gsub("www.youtube.com/watch?v=", "")
+
+    @resource.attachment = @video
+    @resource.save
     
     @video.save
 

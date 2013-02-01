@@ -39,6 +39,9 @@ class UploadsController < ApplicationController
     @upload = Upload.new(params[:upload])
     @upload.resource_id = @resource.id
     @upload.save
+
+    @resource.attachment = @upload
+    @resource.save
     
     respond_to do |format|
       if @upload.update_attributes(params[:upload]) && @resource.update_attributes(params[:resource])

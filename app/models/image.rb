@@ -1,8 +1,5 @@
 class Image < ActiveRecord::Base
   attr_accessible :resource_id, :image
-  
-  belongs_to :page
-
 
   has_one :resource, :as => :attachment
   

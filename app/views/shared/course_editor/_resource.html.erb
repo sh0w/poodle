@@ -1,35 +1,12 @@
 <%
-   page = resource.page
-   lesson = page.lesson
-   course = lesson.course
+   @page = resource.page
+   @lesson = @page.lesson
+   @course = @lesson.course
    %>
 
+<% if ! resource.attachment_id.blank? %>
 <li class="resource sortable" id="resource_<%= resource.id %>">
-<% if resource.text %>
-  <%= link_to button_tag("<i class='icon-font'></i> #{resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_text_path(course,lesson,page,resource.text), id: "edit_text_link", remote: true, title: "edit resource" %>
+  <%= render resource.attachment %>
 
-  <%= link_to '<i class="icon-trash"></i>'.html_safe, [ course, lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-
+  </li>
 <% end %>
-<% if resource.link %>
-  <%= link_to button_tag("<i class='icon-globe'></i> #{resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_link_path(course,lesson,page,resource.link), id: "edit_link_link", remote: true, title: "edit resource" %>
-  <%= link_to '<i class="icon-trash"></i>'.html_safe, [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-
-<% end %>
-<% if resource.image %>
-  <%= link_to button_tag("<i class='icon-picture'></i> #{resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_image_path(course,lesson,page,resource.image), id: "edit_image_link", remote: true, title: "edit resource" %>
-  <%= image_tag resource.image.image.url(:thumb) %>
-  <%= link_to '<i class="icon-trash"></i>'.html_safe, [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-
-<% end %>
-<% if resource.upload %>
-  <%= link_to button_tag("<i class='icon-file'></i> #{resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_upload_path(course,lesson,page,resource.upload), id: "edit_upload_link", remote: true, title: "edit resource" %>
-  <%= link_to '<i class="icon-trash"></i>'.html_safe, [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-
-<% end %>
-<% if resource.video %>
-  <%= link_to button_tag("<i class='icon-film'></i> #{resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_video_path(course,lesson,page,resource.video), id: "edit_video_link", remote: true, title: "edit resource" %>
-  <%= link_to '<i class="icon-trash"></i>'.html_safe, [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
-
-<% end %>
-</li>

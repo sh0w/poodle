@@ -1,5 +1,5 @@
-<span class="position"><%= @resource.position %></span>. video: <%= @resource.headline %> 
+<span class="position"><%= video.resource.position %></span>. video: <%= video.resource.headline %>
 &nbsp;
-<%= link_to '(x)', [ @course, @lesson, @page, @resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
+<%= link_to '(x)', [ @course, @lesson, @page, video.resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
 &nbsp;
-<%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@page.id}/videos/#{@resource.video.id}/edit", id: "edit_video_link", remote: true %>
+<%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@page.id}/videos/#{video.id}/edit", id: "edit_video_link", remote: true %>

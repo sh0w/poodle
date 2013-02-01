@@ -49,3 +49,8 @@ gem "twitter-bootstrap-rails"
 gem "paperclip", "~> 3.0"
 
 gem 'mysql2'
+
+group :development do
+  gem "rails-erd"
+end
+

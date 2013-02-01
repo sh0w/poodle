@@ -1,7 +1,7 @@
-<span class="position"><%= @resource.position %></span>. image: <%= @resource.headline %> 
+<span class="position"><%= image.resource.position %></span>. image: <%= image.resource.headline %>
 <br />
-<%= @resource.image.image.url(:thumb) %> 
+<%= image_tag image.image.url(:thumb) %>
 <br />
-<%= link_to '(x)', [ @course, @lesson, @page, @resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_image", remote: true %>
+<%= link_to '(x)', [ @course, @lesson, @page, image.resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_image", remote: true %>
 &nbsp;
-<%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@page.id}/images/#{@resource.image.id}/edit", id: "edit_image_image", remote: true %>
+<%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@page.id}/images/#{image.id}/edit", id: "edit_image_image", remote: true %>

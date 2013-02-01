@@ -33,8 +33,14 @@ class LinksController < ApplicationController
     if !@link.link.include? "http://"
        @link.link = "http://" + @link.link
     end
-    
+
+
+    @resource.attachment = @link
+    @resource.save
+
     @link.save
+
+
 
     respond_to do |format|
       if @link.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])

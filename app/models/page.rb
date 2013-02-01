@@ -6,9 +6,6 @@ class Page < ActiveRecord::Base
   
   has_many :resources, :dependent => :destroy
 
-  has_many :links, :as => :resources
-  has_many :iamges, :as => :resources
-
   has_many :comments, :dependent => :destroy
   
   default_scope :order => 'position'

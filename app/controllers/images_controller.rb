@@ -39,6 +39,9 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(params[:image])
     @image.resource_id = @resource.id
+
+    @resource.attachment = @image
+    @resource.save
     @image.save
     
     respond_to do |format|

@@ -31,6 +31,9 @@ class TextsController < ApplicationController
     @text = Text.new(params[:text])
     @text.resource_id = @resource.id
     @text.save
+
+    @resource.attachment = @text
+    @resource.save
     
     respond_to do |format|
       if @text.update_attributes(params[:text]) && @resource.update_attributes(params[:resource])
