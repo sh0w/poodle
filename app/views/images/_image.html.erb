@@ -1,7 +1,9 @@
-<span class="position"><%= image.resource.position %></span>. image: <%= image.resource.headline %>
-<br />
+<%
+   page = image.resource.page
+   lesson = page.lesson
+   course = lesson.course
+%>
+<%= link_to button_tag("<i class='icon-picture'></i> #{image.resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_image_path(course,lesson,page,image), id: "edit_image_link", remote: true, title: "edit resource" %>
 <%= image_tag image.image.url(:thumb) %>
-<br />
-<%= link_to '(x)', [ @course, @lesson, @page, image.resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_image", remote: true %>
-&nbsp;
-<%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@page.id}/images/#{image.id}/edit", id: "edit_image_image", remote: true %>
+<%= link_to '<i class="icon-trash"></i>'.html_safe, [ course, lesson, page, image.resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
+

@@ -1,7 +1,10 @@
-<span class="position"><%= upload.resource.position %></span>. upload: <%= upload.resource.headline %>
-<br />
-<%= upload.upload.url %>
-<br />
-<%= link_to '(x)', [ @course, @lesson, @page, upload.resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_upload", remote: true %>
-&nbsp;
-<%= link_to '(edit)', "/courses/#{@course.slug}/lessons/#{@lesson.id}/pages/#{@page.id}/uploads/#{upload.id}/edit", id: "edit_upload_upload", remote: true %>
+<%
+   page = upload.resource.page
+   lesson = page.lesson
+   course = lesson.course
+%>
+
+
+<%= link_to button_tag("<i class='icon-file'></i> #{upload.resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_upload_path(course,lesson,page,upload), id: "edit_upload_link", remote: true, title: "edit resource" %>
+<%= link_to '<i class="icon-trash"></i>'.html_safe, [ course, lesson, page, upload.resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
+

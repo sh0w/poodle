@@ -30,6 +30,8 @@ Poodle::Application.routes.draw do
 
   # course related:
   match 'courses/:course_id/start' => 'courses#take_course', :as => "start"
+  # TODO: match 'courses/:course_id/continue' => 'course#continue', :as => "continue"
+  # TODO: /course/:slug/lesson/:lesson_id --> geht zur ersten seite dieser lesson. wenn keine lesson: errormsg & redirect to course
 
   # user related:
   match 'users/:username' => "users#show", :as => "user"
@@ -41,7 +43,7 @@ Poodle::Application.routes.draw do
   match 'courses/:course_id/editDescription' => 'courses#editDescription', :as => "editCourseDescription"
   match 'courses/:course_id/editTitle' => 'courses#editTitle', :as => "editCourseTitle"
   match 'courses/:course_id/editImage' => 'courses#editImage', :as => "editCourseImage"
-  match 'courses/:course_id/update' => 'courses#update'
+  #match 'courses/:course_id/update' => 'courses#update'
   match 'courses/:course_id/lessons/:lesson_id/editDescription' => 'lessons#editDescription', :as => "editLessonDescription"
   match 'courses/:course_id/lessons/:lesson_id/editTitle' => 'lessons#editTitle', :as => "editLessonTitle"
   match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:resource_id/updatePosition' => 'resources#updatePosition', :as => "updateResourcePosition"
