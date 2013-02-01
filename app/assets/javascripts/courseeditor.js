@@ -63,9 +63,11 @@ function do_requests(url, neworder) {
             type:"POST",
             url:url + id + "/updatePosition",
             data:{
-                "position":position
+                "position":position,
+                "id":id
             }
         });
+        console.log("...");
     }
 }
 

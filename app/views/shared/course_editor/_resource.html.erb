@@ -6,6 +6,7 @@
 
 <% if ! resource.attachment_id.blank? %>
   <li class="resource sortable" id="resource_<%= resource.id %>">
+    <div class="position"><%= resource.position %></div>
     <%= render resource.attachment %>
   </li>
 <% end %>
