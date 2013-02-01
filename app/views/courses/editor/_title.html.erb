@@ -1,1 +1,1 @@
-Edit <%= link_to @course.title, "/courses/#{@course.slug}/editTitle", id: "edit_coursetitle_link", remote: true, title: "Edit Course Title" %>
+Edit <%= link_to @course.title, editCourseTitle_path(@course), id: "edit_coursetitle_link", remote: true, title: "Edit Course Title" %>

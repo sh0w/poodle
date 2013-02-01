@@ -23,26 +23,27 @@ Poodle::Application.routes.draw do
   root :to => "static_pages#explore"
 
 
-  #brauchen wir:
+  #static routes:
   match "/explore" => "static_pages#explore", :as => "explore"
   match "/about" => "static_pages#about", :as => "about"
   match "/team" => "static_pages#team", :as => "team"
+
+  # course related:
   match 'courses/:course_id/start' => 'courses#take_course', :as => "start"
+
+  # user related:
   match 'users/:username' => "users#show", :as => "user"
   match 'profile' => "users#current"
 
 
-  # weg:
+  # TODO remove these routes (?)
   match 'courses/:course_id/toggleVisibility' => 'courses#toggleVisibility', :as => "toggle_visibility"
-  match 'courses/:course_id/editDescription' => 'courses#editDescription'
-  match 'courses/:course_id/editTitle' => 'courses#editTitle'
-  match 'courses/:course_id/editImage' => 'courses#editImage'
-
+  match 'courses/:course_id/editDescription' => 'courses#editDescription', :as => "editCourseDescription"
+  match 'courses/:course_id/editTitle' => 'courses#editTitle', :as => "editCourseTitle"
+  match 'courses/:course_id/editImage' => 'courses#editImage', :as => "editCourseImage"
   match 'courses/:course_id/update' => 'courses#update'
-
-  match 'courses/:course_id/lessons/:lesson_id/editDescription' => 'lessons#editDescription'
-  match 'courses/:course_id/lessons/:lesson_id/editTitle' => 'lessons#editTitle'
-  match 'courses/:course_id/lessons/:lesson_id/editImage' => 'lessons#editImage'
+  match 'courses/:course_id/lessons/:lesson_id/editDescription' => 'lessons#editDescription', :as => "editLessonDescription"
+  match 'courses/:course_id/lessons/:lesson_id/editTitle' => 'lessons#editTitle', :as => "editLessonTitle"
   match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/resources/:resource_id/updatePosition' => 'resources#updatePosition', :as => "updateResourcePosition"
   match 'courses/:course_id/lessons/:lesson_id/pages/:page_id/updatePosition' => 'pages#updatePosition'
   match 'courses/:course_id/lessons/:lesson_id/updatePosition' => 'lessons#updatePosition'

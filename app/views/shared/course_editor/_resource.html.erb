@@ -4,9 +4,7 @@
    course = lesson.course
    %>
 
-
-
-<li class = "resource" id="resource_<%= resource.id %>">
+<li class="resource sortable" id="resource_<%= resource.id %>">
 <% if resource.text %>
   <%= link_to button_tag("<i class='icon-font'></i> #{resource.headline}".html_safe, class: "btn"), edit_course_lesson_page_text_path(course,lesson,page,resource.text), id: "edit_text_link", remote: true, title: "edit resource" %>
 
@@ -34,3 +32,4 @@
   <%= link_to '<i class="icon-trash"></i>'.html_safe, [ @course, @lesson, page, resource ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_resource_link", remote: true %>
 
 <% end %>
+</li>

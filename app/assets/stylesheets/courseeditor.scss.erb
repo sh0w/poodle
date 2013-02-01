@@ -1,0 +1,230 @@
+
+
+#edit_coursetitle_link {
+  background: #00a09a;
+}
+
+
+
+#coursetitle form {
+  display: inline-block;
+}
+
+
+#courseeditor {
+  width: 90%;
+  min-widht: 940px;
+  max-widht: 940px;
+  margin: 0 auto;
+  height: 600px;
+
+  #lessoneditor {
+    width: 220px;
+    float: left;
+
+    #lessons {
+      width: 200px;
+      height: 450px;
+      overflow-y: scroll;
+      float: left;
+      margin: 0;
+
+      .lesson {
+        width: 155px;
+        height: 120px;
+        margin: 0;
+
+        h2 {
+          font-weight: 300;
+          padding: 10px;
+        }
+      }
+      
+      #add_lesson_link {
+        display: block;
+        background-image:url(<%= asset_path 'img/grey.png' %>);
+        background-repeat:no-repeat;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+      }
+    }
+  }
+
+  #pageeditor {
+    width: 550px;
+    min-height: 410px;
+    margin-left: 0;
+    padding: 20px;
+    padding-right: 15px;
+    float: left;
+    background-color: #cccccc;
+    
+    
+      
+      #description {
+        margin: 20px 0 10px 0;
+        
+        p {
+          margin-bottom: 10px;
+        }
+      }
+
+    #pagescontainer {
+      margin-top: 20px;
+      float: left;
+
+      #pages {
+        min-height: 80px;
+
+        .page {
+          width: 178px;
+          min-height: 100px;
+          margin: 5px;
+          margin-left: 0;
+          float: left;
+          position: relative;
+          
+          display: block;
+          background-image:url(<%= asset_path 'img/grey_b.png' %>), url(<%= asset_path 'img/grey_c.png' %>);
+          background-position: bottom, top;
+          background-repeat: no-repeat, repeat;
+          -moz-border-radius: 2px;
+          -webkit-border-radius: 2px;
+
+          h2 {
+            font-weight: 300;
+            padding: 10px;
+          }
+
+          .resources {
+            padding: 10px;
+            margin-bottom: 31px;
+          }
+
+          .add_resource {
+            padding: 5px;
+            opacity: 0;
+            position: absolute;
+            bottom: 0px;
+            a {
+              display:block;
+              float:left;
+              padding: 7px;
+            }
+          }
+
+          .delete_page {
+            position: absolute;
+            margin: 5px;
+            right: 0px;
+            opacity: 0;
+            top: 0px;
+          }
+
+
+        }
+        .page .add_resource  a {
+          margin-right: -9px;
+        }
+        
+        .page:hover .add_resource  {
+          opacity: 1;
+
+            a {
+              margin-right: -9px;
+            }
+        }
+        
+        .page:hover .delete_page  {
+          opacity: 1;
+
+            a {
+              margin-right: 0;
+            }
+        }
+
+        #resources {
+          li {
+            display: block;
+            border-bottom: 1px solid #cccccc;
+            padding: 5px 0 5px 0;
+          }
+
+          li:first-child {
+            border-top: 1px solid #cccccc;
+          }
+        }
+
+        .resources {
+          li {
+            display: block;
+            border-bottom: 1px solid #cccccc;
+            padding: 5px 0 5px 0;
+          }
+
+          li:first-child {
+            border-top: 1px solid #cccccc;
+          }
+        }
+        .new {
+          opacity: 0.5 !important;
+        }
+        .new:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+#edit_courseimage_link {
+  display:block;
+  opacity:1;
+
+  :hover {
+    opacity:0.5;
+  }
+}
+
+
+.fadefocus {
+  webkit-transition: opacity 0.3s linear; -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; transition: all 0.3s linear;
+
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  z-index: 10000;
+}
+
+#overlay_center {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin-left: -250px;
+  z-index: 10001;
+
+  #overlay_content {
+    width: 460px;
+    background-color: #fff;
+    margin-left: 50%;
+    margin-top: 10%;
+    padding: 20px;
+  }
+}
+
+
+.tooltip {
+  text-shadow: none !important;
+  text-transform: none !important;
+}

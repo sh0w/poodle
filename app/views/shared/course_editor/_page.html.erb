@@ -3,7 +3,7 @@
    course = lesson.course
    %>
 
-<li class="page" id="page_<%= page.id %>" data-position="<%= page.position %>" >
+<li class="page sortable" id="page_<%= page.id %>" data-position="<%= page.position %>" >
   <div class="delete_page tooltips fadefocus">
     <%= link_to button_tag('<i class="icon-trash"></i>'.html_safe, class: "btn btn-mini"), [course, lesson, page ], method: :delete, data: { confirm: 'Are you sure?' }, id: "remove_page_link", remote: true, title: "Delete page" %>
   </div>
@@ -16,6 +16,7 @@
             <%= render resource.attachment %>
         <% end %>
 
+        <%= render :partial => "shared/course_editor/resource", :object => resource %>
     <% end %>
   </ul>
 

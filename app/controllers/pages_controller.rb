@@ -5,59 +5,15 @@ class PagesController < ApplicationController
   before_filter :find_lesson, :except => [:destroy]
   before_filter :find_lesson_params_id, :except => [:create, :new]
   before_filter :get_resources, :only => [:edit, :show]
-  before_filter :get_navinfo, :only => [:show]
 
   def find_lesson_params_id
     @page = Page.find(params[:id])
   end
 
   def get_resources
-    @resources = @page.resources.sort { |a,b|
-      ( a.position and b.position ) ? a.position <=> b.position : ( a.position ? -1 : 1 )
-    }
+    @resources = @page.resources
   end
   
-  def get_navinfo
-    page_position = @page.position
-    lesson_position = @page.lesson.position
-    
-    @is_first_page = 0;
-    @is_last_page = 0;
-    
-    if @page.lesson.course.lessons.find_by_position(lesson_position + 1)
-      @next_lesson = @page.lesson.course.lessons.find_by_position(lesson_position + 1)
-    else
-      @next_lesson = -1
-    end
-    
-    if @page.lesson.course.lessons.find_by_position(lesson_position - 1)
-      @previous_lesson = @page.lesson.course.lessons.find_by_position(lesson_position - 1)
-    else
-      @previous_lesson = -1
-    end
-    
-    if @page.lesson.pages.find_by_position(page_position - 1)
-      @previous_page = @page.lesson.pages.find_by_position(page_position - 1)
-    else
-      @is_first_page = 1
-      unless @previous_lesson == -1
-        @previous_page = @page.lesson.course.lessons.find_by_position(lesson_position - 1).pages.last
-      else
-        @previous_page = -1
-      end
-    end     
-    
-    if @page.lesson.pages.find_by_position(page_position + 1)
-      @next_page = @page.lesson.pages.find_by_position(page_position + 1)
-    else
-      @is_last_page = 1
-      unless @next_lesson == -1
-        @next_page = @page.lesson.course.lessons.find_by_position(lesson_position + 1).pages.first.id
-      else
-        @next_page = -1
-      end
-    end  
-  end
 
   # GET /pages/1
   # GET /pages/1.json

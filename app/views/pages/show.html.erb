@@ -9,51 +9,48 @@
 
         <%= render resource.attachment %>
 
-        <div class = "resource" id="resource_<%= resource.id %>">
-          <% if resource.text %>
+          <div class = "resource" id="resource_<%= resource.id %>">
+            <% if resource.text %>
               <h2><%= resource.headline %></h2>
               <p><%= resource.text.text %></p>
-          <% end %>
-          <% if resource.link %>
+            <% end %>
+            <% if resource.link %>
               <a href ="<%= resource.link.link %>"><div class ="icon-arrow-right"></div> <%= resource.headline %></a>
-
-          <% end %>
-          <% if resource.image %>
+            <% end %>
+            <% if resource.image %>
               <div class="image">
                 <%= image_tag resource.image.image.url(:medium), :alt => resource.headline %>
                 <span><%= resource.headline %></span>
               </div>
-          <% end %>
-          <% if resource.upload %>
+            <% end %>
+            <% if resource.upload %>
               <a href ="<%= resource.upload.upload.url %>"><div class ="icon-file"></div> <%= resource.headline %></a>
-          <% end %>
-          <% if resource.video %>
+            <% end %>
+            <% if resource.video %>
               <h2><%= resource.headline %></h2>
               <iframe width="420" height="315" src="https://www.youtube.com/embed/<%= resource.video.video %>?rel=0" frameborder="0" allowfullscreen></iframe>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
+    <% end %>
 
-
-
-  <% end %>
 
 
     <div class="navigation" >
-      <% if @is_first_page == 0 %>
-        <%= link_to "previous page", course_lesson_page_path(@course, @lesson, @previous_page), :class => "btn btn-primary" %>
+      <% if @page.is_first_page == 0 %>
+        <%= link_to "previous page", course_lesson_page_path(@course, @lesson, @page.previous_page), :class => "btn btn-primary" %>
       <% else %>
-        <% unless @previous_lesson == -1 %>
-          <%= link_to "previous lesson", course_lesson_page_path(@course, @previous_lesson, @previous_page), :class => "btn btn-primary" %>
+        <% unless @page.previous_lesson == -1 %>
+          <%= link_to "previous lesson", course_lesson_page_path(@course, @page.previous_lesson, @page.previous_page), :class => "btn btn-primary" %>
         <% end %>
       <% end %>
            
       <%= link_to "back to course overview", course_path(@course), :class => "btn btn-primary" %>
       
-      <% if @is_last_page == 0 %>
-        <%= link_to "next page", course_lesson_page_path(@course, @lesson, @next_page), :class => "btn btn-primary next" %>
+      <% if @page.is_last_page == 0 %>
+        <%= link_to "next page", course_lesson_page_path(@course, @lesson, @page.next_page), :class => "btn btn-primary next" %>
       <% else %>
-        <% unless @next_lesson == -1 %>
-          <%= link_to "start next lesson", course_lesson_page_path(@course, @next_lesson, @next_page), :class => "btn btn-primary next" %>
+        <% unless @page.next_lesson == -1 %>
+          <%= link_to "start next lesson", course_lesson_page_path(@course, @next_lesson, @page.next_page), :class => "btn btn-primary next" %>
         <% else %>
           <%= link_to "finish course", course_path(@course), :class => "btn btn-primary next" %>
         <% end %>
