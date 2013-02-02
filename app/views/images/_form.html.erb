@@ -10,18 +10,18 @@
       </ul>
     </div>
   <% end %>
-
-  <%= fields_for( @resource ) do |resource_f| %>
-    <div class="field">
-      <%= resource_f.label :headline %><br />
-      <%= resource_f.text_field :headline %>
-    </div>
-  <% end %>
   
   <div class="field">
     <%= f.label :image %><br />
     <%= f.file_field :image %>
   </div>
+
+  <%= fields_for( @resource ) do |resource_f| %>
+    <div class="field">
+      <%= resource_f.label "Beschreibung" %><br />
+      <%= resource_f.text_field :headline %>
+    </div>
+  <% end %>
   
   <div class="actions">
     <%= f.submit %>
