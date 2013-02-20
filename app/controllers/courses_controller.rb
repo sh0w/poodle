@@ -29,6 +29,8 @@ class CoursesController < ApplicationController
     @creator = User.find(@course.creates_course.user_id) if !@course.creates_course.nil?
     @takes_course = @course.takes_course.find_by_user_id(current_user.id) if user_signed_in?
 
+    set_meta_tags :site => 'Poodle', :title => @course.title, :reverse => true
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @course }

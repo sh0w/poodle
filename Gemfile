@@ -54,3 +54,4 @@ group :development do
   gem "rails-erd"
 end
 
+gem 'meta-tags', :require => 'meta_tags'
