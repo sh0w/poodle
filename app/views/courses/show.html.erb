@@ -5,52 +5,80 @@
 
     <div class="intro_content clearfix">
 
-      <!---Bild und Bewertung--->
-      <figure>
-        <%= image_tag @course.image.url(:medium), :class => "course_pic" %>
-        <div id="rating">
-          <div id="rated_stars" class="rating_<%= @course.rating %>">&nbsp;</div>
+        <!---Bild und Bewertung--->
+        <div class="left clearfix">
+          <figure>
+            <%= image_tag @course.image.url(:medium), :class => "course_pic" %>
+            <div id="rating">
+              <div id="rated_stars" class="rating_<%= @course.rating %>">&nbsp;</div>
+            </div>
+          </figure>
+
+          <!---Fortschritt--->
+          <div class="progressbox">
+            <% if user_signed_in? and !@course.taken_by_user(current_user.id).blank?
+                 if  @takes_course.lesson_progress_percent < 100
+            %>
+                    <%= render 'shared/progressbar', {:progress => @takes_course.lesson_progress_percent} %>
+
+                    <%= link_to "continue learning", "/courses/#{@course.slug}/lessons/#{@takes_course.lesson_progress}/pages/#{@takes_course.page_progress}", :class => "btn btn-primary start-course btn-block btn-large" %>
+
+                <% else %>
+                    <div class="btn btn-disabled btn-large disabled">Course successfully completed.</div>
+                <% end
+                   else %>
+                <%= link_to "Start this course", start_path(@course), :class => "btn btn-primary start-course btn-block btn-large" %>
+
+            <% end %>
+          </div>
         </div>
-      </figure>
 
-      <!---Beschreibung--->
-      <div class="intro_text">
-        <p>Created by
-          <%= link_to image_tag(@creator.avatar.url(:mini)), user_path(@creator.username), :class => "creator" %>
-          <%= link_to @creator.username, user_path(@creator.username), :class => "creator" %>
+        <!---Beschreibung--->
+        <div class="right clearfix">
 
-          <span class="when"><%= time_ago_in_words(@course.created_at) %> ago</span>
-        </p>
+          <!---Beschreibung--->
+          <div class="intro_text">
+            <p>Created by
+              <%= link_to image_tag(@creator.avatar.url(:mini)), user_path(@creator.username), :class => "creator" %>
+              <%= link_to @creator.username, user_path(@creator.username), :class => "creator" %>
 
-        <p>
-          <%= @course.description %>
-        </p>
-        <%= link_to 'Edit Course', edit_course_path(@course) %>
-      </div>
+              <span class="when"><%= time_ago_in_words(@course.created_at) %> ago</span>
+            </p>
 
-      <!---Fortschritt--->
-      <div class="progressbox">
-        <% if user_signed_in? and !@course.taken_by_user(current_user.id).blank?
-             if  @takes_course.lesson_progress_percent < 100
-        %>
-                <%= render 'shared/progressbar', {:progress => @takes_course.lesson_progress_percent} %>
 
-                <%= link_to "continue learning", "/courses/#{@course.slug}/lessons/#{@takes_course.lesson_progress}/pages/#{@takes_course.page_progress}", :class => "btn btn-primary start-course btn-block btn-large" %>
+            <p>
+              <%= @course.description %>
+            </p>
 
-            <% else %>
-                <div class="btn btn-disabled btn-large disabled">Course successfully completed.</div>
-            <% end
-               else %>
-            <%= link_to "Start this course", start_path(@course), :class => "btn btn-primary start-course btn-block btn-large" %>
+            <p>
 
-        <% end %>
-      </div>
+
+              <!-- AddThis Button BEGIN -->
+            <div class="addthis_toolbox addthis_default_style ">
+              <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+              <a class="addthis_button_tweet"></a>
+              <a class="addthis_counter addthis_pill_style"></a>
+            </div>
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f87f95a5a4e689b"></script>
+            <!-- AddThis Button END -->
+
+            </p>
+
+            <p>
+
+              <% if user_signed_in? %>
+                  <%= link_to 'Edit Course', edit_course_path(@course), :class => "btn btn-mini"  %>
+              <% end %>
+            </p>
+          </div>
 
       <!---social networks
 <aside id="share">
 <h1>Share this</h1>
 </aside>
       --->
+
+      </div>
     </div>
 
   </section>
